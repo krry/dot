@@ -5,6 +5,8 @@ export ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
+ZSH_THEME="random"
+
 ZSH_THEME="awesomepanda"
 
 # Uncomment the following line to use case-sensitive completion.
@@ -52,9 +54,7 @@ ZSH_THEME="awesomepanda"
 plugins=(git brew brew-cask github node torrent osx bower gulp npm)
 
 # User configuration
-
-export PATH="/Users/alan/.node-packages/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/git/bin:/usr/local/heroku/bin:/Users/alan/Sites/lib:/Users/alan/local/node/bin:/Users/alan/.node/bin:./node_modules/.bin:/usr/local/go/bin:/Users/alan/npm/bin:/Users/alan/mongo/bin:/Users/alan/Sites/go/bin:/usr/local/opt/postgresql/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/alan/.rvm/bin"
-# export MANPATH="/usr/local/man:$MANPATH"
+source $HOME/.profile
 
 source $ZSH/oh-my-zsh.sh
 
@@ -63,9 +63,9 @@ source $ZSH/oh-my-zsh.sh
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='nano'
+  export EDITOR='vim'
 else
-  export EDITOR='atom'
+  export EDITOR='vim'
 fi
 
 [[ -s $HOME/.nvm/nvm.sh ]] && . $HOME/.nvm/nvm.sh  # This loads NVM
