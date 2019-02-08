@@ -1,0 +1,19 @@
+alias etym="python ~/Sites/libs/etym/etym.py $1"
+alias octave='octave-cli --no-window-system'
+alias vi=/usr/local/bin/vim
+alias vim=/usr/local/bin/vim
+alias zsh=/usr/local/bin/zsh
+alias pip=/usr/local/bin/pip3
+alias py=/usr/local/bin/python3
+
+# fd - cd to selected directory
+fd() {
+    local dir
+        dir=$(find ${1:-.} -path '*/\.*' -prune \
+                -o -type d -print 2> /dev/null | fzf +m) &&
+        cd "$dir"
+}
+# fh - search in your command history and execute selected command
+fh() {
+    eval $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed 's/ *[0-9]* *//')
+}
