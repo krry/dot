@@ -178,8 +178,7 @@ if (exists('+colorcolumn'))
   set colorcolumn=80
   highlight ColorColumn ctermbg=8
 endif
-" set foldmethod=indent
-" set foldnestmax=5
+set foldlevelstart=5
 
 " Encoding
 set encoding=utf-8
@@ -204,6 +203,9 @@ augroup BufNewFile,BufRead *.{html, js, css}
   autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 augroup END
 
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
+
 " markdown style guide
 function! s:setupWrapping()
   setl wrap
@@ -214,7 +216,13 @@ function! s:setupWrapping()
 endfunction
 
 au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn,txt} setf markdown
-au FileType markdown call s:setupWrapping()
+
+augroup FileType markdown
+  call s:setupWrapping()
+  " code blocks for markdown
+  " inoremap <buffer><silent><unique> ~~~ ~~~<Enter>~~~<C-o>k<C-o>A
+  " inoremap <buffer><silent><unique> ``` ```<Enter>```<C-o>k<C-o>A
+augroup END
 
 " highlight up to 200 lines
 augroup vimrc-sync-fromstart
@@ -274,6 +282,8 @@ noremap <leader>/ :let @/ = ""<CR>
 
 " reload .vimrc quickly
 noremap <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+nnoremap <silent> <leader>S <Esc>:w<cr>
+command Rch <leader>h:e ~/dotfiles/vimrc<cr>
 
 " fix cursor in TMUX
 if exists('$TMUX')
@@ -334,7 +344,7 @@ endif
 
 " File tree settings
 let g:netrw_banner = 0
-let g:netrw_browse_split = 2
+let g:netrw_browse_split = 0
 let g:netrw_liststyle = 3
 let g:netrw_altv = 1
 let g:netrw_winsize = 18
@@ -360,12 +370,12 @@ nnoremap <space><space> :<C-u>Unite -start-insert file_rec/async<cr>
 nnoremap <space>r <Plug>(unite_restart)
 
 " --- type ° to search the word in all files in the current dir
-" nmap º :Ag <c-r>=expand("<cword>")<cr><cr>
-nnoremap <space>/ :Ag<space>
+nmap * :Ag <c-r>=expand("<cword>")<cr><cr>
+nnoremap <space>/ :Ack<space>
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
-
+vnoremap <silent> <Enter> :EasyAlign<cr>
