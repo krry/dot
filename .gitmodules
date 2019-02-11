@@ -1,6 +1,3 @@
-[submodule "tmux-themepack"]
-	path = tmux-themepack
-	url = https://github.com/jimeh/tmux-themepack
 [submodule "vim/plugins/vim-sensible"]
 	path = vim/plugins/vim-sensible
 	url = https://github.com/tpope/vim-sensible
@@ -64,3 +61,6 @@
 [submodule "vim/plugins/indentLine"]
 	path = vim/plugins/indentLine
 	url = https://github.com/Yggdroot/indentLine
+[submodule "tmux-themepack"]
+	path = tmux-themepack
+	url = https://github.com/jimeh/tmux-themepack

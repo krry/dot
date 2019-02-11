@@ -120,8 +120,8 @@ set clipboard^=unnamed,unnamedplus
 set laststatus=2
 
 " use modeline overrides
-set modeline
-set modelines=10
+set nomodeline
+" set modelines=10
 
 set title
 set titleold="Terminal"
@@ -254,7 +254,7 @@ nnoremap p p=`]<C-o>
 nnoremap P P=`]<C-o>
 
 " easier pane splitting
-noremap <leader>h :<C-u>split<cr>
+noremap <leader>s :<C-u>split<cr>
 noremap <leader>v :<C-u>vsplit<cr>
 
 " easier vim pane navigation
@@ -285,18 +285,46 @@ noremap <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo '
 nnoremap <silent> <leader>S <Esc>:w<cr>
 command Rch <leader>h:e ~/dotfiles/vimrc<cr>
 
-" fix cursor in TMUX
-if exists('$TMUX')
-    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-    let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-else
-    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+" http://vim.wikia.com/wiki/Configuring_the_cursor
+" http://micahelliott.com/posts/2015-07-20-vim-zsh-tmux-cursor.html
+" Tmux details: http://reza.jelveh.me/2011/09/18/zsh-tmux-vi-mode-cursor
+"
+" to set cursor:
+" let &t_EI = '\<Esc>[x q' "where x is:
+" 0 => blinking block
+" 1 => blinking block
+" 2 => solid block
+" 3 => blinking underscore
+" 4 => solid underscore
+" 5 => blinking pipe
+" 6 => solid pipe
+
+if &term =~ "xterm"
+  " Insert
+  let &t_SI  = "\<Esc>]12;gray\x7"
+  let &t_SI .= "\<Esc>[4 q"
+  " Normal
+  let &t_EI  = "\<Esc>]12;green\x7"
+  let &t_EI .= "\<Esc>[2 q"
+  autocmd VimLeave * silent !echo -ne "\033]112\007"
+elseif &term =~ "screen"
+  " Insert
+  let &t_SI  = "\<Esc>Ptmux;\<Esc>\<Esc>]12;gray\x7\<Esc>\\"
+  let &t_SI .= "\<Esc>Ptmux;\<Esc>\<Esc>[4 q\<Esc>\\"
+  " Normal
+  let &t_EI  = "\<Esc>Ptmux;\<Esc>\<Esc>]12;blue\x7\<Esc>\\"
+  let &t_EI .= "\<Esc>Ptmux;\<Esc>\<Esc>[2 q\<Esc>\\"
+  autocmd VimLeave * silent !printf "\033Ptmux;\033\033]12;grey\007\033\\"
 endif
 
-" search remapping -  go to the center of the line
-" nnoremap n nzzzv
-" nnoremap N Nzzzv
+" " fix cursor in TMUX
+" if exists('$TMUX')
+"     let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+"     let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+" else
+"     let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+"     let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+" endif
 
 " Git cmds
 noremap <leader>ga :Gwrite<cr>
