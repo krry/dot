@@ -64,3 +64,6 @@
 [submodule "tmux-themepack"]
 	path = tmux-themepack
 	url = https://github.com/jimeh/tmux-themepack
+[submodule "vim/plugins/denite.nvim"]
+	path = vim/plugins/denite.nvim
+	url = https://github.com/Shougo/denite.nvim

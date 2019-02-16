@@ -54,9 +54,8 @@ let g:make = 'gmake'
 if exists('make')
   let g:make = 'make'
 endif
-Plug 'Shougo/vimproc.vim', { 'do': g:make }
-Plug 'Shougo/unite.vim'
-
+" Plug 'Shougo/vimproc.vim', { 'do': g:make }
+Plug 'Shougo/denite.nvim'
 " Colors
 Plug 'tomasr/molokai'
 
@@ -246,8 +245,8 @@ augroup END
 let mapleader = ','
 
 " add new lines
-nmap <cr> o<esc>
-nmap <S-Enter> O<esc>
+nmap <cr> O<esc>
+" nmap <S-Enter> O<esc>
 
 " autoindent pasted text
 nnoremap p p=`]<C-o>
@@ -377,28 +376,26 @@ let g:netrw_liststyle = 3
 let g:netrw_altv = 1
 let g:netrw_winsize = 18
 
-" Unite and ag settings
-let g:unite_source_history_yank_enable = 1
-try
-  let g:unite_source_rec_async_command = ['ag','--follow','--nocolor',
-        \ '--nogroup','--hidden','-g','']
-  call unite#filters#matcher_default#use(['matcher_fuzzy'])
-catch
-endtry
-
-let g:ackprg = 'ag --vimgrep --smart-case'
 cnoreabbrev ag Ack
 cnoreabbrev aG Ack
 cnoreabbrev Ag Ack
 cnoreabbrev AG Ack
+let g:ackprg = 'ag --vimgrep --smart-case'
 
-" search a file in the filetree
-nnoremap <space><space> :<C-u>Unite -start-insert file_rec/async<cr>
-" reset not it is <C-l> normally
-nnoremap <space>r <Plug>(unite_restart)
+" denite file search (c-p uses gitignore, c-o looks at everything)
+nnoremap <space><space> :DeniteProjectDir -buffer-name=git -direction=top file_rec/git<CR>
+" map <C-O> :DeniteProjectDir -buffer-name=files -direction=top file_rec<CR>
+
+" -u flag to unrestrict (see ag docs)
+call denite#custom#var('file_rec', 'command',
+      \ ['ag', '--follow', '--nocolor', '--nogroup', '-u', '-g', ''])
+
+call denite#custom#alias('source', 'file_rec/git', 'file_rec')
+call denite#custom#var('file_rec/git', 'command',
+      \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
 
 " --- type ° to search the word in all files in the current dir
-nmap * :Ag <c-r>=expand("<cword>")<cr><cr>
+nmap * :Ack <c-r>=expand("<cword>")<cr><cr>
 nnoremap <space>/ :Ack<space>
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
