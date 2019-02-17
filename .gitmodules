@@ -67,3 +67,6 @@
 [submodule "vim/plugins/denite.nvim"]
 	path = vim/plugins/denite.nvim
 	url = https://github.com/Shougo/denite.nvim
+[submodule "vim/plugins/vim-yaml"]
+	path = vim/plugins/vim-yaml
+	url = https://github.com/stephpy/vim-yaml

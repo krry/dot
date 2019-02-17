@@ -64,6 +64,9 @@ Plug 'mattn/emmet-vim'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'jelera/vim-javascript-syntax'
 
+" YAML added magic love
+Plug 'stephpy/vim-yaml'
+
 call plug#end()
 
 " Required:
