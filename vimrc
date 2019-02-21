@@ -242,10 +242,10 @@ nnoremap <leader>d :lcd %:p:h<cr>
 
 " find files by name
 set path=.,**
-nnoremap <leader>f :find ./
-nnoremap <leader>s :sfind ./
-nnoremap <leader>v :vert sfind ./
-nnoremap <leader>t :tabfind ./
+nnoremap <leader>f :find 
+nnoremap <leader>s :sfind 
+nnoremap <leader>v :vert sfind 
+nnoremap <leader>t :tabfind 
 
 " Clear search (and its highlighting)
 noremap <leader>/ :let @/ = ""<CR>

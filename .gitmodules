@@ -79,3 +79,6 @@
 [submodule "tmux"]
 	path = tmux
 	url = git@github.com:krry/.tmux.git
+[submodule "zsh"]
+  path = zsh
+  url = https://github.com/krry/prezto

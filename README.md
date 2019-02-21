@@ -1,8 +1,25 @@
-# dot
+# dotfiles
 
-## a collection of dotfiles I use for zsh, vim, tmux, etc. on OSX and linux
+## Installation
 
-## features
+``` sh
+git clone https://github.com/krry/dot.git ${HOME}/.dotfiles
+cd ${HOME}/.dotfiles
+. ./install.sh
+```
+
+On a remote server, if you don't have [`mosh`](https://github.com/mobile-shell/mosh, you'll want that.
+
+``` sh
+git clone https://github.com/mobile-shell/mosh
+$ cd mosh
+$ ./autogen.sh
+$ ./configure
+$ make
+$ make install
+```
+
+## Features
 
 Using tmux, vim, and zsh together can be confusing
 so I've unified many of the keybindings for analogous functions.
