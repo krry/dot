@@ -19,9 +19,6 @@
 [submodule "vim/plugins/vim-markdown"]
 	path = vim/plugins/vim-markdown
 	url = https://github.com/plasticboy/vim-markdown
-[submodule "vim/plugins/vim-javascript-syntax"]
-	path = vim/plugins/vim-javascript-syntax
-	url = https://github.com/jelera/vim-javascript-syntax
 [submodule "vim/plugins/vim-gitgutter"]
 	path = vim/plugins/vim-gitgutter
 	url = https://github.com/airblade/vim-gitgutter
@@ -34,15 +31,9 @@
 [submodule "vim/plugins/vim-easy-align"]
 	path = vim/plugins/vim-easy-align
 	url = https://github.com/junegunn/vim-easy-align
-[submodule "vim/plugins/vim-css3-syntax"]
-	path = vim/plugins/vim-css3-syntax
-	url = https://github.com/hail2u/vim-css3-syntax
 [submodule "vim/plugins/vim-commentary"]
 	path = vim/plugins/vim-commentary
 	url = https://github.com/tpope/vim-commentary
-[submodule "vim/plugins/unite.vim"]
-	path = vim/plugins/unite.vim
-	url = https://github.com/Shougo/unite.vim
 [submodule "vim/plugins/syntastic"]
 	path = vim/plugins/syntastic
 	url = https://github.com/scrooloose/syntastic
@@ -61,9 +52,6 @@
 [submodule "vim/plugins/indentLine"]
 	path = vim/plugins/indentLine
 	url = https://github.com/Yggdroot/indentLine
-[submodule "tmux-themepack"]
-	path = tmux-themepack
-	url = https://github.com/jimeh/tmux-themepack
 [submodule "vim/plugins/denite.nvim"]
 	path = vim/plugins/denite.nvim
 	url = https://github.com/Shougo/denite.nvim
@@ -88,3 +76,18 @@
 [submodule "vim/plugins/webapi-vim"]
 	path = vim/plugins/webapi-vim
 	url = https://github.com/mattn/webapi-vim
+[submodule "vim/plugins/vimwiki"]
+	path = vim/plugins/vimwiki
+	url = https://github.com/vimwiki/vimwiki
+[submodule "vim/plugins/goyo.vim"]
+	path = vim/plugins/goyo.vim
+	url = https://github.com/junegunn/goyo.vim
+[submodule "vim/plugins/papercolor-theme"]
+	path = vim/plugins/papercolor-theme
+	url = https://github.com/NLKNguyen/papercolor-theme
+[submodule "tmux"]
+	path = tmux
+	url = git@github.com:krry/.tmux.git
+[submodule "vim/plugins/vim-colorscheme-primary"]
+	path = vim/plugins/vim-colorscheme-primary
+	url = https://github.com/google/vim-colorscheme-primary

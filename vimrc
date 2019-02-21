@@ -28,36 +28,58 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
+let g:pluggedin=1
+
 " Call in the plugins!
 call plug#begin(expand('~/.vim/plugins'))
 
 " e.g., Plug 'git_username/git_repo_name'
+
 " TODO: look for redundants in here with `vim-sensible`
 Plug 'tpope/vim-sensible'      " sensible defaults
-Plug 'tpope/vim-repeat'        " expands dot repeat scope
-Plug 'tpope/vim-surround'      " add/change/remove surrounds
-Plug 'tpope/vim-commentary'    " quick commenting with 'gcc'
-Plug 'tpope/vim-fugitive'      " de facto git integration
-Plug 'tpope/vim-rsi'           " adds readline key bindings to vim, smartly
-Plug 'itchyny/lightline.vim'   " status bar, better than powerline/airline
-Plug 'scrooloose/syntastic'    " syntax checking for lots of langs
-Plug 'Yggdroot/indentLine'     " shows vertical lines where spaces indent
-Plug 'sheerun/vim-polyglot'    " supports for >140 languages
-Plug 'svermeulen/vim-easyclip' " d deletes, m moves, y yanks and more
-Plug 'plasticboy/vim-markdown' " deeper markdown support
-Plug 'airblade/vim-gitgutter'  " mark lines with changes
+
+" search
 Plug 'mileszs/ack.vim'         " adds silver searcher to vim
-Plug 'junegunn/vim-easy-align' " vertical alignment made easy
 Plug 'Shougo/denite.nvim'      " fuzzy search for anything/files in a project
-Plug 'rust-lang/rust.vim'      " Rust syntax, rustfmt, tagbar, playground
-Plug 'tomasr/molokai'          " molokai theme for vim
+
+" tags
+Plug 'xolox/vim-easytags'      " indexes and highlights ctags
+Plug 'xolox/vim-misc'          " supports easytags
+Plug 'majutsushi/tagbar'       " show ctags in rightside bar
+
+" utilities
+Plug 'svermeulen/vim-easyclip' " d deletes, m moves, y yanks and more
+Plug 'tpope/vim-surround'      " add/change/remove surrounds
+Plug 'tpope/vim-repeat'        " expands dot repeat scope
+Plug 'junegunn/vim-easy-align' " vertical alignment made easy
+Plug 'tpope/vim-commentary'    " quick commenting with 'gcc'
+Plug 'tpope/vim-rsi'           " adds readline key bindings to vim, smartly
+
+" lint
+Plug 'Yggdroot/indentLine'     " shows vertical lines where spaces indent
+Plug 'bronson/vim-trailing-whitespace' " highlights trailing spaces in red
+
+" git
+Plug 'tpope/vim-fugitive'      " de facto git integration
+Plug 'airblade/vim-gitgutter'  " mark lines with changes
+
+" web
+Plug 'mattn/webapi-vim'        " puts vim in touch with web APIs (for playpen)
+Plug 'vimwiki/vimwiki', { 'branch': 'dev' }
+
+" syntax and langs
+Plug 'sheerun/vim-polyglot'    " supports for >140 languages
+Plug 'scrooloose/syntastic'    " syntax checking for lots of langs
 Plug 'mattn/emmet-vim'         " HTML CSS completion
 Plug 'stephpy/vim-yaml'        " YAML added magic love
-Plug 'xolox/vim-misc'          " supports easytags
-Plug 'mattn/webapi-vim'        " puts vim in touch with web APIs (for playpen)
-Plug 'xolox/vim-easytags'      " indexes and highlights ctags
-Plug 'majutsushi/tagbar'       " show ctags in rightside bar
-Plug 'bronson/vim-trailing-whitespace' " highlights trailing spaces in red
+Plug 'rust-lang/rust.vim'      " Rust syntax, rustfmt, tagbar, playground
+
+" colorschemes
+Plug 'itchyny/lightline.vim'   " status bar, better than powerline/airline
+Plug 'tomasr/molokai'          " molokai theme for vim
+Plug 'NLKNguyen/papercolor-theme'       " inspired by material design
+Plug 'google/vim-colorscheme-primary'   " based on Google's colors
+Plug 'junegunn/goyo.vim'       " distraction-free writing in vim
 
 call plug#end()
 
@@ -128,34 +150,45 @@ set wildmode=longest,list,full     "
 "   _/_/_/    _/_/_/  _/        _/_/_/      _/_/    _/        _/_/_/
 
 
-" http://vim.wikia.com/wiki/Configuring_the_cursor
-" https://github.com/Blaradox/dotFiles/blob/master/vim/.vimrc#L213-L234
-" https://stackoverflow.com/questions/42377945/vim-adding-cursorshape-support-over-tmux-ssh
+" Reset cursorline when switching buffers or windows
+augroup Cursorline
+  autocmd!
+  autocmd WinEnter,BufEnter * set cursorline
+  autocmd WinLeave,BufLeave * set nocursorline
+augroup END
 
-" move cursorline when switching buffers or windows
-" augroup Cursorline
-"   autocmd!
-"   autocmd WinEnter,BufEnter * set cursorline
-"   autocmd WinLeave,BufLeave * set nocursorline
-" augroup END
-
-" activate cursorline for insert mode
+" Activate cursorline when in insert mode
 autocmd InsertEnter * set cul
 autocmd InsertLeave * set nocul
 
-" to set cursor:
-" let &t_EI = '\<Esc>[x q' "where x is:
-" 0 => blinking block
-" 1 => blinking block
-" 2 => solid block
-" 3 => blinking underscore
-" 4 => solid underscore
-" 5 => blinking pipe
-" 6 => solid pipe
+" Change cursor shape to indicate mode
+"
+" N.B., This was very difficult to figure out and there is a multitude of
+"       scattered and conflicting advice on StackOverflow and the usual
+"       haunts. The crux was the proper escape character. On OS X, using
+"       Terminal.app, running tmux as the shell, and zsh within that, the
+"       escape character can be \033 or  which is generated with Ctrl-V.
 
-let &t_SI="[6\ q"
-let &t_SR="[4\ q"
-let &t_EI="[2\ q"
+" SHAPES
+" 0 - blinking block
+" 1 - blinking block
+" 2 - solid block
+" 3 - blinking underscore
+" 4 - solid underscore
+" 5 - blinking pipe
+" 6 - solid pipe
+"
+" MODES
+" SI - start insert mode
+" SR - start replace mode
+" EI - end insert mode
+
+" let &t_MODE='\033[SHAPE q'
+" let &t_EI='[4 q'
+
+let &t_SI="[6\ q"   " cursor is a pipe where text will go in insert mode
+let &t_SR="[4\ q"   " cursor underlines what gets swapped in replace mode
+let &t_EI="[2\ q"   " cursor is an obvious block in normal mode
 
 
 
@@ -205,14 +238,14 @@ nnoremap <silent> <S-t> :tabnew<cr>
 nnoremap <leader>l :ls<CR>:b<Space>
 
 " set working directory to here
-nnoremap <leader>. :lcd %:p:h<cr>
+nnoremap <leader>d :lcd %:p:h<cr>
 
 " find files by name
-set path+=**
-nnoremap <leader>f :find *
-nnoremap <leader>s :sfind *
-nnoremap <leader>v :vert sfind *
-nnoremap <leader>t :tabfind *
+set path=.,**
+nnoremap <leader>f :find ./
+nnoremap <leader>s :sfind ./
+nnoremap <leader>v :vert sfind ./
+nnoremap <leader>t :tabfind ./
 
 " Clear search (and its highlighting)
 noremap <leader>/ :let @/ = ""<CR>
@@ -275,15 +308,6 @@ if (exists('+colorcolumn'))
   highlight ColorColumn ctermbg=8
 endif
 
-if &term =~ '256color'
-  set t_ut=
-endif
-
-" set theme
-if !exists('g:not_finish_vimplug')
-  colorscheme molokai
-endif
-
 " Highlight up to 200 lines
 augroup vimrc-sync-fromstart
   autocmd!
@@ -315,19 +339,19 @@ autocmd FileType html,css EmmetInstall
 " MARKDOWN
 au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn,txt} setf markdown
 
-function! s:setupWrapping()
+function! s:wrapGood()
   setl wrap
   setl wm=2
   setl textwidth=79
   setl nolist
-  map <buffer> <Leader>p :Mm <CR>
 endfunction
 
 augroup FileType markdown
-  call s:setupWrapping()
+  call s:wrapGood()
+  set conceallevel=0
   " code blocks for markdown
-  " inoremap <buffer><silent><unique> ~~~ ~~~<Enter>~~~<C-o>k<C-o>A
-  " inoremap <buffer><silent><unique> ``` ```<Enter>```<C-o>k<C-o>A
+  inoremap <buffer><silent> ~~~ ~~~<Enter>~~~<C-o>k<C-o>A
+  inoremap <buffer><silent> ``` ```<Enter>```<C-o>k<C-o>A
 augroup END
 
 " Filesystem tree navigator
@@ -336,7 +360,7 @@ let g:netrw_browse_split = 0 " not sure
 let g:netrw_liststyle = 3 " tree mode
 let g:netrw_altv = 1 " open in vertical split right
 let g:netrw_preview = 1 " vertical previews
-let g:netrw_winsize = 20 " 20% wide tree
+let g:netrw_winsize = 30 " 20% wide tree
 let g:netrw_list_hide = '.*\.swp,.git/'
 
 
@@ -379,13 +403,24 @@ nnoremap <space><space> :DeniteProjectDir -buffer-name=git -direction=top file_r
 " syntastic
 let g:syntastic_always_populate_loc_list=1
 
+" set theme
+set background=dark
+if exists('g:pluggedin')
+  colorscheme molokai
+  " colorscheme PaperColor
+endif
+
 " lightline status bar
 " TODO: configure the status line
 let g:lightline = {
   \   'active': {
-  \     'left': [['mode', 'paste' ], ['readonly', 'filename', 'modified']],
-  \     'right': [['lineinfo'], ['percent'], ['fileformat', 'fileencoding']]
+  \     'left':  [ ['mode', 'paste' ],
+  \                ['readonly', 'filename', 'modified'] ],
+  \     'right': [ ['lineinfo'],
+  \                ['percent'],
+  \                ['filetype', 'fileformat', 'fileencoding'] ]
   \   },
+  \   'colorscheme': 'molokai'
   \ }
 
 " search contents of project files
