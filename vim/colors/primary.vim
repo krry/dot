@@ -1,1 +1,0 @@
-vim/plugins/vim-colorscheme-primary/colors/primary.vim

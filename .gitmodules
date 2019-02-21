@@ -1,9 +1,6 @@
 [submodule "vim/plugins/vim-sensible"]
 	path = vim/plugins/vim-sensible
 	url = https://github.com/tpope/vim-sensible
-[submodule "vim/plugins/vimproc.vim"]
-	path = vim/plugins/vimproc.vim
-	url = https://github.com/Shougo/vimproc.vim
 [submodule "vim/plugins/vim-trailing-whitespace"]
 	path = vim/plugins/vim-trailing-whitespace
 	url = https://github.com/bronson/vim-trailing-whitespace
@@ -16,9 +13,6 @@
 [submodule "vim/plugins/vim-polyglot"]
 	path = vim/plugins/vim-polyglot
 	url = https://github.com/sheerun/vim-polyglot
-[submodule "vim/plugins/vim-markdown"]
-	path = vim/plugins/vim-markdown
-	url = https://github.com/plasticboy/vim-markdown
 [submodule "vim/plugins/vim-gitgutter"]
 	path = vim/plugins/vim-gitgutter
 	url = https://github.com/airblade/vim-gitgutter
@@ -70,9 +64,6 @@
 [submodule "vim/plugins/vim-misc"]
 	path = vim/plugins/vim-misc
 	url = https://github.com/xolox/vim-misc
-[submodule "vim/plugins/vim-rsi"]
-	path = vim/plugins/vim-rsi
-	url = https://github.com/tpope/vim-rsi
 [submodule "vim/plugins/webapi-vim"]
 	path = vim/plugins/webapi-vim
 	url = https://github.com/mattn/webapi-vim
@@ -88,6 +79,3 @@
 [submodule "tmux"]
 	path = tmux
 	url = git@github.com:krry/.tmux.git
-[submodule "vim/plugins/vim-colorscheme-primary"]
-	path = vim/plugins/vim-colorscheme-primary
-	url = https://github.com/google/vim-colorscheme-primary

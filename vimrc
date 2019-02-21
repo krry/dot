@@ -53,7 +53,6 @@ Plug 'tpope/vim-surround'      " add/change/remove surrounds
 Plug 'tpope/vim-repeat'        " expands dot repeat scope
 Plug 'junegunn/vim-easy-align' " vertical alignment made easy
 Plug 'tpope/vim-commentary'    " quick commenting with 'gcc'
-Plug 'tpope/vim-rsi'           " adds readline key bindings to vim, smartly
 
 " lint
 Plug 'Yggdroot/indentLine'     " shows vertical lines where spaces indent
@@ -65,7 +64,7 @@ Plug 'airblade/vim-gitgutter'  " mark lines with changes
 
 " web
 Plug 'mattn/webapi-vim'        " puts vim in touch with web APIs (for playpen)
-Plug 'vimwiki/vimwiki', { 'branch': 'dev' }
+Plug 'vimwiki/vimwiki', { 'branch': 'dev' }   " linkable notes
 
 " syntax and langs
 Plug 'sheerun/vim-polyglot'    " supports for >140 languages
@@ -74,11 +73,12 @@ Plug 'mattn/emmet-vim'         " HTML CSS completion
 Plug 'stephpy/vim-yaml'        " YAML added magic love
 Plug 'rust-lang/rust.vim'      " Rust syntax, rustfmt, tagbar, playground
 
-" colorschemes
+" colorschemes and interface
 Plug 'itchyny/lightline.vim'   " status bar, better than powerline/airline
 Plug 'tomasr/molokai'          " molokai theme for vim
 Plug 'NLKNguyen/papercolor-theme'       " inspired by material design
-Plug 'google/vim-colorscheme-primary'   " based on Google's colors
+
+" bliss
 Plug 'junegunn/goyo.vim'       " distraction-free writing in vim
 
 call plug#end()
@@ -374,14 +374,16 @@ let g:netrw_list_hide = '.*\.swp,.git/'
 "  _/                        _/_/
 
 
-" Git cmds
+" Fugitive cmds
 noremap <leader>ga :Gwrite<cr>
+noremap <leader>gco :Gread<cr>
 noremap <leader>gc :Gcommit<cr>
 noremap <leader>gsh :Gpush<cr>
 noremap <leader>gll :Gpull<cr>
 noremap <leader>gs :Gstatus<cr>
 noremap <leader>gd :Gvdiff<cr>
-noremap <leader>gr :Gremove<cr>
+noremap <leader>grm :Gremove<cr>
+noremap <leader>gmv :Gmove<cr>
 nnoremap <leader>o :.Gbrowser<cr>
 
 " Ack search contents of current directory
@@ -391,7 +393,6 @@ nmap * :Ack <c-r>=expand("<cword>")<cr><cr>
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
-
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 vnoremap <silent> <Enter> :EasyAlign<cr>
