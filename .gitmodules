@@ -82,3 +82,6 @@
 [submodule "zsh"]
   path = zsh
   url = https://github.com/krry/prezto
+[submodule "fonts"]
+	path = fonts
+	url = https://github.com/powerline/fonts
