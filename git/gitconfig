@@ -1,0 +1,41 @@
+[core]
+	editor = vim
+	mergeoptions = --no-edit
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+	ignorecase = true
+	precomposeunicode = true
+	excludesfile = $HOME/.gitignore_global
+[alias]
+	lg = log --graph --pretty=format:\\'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset\\' --abbrev-commit --date=relative
+	s = status
+	st = status
+	ch = checkout
+	co = checkout
+	ci = commit
+	sh = stash
+	sha = stash apply
+	br = branch
+	rem = remote
+	unstage = reset HEAD --
+	last = log -1 HEAD
+[push]
+	default = simple
+[filter "media"]
+	required = true
+	clean = git media clean %f
+	smudge = git media smudge %f
+[merge]
+	tool = vi
+[user]
+	email = krry@me.com
+	name = Kerry Snyder
+	username = krry
+[credential]
+	helper = osxkeychain
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = false

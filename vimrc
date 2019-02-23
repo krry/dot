@@ -38,9 +38,10 @@ call plug#begin(expand('~/.vim/plugins'))
 " TODO: look for redundants in here with `vim-sensible`
 Plug 'tpope/vim-sensible'      " sensible defaults
 
-" search
+" guessing
 Plug 'mileszs/ack.vim'         " adds silver searcher to vim
 Plug 'Shougo/denite.nvim'      " fuzzy search for anything/files in a project
+Plug 'ajh17/VimCompletesMe'    " tab completion all the ways
 
 " tags
 Plug 'xolox/vim-easytags'      " indexes and highlights ctags
@@ -101,6 +102,7 @@ set autoread
 set autowrite
 set backspace=indent,eol,start     " allow backspace when inserting
 set clipboard^=unnamed,unnamedplus " use system clipboard on OSX or Linux
+set conceallevel=0                 " disable concealing
 set directory-=.                   " don't store swap files in current directory
 set encoding=utf-8                 " set charset
 set expandtab                      " 
@@ -256,10 +258,10 @@ noremap <silent> <leader>V :source $MYVIMRC<cr>:exe ":echo 'vimrc reloaded'"<cr>
 " Save, close, quit
 noremap <silent> <leader>u :update<cr>
 noremap <silent> <C-s> :update<cr>
-noremap <silent> <C-x> :x<cr>
+noremap <silent> <C-w> :x<cr>
 noremap <silent> <C-q> :q<cr>
 inoremap <silent> <C-s> <esc>:update<cr>i
-inoremap <silent> <C-x> <esc>:x<cr>
+inoremap <silent> <C-w> <esc>:x<cr>
 inoremap <silent> <C-q> <esc>:q<cr>
 
 " pbcopy for OSX copy/paste
@@ -344,23 +346,27 @@ function! s:wrapGood()
   setl wm=2
   setl textwidth=79
   setl nolist
+  set conceallevel=0
 endfunction
 
 augroup FileType markdown
   call s:wrapGood()
-  set conceallevel=0
   " code blocks for markdown
   inoremap <buffer><silent> ~~~ ~~~<Enter>~~~<C-o>k<C-o>A
   inoremap <buffer><silent> ``` ```<Enter>```<C-o>k<C-o>A
 augroup END
 
+let g:vim_markdown_conceal = 0 " disable markdown conceallevel setting
+let g:tex_conceal = ""         " disable math conceal with LaTeX enabled
+let g:vim_markdown_math = 1
+"
 " Filesystem tree navigator
-let g:netrw_banner = 0 " excise banner
+let g:netrw_banner = 0       " excise banner
 let g:netrw_browse_split = 0 " not sure
-let g:netrw_liststyle = 3 " tree mode
-let g:netrw_altv = 1 " open in vertical split right
-let g:netrw_preview = 1 " vertical previews
-let g:netrw_winsize = 30 " 20% wide tree
+let g:netrw_liststyle = 3    " tree mode
+let g:netrw_altv = 1         " open in vertical split right
+let g:netrw_preview = 1      " vertical previews
+let g:netrw_winsize = 25     " 20% wide tree
 let g:netrw_list_hide = '.*\.swp,.git/'
 
 
@@ -389,12 +395,12 @@ nnoremap <leader>o :.Gbrowser<cr>
 " Ack search contents of current directory
 nnoremap <space>/ :Ack<space>
 " use the word under the cursor for Ack search
-nmap * :Ack <c-r>=expand("<cword>")<cr><cr>
+nmap <space>* :Ack <c-r>=expand("<cword>")<cr><cr>
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
+xmap <leader>a <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
+nmap <leader>a <Plug>(EasyAlign)
 vnoremap <silent> <Enter> :EasyAlign<cr>
 
 " denite file search (c-p uses gitignore, c-o looks at everything)
