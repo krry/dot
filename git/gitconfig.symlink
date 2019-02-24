@@ -1,0 +1,44 @@
+[include]
+  path = ~/.gitconfig.local
+[hub]
+  protocol = https
+[user]
+  email = krry@me.com
+  name = Kerry Snyder
+  username = krry
+[core]
+	editor = vim
+  excludesfile = ~/.gitignore
+	; filemode = true
+	; bare = false
+	; logallrefupdates = true
+	; ignorecase = true
+	; precomposeunicode = true
+[alias]
+	log = log --graph --pretty=format:\\'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset\\' --abbrev-commit --date=relative
+	co = checkout
+  promote = !$ZSH/bin/git-promote
+  wtf     = !$ZSH/bin/git-wtf
+  rank-contributors = !$ZSH/bin/git-rank-contributors
+  count   = !git shortlog -sn
+[push]
+	default = simple
+[color]
+  diff = auto
+  status = auto
+  branch = auto
+  ui = true
+[apply]
+  whitespace = nowarn
+[help]
+  autocorrect = 1
+[merge]
+  tool = vi
+[mergetool]
+  keepBackup = false
+[diff]
+  tool = vimdiff
+[difftool]
+  prompt = false
+[credential]
+  helper = osxkeychain

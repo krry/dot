@@ -47,6 +47,7 @@ Plug 'ajh17/VimCompletesMe'    " tab completion all the ways
 Plug 'xolox/vim-easytags'      " indexes and highlights ctags
 Plug 'xolox/vim-misc'          " supports easytags
 Plug 'majutsushi/tagbar'       " show ctags in rightside bar
+Plug 'scrooloose/nerdtree'     " replace netrw with sweet tree
 
 " utilities
 Plug 'svermeulen/vim-easyclip' " d deletes, m moves, y yanks and more
@@ -113,7 +114,7 @@ set history=222                    " extend cmd line history
 set hlsearch                       " highlight / search matches
 set ignorecase                     " ignore case for searches
 set incsearch                      " 
-set laststatus=2                   " status bar
+set laststatus=2                   " always show status bar for lightline
 set linebreak                      " 
 set mouse=a                        " enable resizing buffers with mouse, etc.
 set mousemodel=popup               " let the mouse pop up
@@ -229,7 +230,7 @@ noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 
 " Show the tree
-nnoremap <leader><Tab> :Lexplore<CR>
+" nnoremap <leader><Tab> :Lexplore<CR>
 
 " Tab for tabs
 nnoremap <Tab> gt
@@ -326,17 +327,24 @@ augroup END
 " PYTHON
 au BufNewFile,BufRead *.py set fileformat=unix
 
+" SHELL
+augroup BufNewFile,BufRead *.{zsh, sh, gitconfig, yml, toml, pl, py}
+  set tabstop=4
+  set shiftwidth=4
+  set softtabstop=4
+augroup END
+
 " HTML/CSS/JS
+let g:user_emmet_install_global = 0
+
 augroup BufNewFile,BufRead *.{html, js, css}
   set tabstop=2
   set shiftwidth=2
   set softtabstop=2
   " turns on html autocomplete
   autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+  autocmd FileType html,css EmmetInstall
 augroup END
-
-let g:user_emmet_install_global = 0
-autocmd FileType html,css EmmetInstall
 
 " MARKDOWN
 au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn,txt} setf markdown
@@ -445,3 +453,34 @@ call denite#custom#alias('source', 'file_rec/git', 'file_rec')
 call denite#custom#var('file_rec/git', 'command',
       \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
 
+" VIMWIKI
+"
+" set wiki to store in Google Drive
+let wiki = {}
+let wiki.path = '~/Drive/Code/wiki/'
+let wiki.path_html = '~/Drive/Code/wiki/html/'
+let wiki.css_name = 'css/wiki.css'
+let wiki.auto_export = 1
+
+let g:vimwiki_list = [wiki]
+
+" Tagbar
+map [] :TagbarToggle<CR>
+
+" Nerdtree Settings
+nmap <C-n> :NERDTreeToggle<CR>
+autocmd VimEnter * NERDTree | wincmd p
+
+" autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+let NERDTreeQuitOnOpen = 1
+let NERDTreeAutoDeleteBuffer = 1
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+set ttyfast
+set lazyredraw
+
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif

@@ -7,6 +7,8 @@
 - iTerm - `./.dotfiles/colors/Molokai.itermcolors`
 - Zsh - takes the colors from iTerm
 
+TODO: confirm and expand color value table
+
 Color  | Hex     | 256
 :----- | :-----: | :-:
 black  | #131313 | 233
