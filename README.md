@@ -8,7 +8,7 @@ Can I install the Piperita.terminal files? And make that the default in set-defa
 ## Installation
 
 ``` sh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/krry/dot/mac/configure.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/krry/dot/mac/configure.sh)"
 ```
 
 On a remote server, if you don't have `[mosh](https://github.com/mobile-shell/mosh`, you'll want that.
