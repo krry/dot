@@ -7,20 +7,12 @@ Can I install the Piperita.terminal files? And make that the default in set-defa
 
 ## Installation
 
+Who doesn't love a one-liner?
+
 ``` sh
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/krry/dot/mac/configure.sh)"
 ```
-
-On a remote server, if you don't have `[mosh](https://github.com/mobile-shell/mosh`, you'll want that.
-
-``` sh
-git clone https://github.com/mobile-shell/mosh
-$ cd mosh
-$ ./autogen.sh
-$ ./configure
-$ make
-$ make install
-```
+---
 
 ## Features
 
