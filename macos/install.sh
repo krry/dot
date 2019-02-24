@@ -5,6 +5,7 @@
 
 echo "Shall we run a mac OS software update?"
 read -p "(y/n): " -n1 REPLY
+echo ''
 if [[ $REPLY =~ ^[Yy]$ ]] ; then
   echo "Checking for Mac OS software update."
   echo "Please enter the password for this machine:"
