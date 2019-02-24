@@ -53,7 +53,7 @@ if [[ $REPLY =~ ^[Yy]$ ]] ; then
 fi
 
 # Install homebrew
-$ZSH/homebrew/install.sh > /dev/null
+# $ZSH/homebrew/install.sh > /dev/null
 
 # Upgrade homebrew
 echo "› brew update"
