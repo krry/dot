@@ -2,10 +2,8 @@
 
 ## Installation
 
-``` sh
-git clone https://github.com/krry/dot.git ${HOME}/.dotfiles
-cd ${HOME}/.dotfiles
-. ./install.sh
+```
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/krry/dot/mac/configure.sh)"
 ```
 
 On a remote server, if you don't have [`mosh`](https://github.com/mobile-shell/mosh, you'll want that.
