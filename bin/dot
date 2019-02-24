@@ -44,7 +44,8 @@ done
 export ZSH=$HOME/.dotfiles
 
 # Set macOS defaults
-read -p "Do you want to make sure your Mac OS is hackerrific? (y/n) " -n 1 -r
+echo "Do you want to make sure your Mac OS is hackerrific?"
+read -p "(y/n): " -n1
 echo ''
 if [[ $REPLY =~ ^[Yy]$ ]] ; then
   $ZSH/macos/set-defaults.sh
