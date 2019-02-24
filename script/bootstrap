@@ -217,3 +217,10 @@ else
 fi
 
 echo "mac symlinking complete!"
+
+cat << EOF
+One last step, copy/paste these two lines:
+exec zsh
+. ./zsh/install.zsh
+EOF
+exit
