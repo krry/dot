@@ -176,7 +176,7 @@ fi
 
 info "Installing krry's vim with vim-plug and lots of Plugins"
 if [ ! -d $HOME/.vim ] ; then
-  ln ~/.dotfiles/vim $HOME
+  ln -s ~/.dotfiles/vim $HOME/.vim
   cd ~/.vim
   git submodule update --remote
   vim +'PlugInstall --sync' +qa
