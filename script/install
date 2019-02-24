@@ -11,6 +11,7 @@ echo "ready to install the brew bundle"
 echo "this could take a while"
 echo "Are you sure you want to do this?\n"
 read -p "(y/n): " -n1
+echo ''
 if [[ $REPLY =~ ^[Yy]$ ]] ; then
   brew bundle
 else
