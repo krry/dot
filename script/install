@@ -9,9 +9,8 @@ cd "$(dirname $0)"/..
 # Run Homebrew through the Brewfile
 echo "ready to install the brew bundle"
 echo "this could take a while"
-
-read -p "Are you sure you want to do this?
-(y/n) " -n1
+echo "Are you sure you want to do this?\n"
+read -p "(y/n): " -n1
 if [ $REPLY =~ ^[Yy]$ ] ; then
   brew bundle
 else
