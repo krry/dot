@@ -3,5 +3,12 @@
 # command line interface to it that we can use to just install everything, so
 # yeah, let's do that.
 
-echo "› sudo softwareupdate -i -a"
-sudo softwareupdate -i -a
+echo "shall we run a mac OS software update?"
+read -p "(y/n): " -n1 REPLY
+if [[ $REPLY =~ ^[Yy]$ ]] ; then
+  echo "Checking for Mac OS software update."
+  echo "Please enter the password for this machine:"
+  sudo softwareupdate -i -a
+else
+  echo "Ok. Continuing without updating Mac OS..."
+fi
