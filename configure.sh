@@ -45,7 +45,7 @@ fi
 
 # Pull down personal dotfiles
 echo "Do you want to use krry's dotfiles?"
-read -p "(y/n) " -n1 REPLY
+read -p "(y/n): " -n1 REPLY
 echo ''
 
 if [[ $REPLY =~ ^[Yy]$ ]] ; then
