@@ -46,27 +46,26 @@ fi
 if type zsh >/dev/null 2>&1 ; then
   echo "switching to zsh"
   exec zsh
-  # prezto zsh install
-  if [ -d ~/.zprezto/ ] ; then
-    echo "prezto is already installed."
-    vared -cp "Would you like to update prezto now?" REPLY
-    if [[ $REPLY =~ ^[Yy]$ ]] ; then
-      zprezto-update
-    fi
-  else
-    echo "installing prezto for zsh..."
-    git clone -q --recursive https://github.com/krry/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
-    setopt EXTENDED_GLOB
-    for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
-      ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
-    done
-  fi
 else
   echo "zsh not found, so no prezto change-o for you"
   exit
 fi
 
-
+# prezto zsh install
+if [ -d ~/.zprezto/ ] ; then
+  echo "prezto is already installed."
+  vared -cp "Would you like to update prezto now?" REPLY
+  if [[ $REPLY =~ ^[Yy]$ ]] ; then
+    zprezto-update
+  fi
+else
+  echo "installing prezto for zsh..."
+  git clone -q --recursive https://github.com/krry/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+  setopt EXTENDED_GLOB
+  for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
+    ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+  done
+fi
 
 # Pull down personal dotfiles
 vared -cp "Do you want to use krry's dotfiles? y/n" REPLY
