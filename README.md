@@ -1,9 +1,14 @@
 # dotfiles
 
+## TODO
+
+Which shell should start the process? All in bash until the prezto part?
+Can I install the Piperita.terminal files? And make that the default in set-defaults.sh.
+
 ## Installation
 
-```
-zsh -c "$(curl -fsSL https://raw.githubusercontent.com/krry/dot/mac/configure.sh)"
+``` sh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/krry/dot/mac/configure.sh)"
 ```
 
 On a remote server, if you don't have `[mosh](https://github.com/mobile-shell/mosh`, you'll want that.
