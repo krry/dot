@@ -185,7 +185,7 @@ else
 fi
 
 read -p "Do you want powerline-patched hacker fonts?
-(y/n) " -n 1 -r
+(y/n) " -n1 REPLY
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
   # install powerline-patched fonts
@@ -199,7 +199,7 @@ fi
 
 # iterm2 config
 read -p "Do you want iTerm to use the molokai colorscheme?
-(y/n) " -n 1 -r
+(y/n) " -n1 REPLY
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
   # Specify the preferences directory
