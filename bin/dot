@@ -44,7 +44,11 @@ done
 export ZSH=$HOME/.dotfiles
 
 # Set macOS defaults
-$ZSH/macos/set-defaults.sh
+read -p "Do you want to make sure your Mac OS is hackerrific? y/n" -n 1 -r
+echo ''
+if [[ $REPLY =~ ^[Yy]$ ]] ; then
+  $ZSH/macos/set-defaults.sh
+fi
 
 # Install homebrew
 $ZSH/homebrew/install.sh 2>&1
