@@ -253,5 +253,4 @@ One last step, copy/paste these two lines:
 exec zsh
 . ./zsh/install.zsh
 EOF
-$&%#&%$&#$&%&#$&%&#$&%&#$&%&%#&#$&%&#$&#$&%&#$&#$&%#&*#%&#%&#%&#%&#
 exit
