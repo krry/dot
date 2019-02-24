@@ -7,9 +7,13 @@ set -e
 cd "$(dirname $0)"/..
 
 # Run Homebrew through the Brewfile
-echo "ready to install the brew bundle"
-echo "this could take a while"
-echo "Are you sure you want to do this?\n"
+cat << EOF
+We're ready to install the homebrew bundle.
+
+This could take a while.
+Are you sure you want to do this now?
+EOF
+echo ''
 read -p "(y/n): " -n1
 echo ''
 if [[ $REPLY =~ ^[Yy]$ ]] ; then
