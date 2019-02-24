@@ -194,10 +194,12 @@ info "Installing krry's vimrc, vim-plug, and plugins"
 if [ ! -d $HOME/.vim ] ; then
   ln -s ~/.dotfiles/vim $HOME/.vim
   cd ~/.vim
-  vim +'PlugInstall --sync' +qa > /dev/null
 else
   echo "There is already a .vim dir."
 fi
+
+echo "Installing vim plugins..."
+vim +'PlugInstall --sync' +qa > /dev/null 2 &> 1
 
 # .config permissions fix
 # sudo chown $(whoami) $HOME/.config
