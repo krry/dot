@@ -45,7 +45,7 @@ fi
 
 # Pull down personal dotfiles
 read -p "Do you want to use krry's dotfiles? 
-(y/n) " REPLY
+(y/n) " -n1 REPLY
 
 if [[ $REPLY =~ ^[Yy]$ ]] ; then
   if [[ -d ~/.dotfiles ]] ; then
