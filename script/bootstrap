@@ -199,7 +199,7 @@ else
 fi
 
 echo "Installing vim plugins..."
-vim +'PlugInstall --sync' +qa > /dev/null 2 &> 1
+vim +'PlugInstall --sync' +qa > /dev/null 2>&1
 
 # .config permissions fix
 # sudo chown $(whoami) $HOME/.config
