@@ -5,6 +5,7 @@ tap 'homebrew/bundle'
 brew 'ack'           # quick file search
 brew 'bash-completion'
 brew 'coreutils'     # GNU tools like `shuf` from Linux
+brew 'gist'          # make gists from the command line
 brew 'git'
 brew 'go'
 brew 'grc'           # colorize log files and cli output
