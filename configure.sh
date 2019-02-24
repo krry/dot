@@ -44,13 +44,15 @@ if ! curl "$URL" --silent --output "$HOME/.git-completion.bash" ; then
 fi
 
 # Pull down personal dotfiles
-read -p "Do you want to use krry's dotfiles? 
-(y/n) " -n1 REPLY
+echo "Do you want to use krry's dotfiles?"
+read -p "(y/n) " -n1 REPLY
+echo ''
 
 if [[ $REPLY =~ ^[Yy]$ ]] ; then
   if [[ -d ~/.dotfiles ]] ; then
-    read -p "dotfiles already present. do you want to reinstall?
-(y/n)" REPLY
+    echo ".dotfiles already present. Do you want to reinstall?"
+    read -p "(y/n): " REPLY
+    echo ''
     if [[ $REPLY =~ ^[Yy]$ ]] ; then
       echo "archiving old dotfiles in ~/.dotfiles_old"
       mv -r "$HOME/.dotfiles" "$HOME/.dotfiles_old"
