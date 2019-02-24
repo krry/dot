@@ -184,7 +184,8 @@ else
   echo "There is already a .vim dir."
 fi
 
-read -p "Do you want powerline-patched hacker fonts? y/n" -n 1 -r
+read -p "Do you want powerline-patched hacker fonts?
+(y/n) " -n 1 -r
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
   # install powerline-patched fonts
@@ -197,7 +198,8 @@ fi
 # success '.config permissions fixed'
 
 # iterm2 config
-read -p "Do you want iTerm to use the molokai colorscheme? y/n" -n 1 -r
+read -p "Do you want iTerm to use the molokai colorscheme?
+(y/n) " -n 1 -r
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
   # Specify the preferences directory
