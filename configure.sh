@@ -44,7 +44,19 @@ if ! curl "$URL" --silent --output "$HOME/.git-completion.bash" ; then
 fi
 
 # Pull down personal dotfiles
-echo "Do you want to use krry's dotfiles?"
+echo ""
+cat << EOF
+***********************************
+Do you want to use krry's dotfiles?
+***********************************
+
+They come chock full of rainbows and automatons!
+zsh, tmux, vim, git all playing together like
+bunnies in a syntax highlighted field of
+autocompletion and intuitive keybindings.
+
+You'll spend more time drooling than coding.
+EOF
 read -p "(y/n): " -n1 REPLY
 echo ''
 
