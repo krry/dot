@@ -3,7 +3,7 @@
 ## Installation
 
 ```
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/krry/dot/mac/configure.sh)"
+zsh -c "$(curl -fsSL https://raw.githubusercontent.com/krry/dot/mac/configure.sh)"
 ```
 
 On a remote server, if you don't have `[mosh](https://github.com/mobile-shell/mosh`, you'll want that.
