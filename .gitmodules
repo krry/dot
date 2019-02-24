@@ -76,12 +76,18 @@
 [submodule "vim/plugins/papercolor-theme"]
 	path = vim/plugins/papercolor-theme
 	url = https://github.com/NLKNguyen/papercolor-theme
+[submodule "vim/plugins/VimCompletesMe"]
+  path = vim/plugins/VimCompletesMe
+  url = https://github.com/ajh17/VimCompletesMe
+[submodule "vim/plugins/nerdtree"]
+  path = vim/plugins/nerdtree
+  url = https://github.com/scrooloose/nerdtree
 [submodule "tmux"]
 	path = tmux
-	url = git@github.com:krry/.tmux.git
+	url = https://github.com/krry/.tmux.git
 [submodule "zsh"]
   path = zsh
-  url = https://github.com/krry/prezto
+  url = https://github.com/krry/prezto.git
 [submodule "fonts"]
 	path = fonts
-	url = https://github.com/powerline/fonts
+	url = https://github.com/powerline/fonts.git
