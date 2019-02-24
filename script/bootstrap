@@ -225,20 +225,20 @@ else
   echo "Okay, no molokai'd iTerm for you."
 fi
 
-echo "Do you want mosh for super smooth remote ssh action?"
-read -p "(y/n): " -n1 REPLY
-echo ''
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-  cd ~/.dotfiles
-  git clone https://github.com/mobile-shell/mosh
-  cd mosh
-  ./autogen.sh
-  ./configure
-  make
-  make install
-else
-  echo "Maybe later."
-fi
+# echo "Do you want mosh for super smooth remote ssh action?"
+# read -p "(y/n): " -n1 REPLY
+# echo ''
+# if [[ $REPLY =~ ^[Yy]$ ]]; then
+#   cd ~/.dotfiles
+#   git clone https://github.com/mobile-shell/mosh
+#   cd mosh
+#   ./autogen.sh
+#   ./configure
+#   make
+#   make install
+# else
+#   echo "Maybe later."
+# fi
 
 cat << EOF
 
