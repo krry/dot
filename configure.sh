@@ -1,7 +1,5 @@
 #!/bin/bash
 
-alias echo=printf "$1\n"
-
 # Install brew
 if test ! $(which brew) ; then
   echo "Installing Homebrew for you."
@@ -95,4 +93,3 @@ else
   echo "source $HOME/.git-completion.bash" >> ${ZDOTDIR:-$HOME}/.bashrc && echo "added git-completion to .bashrc..."
 fi
 
-unalias echo

@@ -10,8 +10,6 @@ DOTFILES_ROOT=$(pwd -P)
 
 set -e
 
-echo ''
-
 info () {
   printf "\r  [ \033[00;34m..\033[0m ] $1\n"
 }
@@ -26,7 +24,6 @@ success () {
 
 fail () {
   printf "\r\033[2K  [\033[0;31mFAIL\033[0m] $1\n"
-  echo ''
   exit
 }
 
@@ -105,7 +102,7 @@ link_file () {
 
     if [ "$overwrite" == "true" ]
     then
-      rm -rf "$dst"
+      rm "$dst"
       success "removed $dst"
     fi
 
@@ -140,19 +137,6 @@ install_dotfiles () {
   done
 }
 
-add_cron () {
-  local frequency="*/15 * * * *"
-  local command=$1
-  local job="$frequency $command"
-  cat <(fgrep -i -v "$command" <(crontab -l)) <(echo "$job") | crontab -
-}
-
-add_line () {
-  local command=$1
-  local job="$command"
-  cat <(fgrep -i -v "$command" <(crontab -l)) <(echo "$job") | crontab -
-}
-
 setup_gitconfig
 install_dotfiles
 
@@ -163,7 +147,6 @@ then
   if source bin/dot | while read -r data; do info "$data"; done
   then
     success "dependencies installed"
-    echo ''
     echo "Now updating dependencies..."
     pip3 install --upgrade setuptools
   else
@@ -171,102 +154,64 @@ then
   fi
 fi
 
-echo ''
-info "starting jldeen mods"
-#backup old bin, if exists
+if [[ -z ~/.tmux.conf ]] ; then
+  info "installing .tmux"
+  git clone https://github.com/krry/.tmux.git
+  ln -s ".tmux/.tmux.conf" $HOME
+  cp ".tmux/.tmux.conf.local" $HOME
+fi
+
+info "Installing jldeen's bin"
+# backup old bin, if exists
 if [ -d $HOME/bin ]
 then
-    echo "current $HOME/bin folder found!!! Creating backup..."
+    echo "Current $HOME/bin folder found!!! Creating backup..."
     sudo mv $HOME/bin bin_old
-    success "backup created"
+    success "Backup created."
 else
-    echo "No current $HOME/bin folder found. Proceeding to link bin folder for tumx scripts..."
+    echo "No current $HOME/bin folder found. Proceeding to link bin folder"
+    # symlink .dotfiles bin to ~
+    ln -s $HOME/.dotfiles/bin $HOME/bin && success "symlink for $HOME/bin folder created"
 fi
 
-# symlink .dotfiles bin to ~
-ln -s $HOME/.dotfiles/bin $HOME/bin && success "symlink for $HOME/bin folder created"
-
-# symlink .dotfiles tmux to ~
-ln -s $HOME/.dotfiles/tmux $HOME/.tmux && success "symlink for $HOME/.tmux folder created"
-
-# symlink VSCode User Settings
-if [ -d $HOME/Library/Application\ Support/Code/User ] ; then 
-  ln -s $HOME/.dotfiles/code/settings.json $HOME/Library/Application\ Support/Code/User/settings.json
-  success "symlink for vs code settings created"
+info "Installing krry's vim with vim-plug and lots of Plugins"
+if [ ! -d $HOME/.vim ] ; then
+  ln ~/.dotfiles/vim $HOME
+  cd ~/.vim
+  git submodule update --remote
+  vim +'PlugInstall --sync' +qa
 else
-  info "symlink for vs code settings not created"
-  echo "VS Code does not appear to be installed or has not been launched yet. Cannot create symlink for VS Code User settings..."
+  echo "There is already a .vim dir."
 fi
 
-# install Source Code Pro nerd font
-cp $HOME/.dotfiles/Source\ Code\ Pro\ Nerd\ Font\ Complete.ttf /Library/Fonts
-success "Source Code Pro font copied successfully!"
-
-# .config permissions fix
-sudo chown $(whoami) $HOME/.config 
-success '.config permissions fixed'
-
-# airport symlink
-if ! [ -f /usr/local/bin/airport ]
-  then
-    sudo ln -s /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport /usr/local/bin/airport
-    success "symlink for airport created"
-  else 
-    info "symlink for airport already exists"
-  fi
-
-# crontab additions
-add_line "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-  if [[ $? -eq 0 ]]
-  then
-  success "$PATH added to crontab"
-  else
-  info "ERROR $PATH could not be added to crontab"
-  fi
-
-add_cron "speedtest-cli --simple > ~/bin/bandwidth.log"
-  if [[ $? -eq 0 ]]
-  then
-  success "crontab created for speedtest cli --simple"
-  else
-  info "ERROR crontab could not be created for speedtest cli --simple"
-  fi
-
-add_cron "speedtest-cli --json > ~/bin/bandwidth.json"
-  if [[ $? -eq 0 ]]
-  then
-  success "crontab created for speedtest cli --json"
-  else
-  info "ERROR crontab could not be created for speedtest cli --json"
-  fi
-
-# first run of speedtest-cli
-echo "Running speedtest-cli for tmux status bar data now..."
-speedtest-cli --simple > ~/bin/bandwidth.log
-success "speedtest-cli bandwidth.log created"
-
-speedtest-cli --json > ~/bin/bandwidth.json
-success "speedtest-cli bandwidth.json created"
-
-# iterm2 config
-echo ''
-read -p "Do you currently use iTerm2 and would you like to set jldeen's custom colors? y/n" -n 1 -r
-echo ''
+read -p "Do you want powerline-patched hacker fonts? y/n" -n 1 -r
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
-	# Specify the preferences directory
+  # install powerline-patched fonts
+  . "$HOME/.dotfiles/fonts/install.sh"
+  success "Hacker fonts installed. Powerline glyphs enabled."
+fi
+
+# .config permissions fix
+# sudo chown $(whoami) $HOME/.config
+# success '.config permissions fixed'
+
+# iterm2 config
+read -p "Do you want iTerm to use the molokai colorscheme? y/n" -n 1 -r
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+  # Specify the preferences directory
   defaults write com.googlecode.iterm2 PrefsCustomFolder -string "$HOME/.itermcfg/"
   # Tell iTerm2 to use the custom preferences in the directory
   defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true
-    if [[ $? -eq 0 ]]
-    then
-        success "successfully configured iTerm2 to use jldeen's custom colors..."
-    else
-        fail "failed to apply jldeen's custom colors..." >&2
-fi
-else 
-    echo "You chose not to use iTerm2 or jldeen's custom colors."
+  if [[ $? -eq 0 ]]
+  then
+    success "successfully configured iTerm2 to use molokai"
+  else
+    fail "failed to apply molokai..." >&2
+  fi
+else
+  echo "Okay, no molokai'd iTerm for you."
 fi
 
-echo ''
-echo '	Badass macOS terminal installed!'
+echo "mac symlinking complete!"

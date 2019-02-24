@@ -5,6 +5,7 @@ tap 'homebrew/bundle'
 brew 'ack'           # quick file search
 brew 'bash-completion'
 brew 'coreutils'     # GNU tools like `shuf` from Linux
+brew 'git'
 brew 'go'
 brew 'grc'           # colorize log files and cli output
 # brew 'jp2a'
@@ -24,6 +25,8 @@ brew 'tree'
 brew 'wget'
 brew 'yarn'
 brew 'youtube-dl'    # download YouTube videos
+brew 'zsh'
+brew 'zsh-completions'
 
 cask '1password'
 cask 'atom'
