@@ -326,8 +326,8 @@ defaults write com.apple.Terminal "Startup Window Settings" -string "Pro"
 echo "Preventing Time Machine from prompting to use new hard drives as backup volume"
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 
-echo "Disabling local Time Machine backups"
-hash tmutil &> /dev/null && sudo tmutil disablelocal
+# echo "Disabling local Time Machine backups"
+# hash tmutil &> /dev/null && sudo tmutil disablelocal
 
 ###############################################################################
 # Personal Additions                                                          #
@@ -338,10 +338,11 @@ hash tmutil &> /dev/null && sudo tmutil disablelocal
 # sudo pmset -a hibernatemode 0
 
 echo "Speeding up wake from sleep to 24 hours from an hour"
-"http://www.cultofmac.com/221392/quick-hack-speeds-up-retina-macbooks-wake-from-sleep-os-x-tips/"
-pmset -a standbydelay 86400
+echo "http://www.cultofmac.com/221392/quick-hack-speeds-up-retina-macbooks-wake-from-sleep-os-x-tips/"
+sudo pmset -a standbydelay 86400
 
-echo "Disabling OS X logging of downloaded files" "http://www.macgasm.net/2013/01/18/good-morning-your-mac-keeps-a-log-of-all-your-downloads/"
+echo "Disabling OS X logging of downloaded files"
+echo "http://www.macgasm.net/2013/01/18/good-morning-your-mac-keeps-a-log-of-all-your-downloads/"
 defaults write com.apple.LaunchServices LSQuarantine -bool NO
 
 echo "Won’t prompt for confirmation before downloading"
@@ -356,8 +357,8 @@ defaults write com.apple.NetworkBrowser BrowseAllInterfaces 1
 ###############################################################################
 # Kill affected applications                                                  #
 ###############################################################################
-
 cat << EOF
+
 Done!
 
 ################################################################
