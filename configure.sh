@@ -67,7 +67,7 @@ if [[ $REPLY =~ ^[Yy]$ ]] ; then
     echo ''
     if [[ $REPLY =~ ^[Yy]$ ]] ; then
       echo "archiving old dotfiles in ~/.dotfiles_old"
-      mv -r "$HOME/.dotfiles" "$HOME/.dotfiles_old"
+      mv "$HOME/.dotfiles" "$HOME/.dotfiles_old"
     fi
   fi
 
