@@ -3,7 +3,7 @@
 # command line interface to it that we can use to just install everything, so
 # yeah, let's do that.
 
-echo "shall we run a mac OS software update?"
+echo "Shall we run a mac OS software update?"
 read -p "(y/n): " -n1 REPLY
 if [[ $REPLY =~ ^[Yy]$ ]] ; then
   echo "Checking for Mac OS software update."
