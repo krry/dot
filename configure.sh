@@ -45,25 +45,30 @@ fi
 
 # prezto zsh install
 if [ -d ~/.zprezto/ ] ; then
-  echo "prezto is already installed..."
-  read -p "Would you like to update prezto now?" -n 1 -r
+  echo "prezto is already installed."
+  vared -cp "Would you like to update prezto now?" REPLY
   if [[ $REPLY =~ ^[Yy]$ ]] ; then
     zprezto-update
   fi
-else
-  git clone --recursive https://github.com/krry/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+elif type zsh >/dev/null 2>&1
+  echo "switching to zsh"
+  exec zsh
+  echo "installing prezto for zsh..."
+  git clone -q --recursive https://github.com/krry/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
   setopt EXTENDED_GLOB
   for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
     ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
   done
+ else
+  echo "zsh not found, so no prezto change-o for you"
 fi
 
 # Pull down personal dotfiles
-read -p "Do you want to use krry's dotfiles? y/n" -n 1 -r
+vared -cp "Do you want to use krry's dotfiles? y/n" REPLY
 
 if [[ $REPLY =~ ^[Yy]$ ]] ; then
   if [[ -d ~/.dotfiles ]] ; then
-    read -p "dotfiles already present. do you want to reinstall? y/n" -n 1 -r
+    vared -cp "dotfiles already present. do you want to reinstall? y/n" REPLY
     if [[ $REPLY =~ ^[Yy]$ ]] ; then
       echo "archiving old dotfiles in ~/.dotfiles_old"
       mv -r "$HOME/.dotfiles" "$HOME/.dotfiles_old"
