@@ -5,7 +5,7 @@
 # This installs some of the common dependencies needed (or at least desired)
 # using Homebrew.
 
-# Check for Homebrew
+echo "Check for Homebrew"
 if test ! $(which brew)
 then
   echo "  Installing Homebrew for you."
@@ -18,7 +18,22 @@ then
   then
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install)"
   fi
+fi
 
+# Run Homebrew through the Brewfile
+cat << EOF
+We're ready to install the homebrew bundle.
+This could take a while.
+
+Do you want to do this now?
+EOF
+echo ''
+read -p "(y/n): " -n 1
+echo ''
+if [[ $REPLY =~ ^[Yy]$ ]] ; then
+  brew bundle
+else
+  echo "Ok. You can always come back and run \`brew bundle\` later."
 fi
 
 exit 0

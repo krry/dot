@@ -201,6 +201,10 @@ fi
 echo "Installing vim plugins..."
 vim +'PlugInstall --sync' +qa > /dev/null 2>&1
 
+info "Installing .tmux configuration"
+ln -s -f "$HOME/.dotfiles/tmux/.tmux.conf" $HOME
+cp "$HOME/.dotfiles/tmux/.tmux.conf.local" $HOME
+
 # .config permissions fix
 # sudo chown $(whoami) $HOME/.config
 # success '.config permissions fixed'

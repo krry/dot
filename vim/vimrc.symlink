@@ -1,24 +1,16 @@
 
 
 
-"                    _/
-"       _/      _/      _/_/_/  _/_/    _/  _/_/    _/_/_/
-"      _/      _/  _/  _/    _/    _/  _/_/      _/
-"       _/  _/    _/  _/    _/    _/  _/        _/
-"  _/    _/      _/  _/    _/    _/  _/          _/_/_/
+"      ___      ___  __     ___      ___   _______    ______
+"     |"  \    /"  ||" \   |"  \    /"  | /"      \  /" _  "\
+"      \   \  //  / ||  |   \   \  //   ||:        |(: ( \___)
+"       \\  \/. ./  |:  |   /\\  \/.    ||_____/   ) \/ \
+"   _____\.    //   |.  |  |: \.        | //      /  //  \ _
+"  ))_  ")\\   /    /\  |\ |.  \    /:  ||:  __   \ (:   _) \
+" (_____(  \__/    (__\_|_)|___|\__/|___||__|  \___) \_______)
 "
 
-
 set nocompatible    " Be iMproved
-
-
-"                _/                            _/
-"   _/      _/      _/_/_/  _/_/    _/_/_/    _/  _/    _/    _/_/_/
-"  _/      _/  _/  _/    _/    _/  _/    _/  _/  _/    _/  _/    _/
-"   _/  _/    _/  _/    _/    _/  _/    _/  _/  _/    _/  _/    _/
-"    _/      _/  _/    _/    _/  _/_/_/    _/    _/_/_/    _/_/_/
-"                               _/                            _/
-"                              _/                        _/_/
 
 
 " Install vim-plug if not found
@@ -30,58 +22,65 @@ endif
 
 let g:pluggedin=1
 
-" Call in the plugins!
+"                     .
+" .  , . ,-,-.    ,-. |  . . ,-.
+" | /  | | | | -- | | |  | | | |
+" `'   ' ' ' '    |-' `' `-' `-|
+"                 |           ,|
+"                 '           `'
+
 call plug#begin(expand('~/.vim/plugins'))
 
 " e.g., Plug 'git_username/git_repo_name'
 
 " TODO: look for redundants in here with `vim-sensible`
-Plug 'tpope/vim-sensible'      " sensible defaults
+Plug 'tpope/vim-sensible'       " sensible defaults
 
 " guessing
-Plug 'mileszs/ack.vim'         " adds silver searcher to vim
-Plug 'Shougo/denite.nvim'      " fuzzy search for anything/files in a project
-Plug 'ajh17/VimCompletesMe'    " tab completion all the ways
+Plug 'mileszs/ack.vim'          " adds silver searcher to vim
+Plug 'Shougo/denite.nvim'       " fuzzy search for anything in a project
+Plug 'ajh17/VimCompletesMe'     " tab completion all the ways
 
 " tags
-Plug 'xolox/vim-easytags'      " indexes and highlights ctags
-Plug 'xolox/vim-misc'          " supports easytags
-Plug 'majutsushi/tagbar'       " show ctags in rightside bar
-Plug 'scrooloose/nerdtree'     " replace netrw with sweet tree
+Plug 'xolox/vim-easytags'       " indexes and highlights ctags
+Plug 'xolox/vim-misc'           " supports easytags
+Plug 'majutsushi/tagbar'        " show ctags in rightside bar
+Plug 'scrooloose/nerdtree'      " replace netrw with sweet tree
 
 " utilities
-Plug 'svermeulen/vim-easyclip' " d deletes, m moves, y yanks and more
-Plug 'tpope/vim-surround'      " add/change/remove surrounds
-Plug 'tpope/vim-repeat'        " expands dot repeat scope
-Plug 'junegunn/vim-easy-align' " vertical alignment made easy
-Plug 'tpope/vim-commentary'    " quick commenting with 'gcc'
+Plug 'svermeulen/vim-easyclip'  " d deletes, m moves, y yanks and more
+Plug 'tpope/vim-surround'       " add/change/remove surrounds
+Plug 'tpope/vim-repeat'         " expands dot repeat scope
+Plug 'junegunn/vim-easy-align'  " vertical alignment made easy
+Plug 'scrooloose/nerdcommenter' " auto commenter
 
 " lint
-Plug 'Yggdroot/indentLine'     " shows vertical lines where spaces indent
-Plug 'bronson/vim-trailing-whitespace' " highlights trailing spaces in red
+Plug 'Yggdroot/indentLine'      " shows vertical lines where spaces indent
+Plug 'bronson/vim-trailing-whitespace'  " highlights trailing spaces in red
 
 " git
-Plug 'tpope/vim-fugitive'      " de facto git integration
-Plug 'airblade/vim-gitgutter'  " mark lines with changes
+Plug 'tpope/vim-fugitive'       " de facto git integration
+Plug 'airblade/vim-gitgutter'   " mark lines with changes
 
 " web
-Plug 'mattn/webapi-vim'        " puts vim in touch with web APIs (for playpen)
-Plug 'vimwiki/vimwiki', { 'branch': 'dev' }   " linkable notes
+Plug 'mattn/webapi-vim'         " puts vim in touch with web APIs (for playpen)
+Plug 'vimwiki/vimwiki', { 'branch': 'dev' }  " linkable notes
 
 " syntax and langs
-Plug 'sheerun/vim-polyglot'    " supports for >140 languages
-Plug 'scrooloose/syntastic'    " syntax checking for lots of langs
-Plug 'mattn/emmet-vim'         " HTML CSS completion
-Plug 'stephpy/vim-yaml'        " YAML added magic love
-Plug 'rust-lang/rust.vim'      " Rust syntax, rustfmt, tagbar, playground
+Plug 'sheerun/vim-polyglot'     " supports for >140 languages
+Plug 'scrooloose/syntastic'     " syntax checking for lots of langs
+Plug 'mattn/emmet-vim'          " HTML CSS completion
+Plug 'stephpy/vim-yaml'         " YAML added magic love
+Plug 'rust-lang/rust.vim'       " Rust syntax, rustfmt, tagbar, playground
 
 " colorschemes and interface
-Plug 'itchyny/lightline.vim'   " status bar, better than powerline/airline
-Plug 'tomasr/molokai'          " molokai theme for vim
-Plug 'NLKNguyen/papercolor-theme'       " inspired by material design
+Plug 'itchyny/lightline.vim'    " status bar, better than powerline/airline
+Plug 'tomasr/molokai'           " molokai theme for vim
+Plug 'NLKNguyen/papercolor-theme'  " inspired by material design
 
 " bliss
-Plug 'junegunn/goyo.vim'       " distraction-free writing in vim
+Plug 'junegunn/goyo.vim'        " distraction-free writing in vim
+Plug 'fadein/vim-FIGlet'        " make Figlets in vim
 
 call plug#end()
 
@@ -96,62 +95,65 @@ filetype plugin on
 "   _/_/_/    _/_/_/    _/        _/_/_/    _/_/_/  _/      _/_/  _/_/_/
 
 
-syntax enable                      " turn on syntax highlighting
+syntax enable                   " turn on syntax highlighting
 
-set autoindent
+set autoindent                      " indents new line to follow previous
 set autoread
 set autowrite
-set backspace=indent,eol,start     " allow backspace when inserting
-set clipboard^=unnamed,unnamedplus " use system clipboard on OSX or Linux
-set conceallevel=0                 " disable concealing
-set directory-=.                   " don't store swap files in current directory
-set encoding=utf-8                 " set charset
-set expandtab                      " 
-set fileformats=unix,mac           " 
-set foldlevelstart=5               " 
-set hidden                         " enable background buffers
-set history=222                    " extend cmd line history
-set hlsearch                       " highlight / search matches
-set ignorecase                     " ignore case for searches
-set incsearch                      " 
-set laststatus=2                   " always show status bar for lightline
-set linebreak                      " 
-set mouse=a                        " enable resizing buffers with mouse, etc.
-set mousemodel=popup               " let the mouse pop up
-set nobackup                       " 
-set nomodeline                     " use modeline overrides
-set noshowmode                     " show editor mode below
-set noswapfile                     " 
-set nowb                           " 
-" set nowrap
-set nowritebackup                  " 
-set number                         " show line numbers
-set ruler                          " show where you are
-set scrolloff=3                    " show context above/below cursor-line
-set shiftwidth=2                   " 
-set showcmd                        " show incomplete cmds below
-set smartcase                      " 
-set smartindent                    " 
-set smarttab                       " 
-set softtabstop=2                  " assume tabs to be 2 spaces
-set t_Co=256                       " 
-set tabstop=8                      " 
-set textwidth=79                   " allow 79 characters in a line
-set title                          " 
-set titleold="Terminal"            " 
-set titlestring=%F                 " 
-set visualbell                     " don't ding, flash
-set whichwrap+=<,>,h,l,[,]         " Wrap arrow keys between lines
-set wildmenu                       " show a navigable menu for tab completion
-set wildmode=longest,list,full     " 
+set backspace=indent,eol,start      " allow backspace when inserting
+set clipboard^=unnamed,unnamedplus  " use system clipboard on OSX or Linux
+set conceallevel=0                  " disable concealing
+set directory-=.                    " don't store swap files in current dir
+set encoding=utf-8                  " set charset
+set expandtab                       " autoindent with $tabstop spaces for tabs
+set fileformats=unix,mac            " derp
+set foldlevelstart=5                " super nested docs get folded
+set hidden                          " enable background buffers
+set history=222                     " extend cmd line history
+set hlsearch                        " highlight / search matches
+set ignorecase                      " ignore case for searches
+set incsearch                       "
+set laststatus=2                    " always show status bar for lightline
+set linebreak                       "
+set mouse=a                         " enable resizing buffers with mouse, etc.
+set mousemodel=popup                " let the mouse pop up
+set nobackup                        "
+set nomodeline                      " use modeline overrides
+set noshowmode                      " show editor mode below
+set noswapfile                      "
+set nowb                            "
+set nowrap                          " don't auto-wrap lines by default
+set nowritebackup                   "
+set number                          " show line numbers
+set ruler                           " show where you are
+set scrolloff=3                     " show context above/below cursor-line
+set shiftwidth=4                    " autoindent uses 4-space tabs
+set showcmd                         " show incomplete cmds below
+set smartcase                       "
+set smartindent                     " autoindents when brackets or other such
+set smarttab                        "
+set softtabstop=4                   " insert/backspace use 4-space tabs
+set t_Co=256                        " use 256 colors bleeotch
+set tabstop=4                       " tab takes up 4 spaces
+set textwidth=79                    " allow 79 characters in a line
+set title                           "
+set titleold="Terminal"             "
+set titlestring=%F                  "
+set visualbell                      " don't ding, flash
+set whichwrap+=<,>,h,l,[,]          " Wrap between lines with arrow keys
+set wildmenu                        " show a navigable menu for tab completion
+set wildmode=longest,list,full      "
 
 
 
-"      _/_/_/  _/    _/  _/  _/_/    _/_/_/    _/_/    _/  _/_/    _/_/_/
-"   _/        _/    _/  _/_/      _/_/      _/    _/  _/_/      _/_/
-"  _/        _/    _/  _/            _/_/  _/    _/  _/            _/_/
-"   _/_/_/    _/_/_/  _/        _/_/_/      _/_/    _/        _/_/_/
-
+"     /^^
+"  /^^   /^^
+" /^^       /^^  /^^/^ /^^^ /^^^^    /^^    /^ /^^^ /^^^^
+" /^^       /^^  /^^ /^^   /^^     /^^  /^^  /^^   /^^
+" /^^       /^^  /^^ /^^     /^^^ /^^    /^^ /^^     /^^^
+"  /^^   /^^/^^  /^^ /^^       /^^ /^^  /^^  /^^       /^^
+"    /^^^^    /^^/^^/^^^   /^^ /^^   /^^    /^^^   /^^ /^^
+"
 
 " Reset cursorline when switching buffers or windows
 augroup Cursorline
@@ -203,7 +205,6 @@ let &t_EI="[2\ q"   " cursor is an obvious block in normal mode
 "                           _/        _/                            _/
 "                          _/        _/                        _/_/
 
-
 " elect a <leader>
 let mapleader = ','
 
@@ -229,9 +230,6 @@ noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 
-" Show the tree
-" nnoremap <leader><Tab> :Lexplore<CR>
-
 " Tab for tabs
 nnoremap <Tab> gt
 nnoremap <S-Tab> gT
@@ -245,10 +243,10 @@ nnoremap <leader>d :lcd %:p:h<cr>
 
 " find files by name
 set path=.,**
-nnoremap <leader>f :find 
-nnoremap <leader>s :sfind 
-nnoremap <leader>v :vert sfind 
-nnoremap <leader>t :tabfind 
+nnoremap <leader>f :find *
+nnoremap <leader>s :sfind *
+nnoremap <leader>v :vert sfind *
+nnoremap <leader>t :tabfind *
 
 " Clear search (and its highlighting)
 noremap <leader>/ :let @/ = ""<CR>
@@ -259,11 +257,9 @@ noremap <silent> <leader>V :source $MYVIMRC<cr>:exe ":echo 'vimrc reloaded'"<cr>
 " Save, close, quit
 noremap <silent> <leader>u :update<cr>
 noremap <silent> <C-s> :update<cr>
-noremap <silent> <C-w> :x<cr>
-noremap <silent> <C-q> :q<cr>
+noremap <silent> <C-x> :x<cr>
 inoremap <silent> <C-s> <esc>:update<cr>i
-inoremap <silent> <C-w> <esc>:x<cr>
-inoremap <silent> <C-q> <esc>:q<cr>
+inoremap <silent> <C-x> <esc>:x<cr>
 
 " pbcopy for OSX copy/paste
 if has('macunix')
@@ -273,13 +269,10 @@ endif
 
 
 
-"                            _/      _/      _/
-"       _/_/_/    _/_/    _/_/_/_/_/_/_/_/      _/_/_/      _/_/_/    _/_/_/
-"    _/_/      _/_/_/_/    _/      _/      _/  _/    _/  _/    _/  _/_/
-"       _/_/  _/          _/      _/      _/  _/    _/  _/    _/      _/_/
-"  _/_/_/      _/_/_/      _/_/    _/_/  _/  _/    _/    _/_/_/  _/_/_/
-"                                                           _/
-"                                                      _/_/
+" ____ ____ _  _ ___  _ ___ _ ____ _  _ ____ _    ____
+" |    |  | |\ | |  \ |  |  | |  | |\ | |__| |    [__
+" |___ |__| | \| |__/ |  |  | |__| | \| |  | |___ ___]
+"
 
 " Determine operating system
 if !exists('g:os')
@@ -327,20 +320,13 @@ augroup END
 " PYTHON
 au BufNewFile,BufRead *.py set fileformat=unix
 
-" SHELL
-augroup BufNewFile,BufRead *.{zsh, sh, gitconfig, yml, toml, pl, py}
-  set tabstop=4
-  set shiftwidth=4
-  set softtabstop=4
-augroup END
-
 " HTML/CSS/JS
 let g:user_emmet_install_global = 0
 
 augroup BufNewFile,BufRead *.{html, js, css}
-  set tabstop=2
-  set shiftwidth=2
-  set softtabstop=2
+  " set tabstop=2
+  " set shiftwidth=2
+  " set softtabstop=2
   " turns on html autocomplete
   autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
   autocmd FileType html,css EmmetInstall
@@ -368,27 +354,27 @@ let g:vim_markdown_conceal = 0 " disable markdown conceallevel setting
 let g:tex_conceal = ""         " disable math conceal with LaTeX enabled
 let g:vim_markdown_math = 1
 "
-" Filesystem tree navigator
-let g:netrw_banner = 0       " excise banner
-let g:netrw_browse_split = 0 " not sure
-let g:netrw_liststyle = 3    " tree mode
-let g:netrw_altv = 1         " open in vertical split right
-let g:netrw_preview = 1      " vertical previews
-let g:netrw_winsize = 25     " 20% wide tree
-let g:netrw_list_hide = '.*\.swp,.git/'
+" File Tree navigator
+" let g:netrw_banner = 0       " excise banner
+" let g:netrw_browse_split = 0 " not sure
+" let g:netrw_liststyle = 3    " tree mode
+" let g:netrw_altv = 1         " open in vertical split right
+" let g:netrw_preview = 1      " vertical previews
+" let g:netrw_winsize = 25     " 20% wide tree
+" let g:netrw_list_hide = '.*\.swp,.git/'
 
 
 
-"                  _/                      _/
-"       _/_/_/    _/  _/    _/    _/_/_/      _/_/_/      _/_/_/
-"      _/    _/  _/  _/    _/  _/    _/  _/  _/    _/  _/_/
-"     _/    _/  _/  _/    _/  _/    _/  _/  _/    _/      _/_/
-"    _/_/_/    _/    _/_/_/    _/_/_/  _/  _/    _/  _/_/_/
-"   _/                            _/
-"  _/                        _/_/
+"    .                   ,  ,
+" ._ |. . _ *._    __ _ -+--+-*._  _  __
+" [_)|(_|(_]|[ )  _) (/, |  | |[ )(_]_)
+" |      ._|                      ._|
 
+"  __       __                  __
+" |   |  | |    > >>|<< > |  | |
+" |<< |  | | >> |   |   | |  | |<<
+" |   '<<' '__| |   |   |  \/  |__
 
-" Fugitive cmds
 noremap <leader>ga :Gwrite<cr>
 noremap <leader>gco :Gread<cr>
 noremap <leader>gc :Gcommit<cr>
@@ -400,10 +386,36 @@ noremap <leader>grm :Gremove<cr>
 noremap <leader>gmv :Gmove<cr>
 nnoremap <leader>o :.Gbrowser<cr>
 
+
+"    /`-.      )\.-.      .'(
+"  ,' _  \   ,' ,-,_)  ,')\  )
+" (  '-' (  (  .   _  (  '/ /
+"  )   _  )  ) '..' )  )   (
+" (  ,' ) \ (  ,   (  (  .\ \
+"  )/    )/  )/'._.'   )/  )/
+
 " Ack search contents of current directory
 nnoremap <space>/ :Ack<space>
+
 " use the word under the cursor for Ack search
 nmap <space>* :Ack <c-r>=expand("<cword>")<cr><cr>
+
+" search contents of project files
+cnoreabbrev ag Ack
+cnoreabbrev aG Ack
+cnoreabbrev Ag Ack
+cnoreabbrev AG Ack
+let g:ackprg = 'ag --vimgrep --smart-case'
+
+
+
+" o--o                O  o
+" |                  / \ | o
+" O-o   oo o-o o  o o---o|   o--o o-o
+" |    | |  \  |  | |   || | |  | |  |
+" o--o o-o-o-o o--O o   oo | o--O o  o
+"                 |             |
+"              o--o          o--o
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap <leader>a <Plug>(EasyAlign)
@@ -411,21 +423,58 @@ xmap <leader>a <Plug>(EasyAlign)
 nmap <leader>a <Plug>(EasyAlign)
 vnoremap <silent> <Enter> :EasyAlign<cr>
 
+
+" @@@@@@@  @@@@@@@@ @@@  @@@ @@@ @@@@@@@ @@@@@@@@
+" @@!  @@@ @@!      @@!@!@@@ @@!   @@!   @@!
+" @!@  !@! @!!!:!   @!@@!!@! !!@   @!!   @!!!:!
+" !!:  !!! !!:      !!:  !!! !!:   !!:   !!:
+" :: :  :  : :: ::: ::    :  :      :    : :: :::
+
 " denite file search (c-p uses gitignore, c-o looks at everything)
-nnoremap <space><space> :DeniteProjectDir -buffer-name=git -direction=top file_rec/git<CR>
+nnoremap <space><space> :DeniteProjectDir -buffer-name=git
+                      \ -direction=top file_rec/git<CR>
 " map <C-O> :DeniteProjectDir -buffer-name=files -direction=top file_rec<CR>
 
-" syntastic
+" denite fuzzy file search options
+" -u flag to unrestrict (see ag docs)
+call denite#custom#var('file_rec', 'command',
+            \ ['ag', '--follow', '--nocolor', '--nogroup', '-u', '-g', ''])
+call denite#custom#alias('source', 'file_rec/git', 'file_rec')
+call denite#custom#var('file_rec/git', 'command',
+            \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
+
+
+"                                   o
+"  ,         _  _  _|_  __,   , _|_     __
+" / \_|   | / |/ |  |  /  |  / \_|  |  /
+"  \/  \_/|/  |  |_/|_/\_/|_/ \/ |_/|_/\___/
+"        /|
+"        \|
+
 let g:syntastic_always_populate_loc_list=1
 
-" set theme
+
+
+"            _                     _
+"  ___  ___ | | ___  _ _  ___ ___ | |_  ___ ._ _ _  ___
+" / | '/ . \| |/ . \| '_><_-</ | '| . |/ ._>| ' ' |/ ._>
+" \_|_.\___/|_|\___/|_|  /__/\_|_.|_|_|\___.|_|_|_|\___.
+"
+
 set background=dark
 if exists('g:pluggedin')
   colorscheme molokai
   " colorscheme PaperColor
 endif
 
-" lightline status bar
+
+
+"  __ __       __    __   __ __
+" |  |__.-----|  |--|  |_|  |__.-----.-----.
+" |  |  |  _  |     |   _|  |  |     |  -__|
+" |__|__|___  |__|__|____|__|__|__|__|_____|
+"       |_____|
+
 " TODO: configure the status line
 let g:lightline = {
   \   'active': {
@@ -438,23 +487,11 @@ let g:lightline = {
   \   'colorscheme': 'molokai'
   \ }
 
-" search contents of project files
-cnoreabbrev ag Ack
-cnoreabbrev aG Ack
-cnoreabbrev Ag Ack
-cnoreabbrev AG Ack
-let g:ackprg = 'ag --vimgrep --smart-case'
 
-" denite fuzzy file search options
-" -u flag to unrestrict (see ag docs)
-call denite#custom#var('file_rec', 'command',
-      \ ['ag', '--follow', '--nocolor', '--nogroup', '-u', '-g', ''])
-call denite#custom#alias('source', 'file_rec/git', 'file_rec')
-call denite#custom#var('file_rec/git', 'command',
-      \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
+"    .          ..  .
+" . ...-.-.. . ..|_,.
+"  ` '' ' ' ` ` '' `'
 
-" VIMWIKI
-"
 " set wiki to store in Google Drive
 let wiki = {}
 let wiki.path = '~/Drive/Code/wiki/'
@@ -467,11 +504,15 @@ let g:vimwiki_list = [wiki]
 " Tagbar
 map [] :TagbarToggle<CR>
 
-" Nerdtree Settings
+
+
+"     __ _  _ ___
+" |\||_ |_)| \ |  __ _  _
+" | ||__| \|_/ |  | (/_(/_
+
 nmap <C-n> :NERDTreeToggle<CR>
 autocmd VimEnter * NERDTree | wincmd p
 
-" autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
 let NERDTreeQuitOnOpen = 1
@@ -481,6 +522,44 @@ let NERDTreeDirArrows = 1
 set ttyfast
 set lazyredraw
 
+" detect whether a file is opened
 autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+" if vim is opened raw, show and focus NERDTree
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in")
+      \ | NERDTree | NERDTreeFocus | endif
+" if vim opens to a directory, show NERDTree and open a new file there
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) &&
+      \ !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+" if NERDTree is the only pane left open, close vim
+autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") &&
+      \ b:NERDTree.isTabTree()) | q | endif
+
+let g:NERDTreeMapOpenSplit = 's'
+let g:NERDTreeMapOpenVSplit = 'v'
+
+" FIGlet Fonts
+let g:figletFontDir = '/usr/local/share/figlet/fonts'
+
+" .  ..___.__ .__  __                     ,
+" |\ |[__ [__)|  \/  ` _ ._ _ ._ _  _ ._ -+- _ ._.
+" | \|[___|  \|__/\__.(_)[ | )[ | )(/,[ ) | (/,[
+"
+
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+
+" Align line-wise comment delimiters flush left instead of following code
+" indentation
+let g:NERDDefaultAlign = 'left'
+
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
+" Enable NERDCommenterToggle to check all selected lines is commented or not 
+let g:NERDToggleCheckAllLines = 1

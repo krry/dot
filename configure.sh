@@ -1,5 +1,4 @@
 #!/bin/bash
-
 # Install brew
 if test ! $(which brew) ; then
   echo "Installing Homebrew for you."
@@ -57,13 +56,13 @@ autocompletion and intuitive keybindings.
 
 You'll spend more time drooling than coding.
 EOF
-read -p "(y/n): " -n1 REPLY
+read -p "(y/n): " -n 1
 echo ''
 
 if [[ $REPLY =~ ^[Yy]$ ]] ; then
   if [[ -d ~/.dotfiles ]] ; then
     echo ".dotfiles already present. Do you want to reinstall?"
-    read -p "(y/n): " REPLY
+    read -p "(y/n): " -n 1
     echo ''
     if [[ $REPLY =~ ^[Yy]$ ]] ; then
       echo "archiving old dotfiles in ~/.dotfiles_old"

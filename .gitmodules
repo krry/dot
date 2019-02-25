@@ -82,6 +82,12 @@
 [submodule "vim/plugins/nerdtree"]
   path = vim/plugins/nerdtree
   url = https://github.com/scrooloose/nerdtree
+[submodule "vim/plugins/nerdcommenter"]
+    path = vim/plugins/nerdcommenter
+    url = https://github.com/scrooloose/nerdcommenter
+[submodule "vim/plugin/vim-FIGlet"]
+    path = vim/plugins/vim-FIGlet
+    url = https://github.com/fadein/vim-FIGlet
 [submodule "tmux"]
 	path = tmux
 	url = https://github.com/krry/.tmux.git
@@ -91,3 +97,6 @@
 [submodule "fonts"]
 	path = fonts
 	url = https://github.com/powerline/fonts.git
+[submodule "vim/plugins/vim-FIGlet"]
+	path = vim/plugins/vim-FIGlet
+	url = https://github.com/fadein/vim-FIGlet
