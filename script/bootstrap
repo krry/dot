@@ -4,7 +4,7 @@
 
 # Required:
 # clone this repo into your $HOME
-
+alias echo=printf "\r  [ \033[00;34m^^\033[0m ] $1\n"
 cd "$(dirname "$0")/.."
 DOTFILES_ROOT=$(pwd -P)
 
@@ -161,7 +161,7 @@ if [[ -z ~/.tmux.conf ]] ; then
   cp ".tmux/.tmux.conf.local" $HOME
 fi
 
-info "Installing jldeen's bin"
+info "Installing jldeen's bin utilities"
 # backup old bin, if exists
 if [ -d $HOME/bin ]
 then
@@ -176,8 +176,8 @@ fi
 
 echo "Initalizing submodules for dotfiles"
 git submodule init
-echo "Installing submodules"
-git submodule update --remote
+# echo "Installing submodules"
+# git submodule update --remote
 
 echo "Do you want powerline-patched hacker fonts?"
 read -p "(y/n): " -n1 REPLY
