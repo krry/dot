@@ -54,11 +54,11 @@ $(curl "$PROMPT_URL" --silent --output "$HOME/.git-prompt.sh") || pffail "Couldn
 
 DOT_DIR="$HOME/.dotfiles"
 # backup current dotfiles
-if [[ -d ~/.dotfiles ]] ; then
+if [[ -d $DOT_DIR ]] ; then
     pfwarn "existing dotfiles found"
     now="$(date '+%Y%m%d%H%M')"
     pfinfo "Backing up old dotfiles in ~/.dotfiles_$now"
-    mv "$DOT_DIR" "$DOT_DIR_$now"
+    mv "$DOT_DIR" "${DOT_DIR}_${now}"
 fi
 
 # clone fresh dotfiles

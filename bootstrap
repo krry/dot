@@ -32,7 +32,7 @@ pffail () {
 }
 
 setup_gitconfig () {
-    if ! [ -f git/gitconfig.local.symlink ]
+    if ! [ -f $DOTFILES_ROOT/git/gitconfig.local.symlink ]
     then
         pfinfo 'setup gitconfig'
 
@@ -48,9 +48,9 @@ setup_gitconfig () {
         pfuser ' - What is your github author email?'
         read -ep "Mail me at: " git_authoremail
 
-        sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" git/gitconfig.local.symlink.example > git/gitconfig.local.symlink
+        sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" $DOTFILES_ROOT/git/gitconfig.local.symlink.example > $DOTFILES_ROOT/git/gitconfig.local.symlink
 
-        pfsuccess 'gitconfig'
+        pfsuccess 'gitconfig configured'
     fi
 }
 
@@ -130,7 +130,7 @@ link_file () {
 }
 
 install_dotfiles () {
-    pfinfo 'installing dotfiles'
+    pfinfo 'Installing dotfiles'
 
     local overwrite_all=false backup_all=false skip_all=false
 
@@ -178,8 +178,8 @@ setup_vundle() {
     if [[ -d ~/.vim ]] ; then
         pfwarn "Existing vim files found"
         now="$(date '+%Y%m%d%H%M')"
-        pfinfo "Backing up old vim files in $HOME/.vim_$now"
-        mv "$HOME/.vim" "$HOME/.vim_$now"
+        pfinfo "Backing up old vim files in ${HOME}/.vim_${now}"
+        mv "${HOME}/.vim" "${HOME}/.vim_${now}"
     fi
 
     vim \
