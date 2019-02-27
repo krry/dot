@@ -268,7 +268,7 @@ sync_repo $REPO_URI $APP_PATH true
 setup_gitconfig
 install_dotfiles
 ask set_mac_defaults "Scrub MacOS defaults?" $hostname
-install_dep "fonts" "colors"
+install_deps "fonts" "colors"
 sync_repo $VUNDLE_URI $VUNDLE_PATH
 setup_vundle "$APP_PATH/vimrc.bundles.symlink"
 ask default_fish "Fish as default shell?"
