@@ -507,7 +507,7 @@ let g:vim_markdown_math = 1
     colorscheme molokai               " iterm sets the colors
 
     " then override anything you don't like
-    hi linenr ctermbg=bg ctermfg=darkgray
+    " hi linenr ctermbg=bg ctermfg=darkgray
     hi clear signcolumn
 
 

@@ -177,9 +177,9 @@ setup_vundle() {
 
     if [[ -d ~/.vim ]] ; then
         pfwarn "Existing vim files found"
-        date=date "+%Y%m%d%H%M"
-        pfinfo "Backing up old vim files in $HOME/.vim_$date"
-        mv "$HOME/.vim" "$HOME/.vim_$date"
+        now="$(date '+%Y%m%d%H%M')"
+        pfinfo "Backing up old vim files in $HOME/.vim_$now"
+        mv "$HOME/.vim" "$HOME/.vim_$now"
     fi
 
     vim \
