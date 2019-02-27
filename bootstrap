@@ -32,7 +32,7 @@ pffail () {
 }
 
 setup_gitconfig () {
-    if ! [ -f ./git/gitconfig.local.symlink ]
+    if ! [ -f git/gitconfig.local.symlink ]
     then
         pfinfo 'setup gitconfig'
 
@@ -48,7 +48,7 @@ setup_gitconfig () {
         pfuser ' - What is your github author email?'
         read -ep "Mail me at: " git_authoremail
 
-        sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" ./git/gitconfig.local.symlink.example > ./git/gitconfig.local.symlink
+        sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" git/gitconfig.local.symlink.example > git/gitconfig.local.symlink
 
         pfsuccess 'gitconfig configured'
     fi
