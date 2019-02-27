@@ -23,11 +23,13 @@ pffail () {
 }
 
 cat << EOF
+
 ^^^^^^^^^^^^^^^^^^^^
 READY FOR .LIFTOFF!?
 Yo tambien, $OSTYPE.
 Let's get .filed up!
 ~~~~~~~~~~~~~~~~~~~~
+
 EOF
 
 # First, have a homebrew
@@ -45,11 +47,11 @@ brew install git bash-completion
 GIT_VERSION=`git --version | awk '{print $3}'`
 
 URL="https://raw.githubusercontent.com/git/git/v$GIT_VERSION/contrib/completion/git-completion.bash"
-pfinfo "Downloading git-completion for git@v$GIT_VERSION..."
+pfinfo "Downloading git-completion@v$GIT_VERSION..."
 $(curl "$URL" --silent --output "$HOME/.git-completion.bash") || pffail "Couldn't download completion script."
 
 PROMPT_URL="https://raw.githubusercontent.com/git/git/v$GIT_VERSION/contrib/completion/git-prompt.sh"
-pfinfo "Downloading git-prompt git@v$GIT_VERSION..."
+pfinfo "Downloading git-prompt@v$GIT_VERSION..."
 $(curl "$PROMPT_URL" --silent --output "$HOME/.git-prompt.sh") || pffail "Couldn't download prompt  script."
 
 DOT_DIR="$HOME/.dotfiles"

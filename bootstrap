@@ -3,7 +3,7 @@
 # bootstrap installs things.
 
 # Required: clone this repo into your $HOME
-cd "$(dirname "$0")/.."
+cd "$(dirname "$0")"
 DOTFILES_ROOT=$(pwd -P)
 
 # if things goes sideways quit suddenly
