@@ -18,6 +18,7 @@
 " Always the quintessential opener
     set nocompatible
 
+" load ALL the vundles
     if filereadable(expand("~/.vimrc.bundles"))
         source ~/.vimrc.bundles
     endif
@@ -278,7 +279,8 @@ au BufRead,BufNewFile *.{md,markdown} setf markdown
 " _  _ ____ ____ ___  ___ ____ ____ ____
 " |\ | |___ |__/ |  \  |  |__/ |___ |___
 " | \| |___ |  \ |__/  |  |  \ |___ |___
-"
+
+    :let g:netrw_dirhistmax = 0                 " don't save .netrwhist files
     nmap <C-n> :NERDTreeToggle<CR>
     autocmd VimEnter * NERDTree | wincmd p
 
@@ -290,9 +292,9 @@ au BufRead,BufNewFile *.{md,markdown} setf markdown
     let NERDTreeDirArrows = 1
     set ttyfast
     set lazyredraw
-    autocmd StdinReadPre * let s:std_in=1
-    autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
-    autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+    " autocmd StdinReadPre * let s:std_in=1
+    " autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+    " autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 
 " _ _ _ _ _    ___  ____ _ ____ ____

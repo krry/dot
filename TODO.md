@@ -1,4 +1,4 @@
-- [ ] align color palettes in tmux, iterm, vim: molokai or papercolor
-    - [ ] export .itermcolors and .terminal files
-- [ ] add scaffolds to .vim/ftplugin/html
-    - [ ] refactor .vimrc into ftplugin files?
+- [x] align color palettes in tmux, iterm, vim: molokai or papercolor
+    - [x] export .itermcolors and .terminal files
+- [x] add scaffolds to .vim/ftplugin/html
+    - [x] refactor .vimrc into ftplugin files?

@@ -11,8 +11,8 @@ set background=dark             " for colorschemes
 
 filetype off                    " must precede vundle
 set rtp+=~/.vim/bundle/vundle   " set runtimepath to vundle
-call vundle#rc()
-"call vundle#begin()
+" call vundle#rc()
+call vundle#begin()
 
 " Add UnBundle cmd
 " credit: @spf_13
@@ -28,7 +28,7 @@ com! -nargs=+   UnBundle
 
 Plugin 'gmarik/vundle'                " required for Vundle
 Plugin 'MarcWeber/vim-addon-mw-utils' " makes the vundle#rc work
-if executable('ag')
+if executable('ag')                   " try the faster search algos first
     Plugin 'mileszs/ack.vim'
     let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
 elseif executable('ack-grep')
@@ -76,4 +76,4 @@ Plugin 'bronson/vim-trailing-whitespace' " highlights trailing spaces in red
 Plugin 'nathanaelkane/vim-indent-guides' " nice-lookin indent signifiers
 Plugin 'christoomey/vim-tmux-navigator'  " move seamlessly from vim to tmux
 
-"call vundle#end()                     " required after Vundle
+call vundle#end()                     " required after Vundle
