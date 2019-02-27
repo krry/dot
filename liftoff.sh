@@ -1,16 +1,16 @@
 #!/bin/bash
 
 # output format functions
-info () {
+pfinfo () {
   printf "\r  [ \033[00;34m..\033[0m ] $1\n"
 }
 
 pfwarn () {
-  printf "\r  [ \033[00;34m..\033[0m ] $1\n"
+  printf "\r  [ \033[00;33mN.B.\033[0m ] $1\n"
 }
 
 pfuser () {
-  printf "\r  [ \033[0;33m??\033[0m ] $1\n"
+  printf "\r  [ \033[0;36m??\033[0m ] $1\n"
 }
 
 pfsuccess () {

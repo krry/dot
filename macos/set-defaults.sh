@@ -33,7 +33,7 @@ EOF
 # General UI/UX                                                               #
 ###############################################################################
 
-ComputerName="kevin"
+ComputerName="$1"
 
 echo "Setting your computer name (as done via System Preferences → Sharing)"
 scutil --set ComputerName $ComputerName

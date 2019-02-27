@@ -141,6 +141,12 @@ install_dotfiles () {
     done
 }
 
+set_mac_defaults() {
+    pfinfo "This computer is named :$1. Change it?"
+    read -e -p "$1"
+    $DOTFILES_ROOT/macos/set-default.sh $REPLY
+}
+
 install_fonts() {
     pfinfo "Installing powerline patched hacker fonts"
 
@@ -193,7 +199,7 @@ ask() {
     read -p "(y/n): " -n1
     echo ''
     if [[ $REPLY =~ '^[Yy]' ]] ; then
-        $2
+        $2 $3
     else
         pfinfo "That's ok. Maybe later."
     fi
@@ -217,6 +223,7 @@ install_mosh() {
 
 setup_gitconfig
 install_dotfiles
+ask set_mac_defaults "Do you want to set your Mac OS defaults to rad?" $hostname
 install_fonts
 import_colors
 setup_vundle #TODO: pass bundles files as an argument to vim -u
