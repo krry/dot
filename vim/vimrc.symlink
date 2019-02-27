@@ -1,18 +1,18 @@
-"            d8b
-"            Y8P
 "
-"    888  88888888888b.d88b. 888d888 .d8888b
-"    888  888888888 "888 "88b888P"  d88P"
-"    Y88  88P888888  888  888888    888
-" d8b Y8bd8P 888888  888  888888    Y88b.
-" Y8P  Y88P  888888  888  888888     "Y8888P
+"    db    db d888888b .88b  d88. d8888b.  .o88b.
+"    88    88   `88'   88'YbdP`88 88  `8D d8P  Y8
+"    Y8    8P    88    88  88  88 88oobY' 8P
+"    `8b  d8'    88    88  88  88 88`8b   8b
+" db  `8bd8'    .88.   88  88  88 88 `88. Y8b  d8
+" VP    YP    Y888888P YP  YP  YP 88   YD  `Y88P'
 "
-" by  .:
-"     ::
-"     ;;.-.   .;.::..;.::..    .-.
-"     ;; .'   .;    .;     `:  ;
-"   _.'`  `..;'   .;'       `.'
-"                        -.;'
+"
+" by   .:
+"      ::
+"      ;;.-.   .;.::..;.::..    .-.
+"      ;; .'   .;    .;     `:  ;
+"    _.'`  `..;'   .;'       `.'
+"                         -.;'
 "
 
 " Always the quintessential opener
@@ -25,7 +25,7 @@
     " https://github.com/VundleVim/Vundle.vim
 
     filetype off                          " required before Vundle
-    set rtp+=~/.vim/bundle/Vundle.vim
+    set rtp+=~/.vim/bundle/Vundle.vim     " set runtimepath to bundles
     call vundle#begin()
     Plugin 'VundleVim/Vundle.vim'         " required for Vundle
 
@@ -69,12 +69,13 @@
     Plugin 'christoomey/vim-tmux-navigator'  " move seamlessly from vim to tmux
 
     call vundle#end()                     " required after Vundle
-    filetype plugin indent on             " auto-detect filetypes
+    filetype plugin indent on             " auto-detect filetypes after Vundle
 
 " styling
     set background=dark
     syntax on
     scriptencoding utf-8
+    set t_co=256                        " enable 256 colors
 
 " vim doesn't play well with fish as its internal shell
     if &shell =~# 'fish$'
@@ -91,7 +92,7 @@
 
 " Lines
     set nowrap		                " leave lines intact by
-     set textwidth=78		        " encourage readable line length
+    " set textwidth=78		        " encourage readable line length
     set number                      " shows line number
     if (exists('+colorcolumn'))     " make final column visible
       set colorcolumn=80
@@ -263,7 +264,7 @@
 " |    | |__] |___ |___  |
 "
     " figlet heading - small, medium, large
-        nmap <leader>fgs <plug>NERDCommenterUncomment ^d0vg_:FIGlet -f pepper
+        nmap <leader>fgs ,c<space>^d0vg_:FIGlet -f pepper
                     \<cr><S-v>3j,c<space>
         nmap <leader>fgm ,c<space>^d0vg_:FIGlet -f cybermedium
                     \<cr><S-v>3j,c<space>
@@ -278,35 +279,11 @@
     " Yank to the end of the line like C and D
         nnoremap Y y$
 
-" .88b  d88.  .d8b.  d8888b. db   dD d8888b.  .d88b.  db   d8b   db d8b   db
-" 88'YbdP`88 d8' `8b 88  `8D 88 ,8P' 88  `8D .8P  Y8. 88   I8I   88 888o  88
-" 88  88  88 88ooo88 88oobY' 88,8P   88   88 88    88 88   I8I   88 88V8o 88
-" 88  88  88 88~~~88 88`8b   88`8b   88   88 88    88 Y8   I8I   88 88 V8o88
-" 88  88  88 88   88 88 `88. 88 `88. 88  .8D `8b  d8' `8b d8'8b d8' 88  V888
-" YP  YP  YP YP   YP 88   YD YP   YD Y8888D'  `Y88P'   `8b8' `8d8'  VP   V8P
-
-au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn,txt} setf markdown
-
-function! s:wrapGood()
-  setl wrap
-  setl wm=2
-  setl textwidth=79
-  setl nolist
-  set conceallevel=0
-endfunction
-
-augroup FileType markdown
-  call s:wrapGood()
-  " code blocks for markdown
-  inoremap <buffer><silent> ~~~ ~~~<Enter>~~~<C-o>k<C-o>A
-  inoremap <buffer><silent> ``` ```<Enter>```<C-o>k<C-o>A
-augroup END
-
-let g:vim_markdown_conceal = 0 " disable markdown conceallevel setting
-let g:tex_conceal = ""         " disable math conceal with LaTeX enabled
-let g:vim_markdown_math = 1
-
-
+" ____ _ _    ____ ___ _   _ ___  ____ ____
+" |___ | |    |___  |   \_/  |__] |___ [__
+" |    | |___ |___  |    |   |    |___ ___]
+"
+au BufRead,BufNewFile *.{md,markdown} setf markdown
 " ____ _  _ ____ _ ___ _ _  _ ____
 " |___ |  | | __ |  |  | |  | |___
 " |    |__| |__] |  |  |  \/  |___
@@ -360,9 +337,10 @@ let g:vim_markdown_math = 1
     let NERDTreeDirArrows = 1
     set ttyfast
     set lazyredraw
-    autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
     autocmd StdinReadPre * let s:std_in=1
     autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+    autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
 
 " _ _ _ _ _    ___  ____ _ ____ ____
 " | | | | |    |  \ |___ | |__/ |___
@@ -500,7 +478,6 @@ let g:vim_markdown_math = 1
 " |    |  | |    |  | |__/ [__  |    |__| |___ |\/| |___
 " |___ |__| |___ |__| |  \ ___] |___ |  | |___ |  | |___
 "
-    set t_co=256                        " enable 256 colors
 
     " better to set colorscheme at the bottom
     " to apply it to all preceding additions
