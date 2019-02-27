@@ -262,14 +262,14 @@ EOF
 
 setup_git_in_bash "git-completion.bash" "git-prompt.sh"
 back_up $APP_PATH
+back_up $VIM_PATH
+back_up $VIMRC
 sync_repo $REPO_URI $APP_PATH true
 setup_gitconfig
 install_dotfiles
 ask set_mac_defaults "Scrub MacOS defaults?" $hostname
 install_dep "fonts" "colors"
 sync_repo $VUNDLE_URI $VUNDLE_PATH
-back_up $VIM_PATH
-back_up $VIMRC
 setup_vundle "$APP_PATH/vimrc.bundles.symlink"
 ask default_fish "Fish as default shell?"
 
