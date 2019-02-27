@@ -1,338 +1,290 @@
-
-
-
-"      ___      ___  __     ___      ___   _______    ______
-"     |"  \    /"  ||" \   |"  \    /"  | /"      \  /" _  "\
-"      \   \  //  / ||  |   \   \  //   ||:        |(: ( \___)
-"       \\  \/. ./  |:  |   /\\  \/.    ||_____/   ) \/ \
-"   _____\.    //   |.  |  |: \.        | //      /  //  \ _
-"  ))_  ")\\   /    /\  |\ |.  \    /:  ||:  __   \ (:   _) \
-" (_____(  \__/    (__\_|_)|___|\__/|___||__|  \___) \_______)
+"            d8b
+"            Y8P
+"
+"    888  88888888888b.d88b. 888d888 .d8888b
+"    888  888888888 "888 "88b888P"  d88P"
+"    Y88  88P888888  888  888888    888
+" d8b Y8bd8P 888888  888  888888    Y88b.
+" Y8P  Y88P  888888  888  888888     "Y8888P
+"
+" by  .:
+"     ::
+"     ;;.-.   .;.::..;.::..    .-.
+"     ;; .'   .;    .;     `:  ;
+"   _.'`  `..;'   .;'       `.'
+"                        -.;'
 "
 
-set nocompatible    " Be iMproved
+" Always the quintessential opener
+    set nocompatible
+
+" _  _ _  _ _  _ ___  _    ____
+" |  | |  | |\ | |  \ |    |___
+"  \/  |__| | \| |__/ |___ |___
+
+    " https://github.com/VundleVim/Vundle.vim
+
+    filetype off                          " required before Vundle
+    set rtp+=~/.vim/bundle/Vundle.vim
+    call vundle#begin()
+    Plugin 'VundleVim/Vundle.vim'         " required for Vundle
+
+    Plugin 'ctrlpvim/ctrlp.vim'           " fuzzy search on roids
+    Plugin 'tacahiroy/ctrlp-funky'           " ctrl-p function navigator
+    Plugin 'tpope/vim-fugitive'           " git slicker
+    Plugin 'airblade/vim-gitgutter'       " mark lines with changes
+    Plugin 'scrooloose/nerdcommenter'     " comment ease and grace
+    Plugin 'scrooloose/nerdtree'          " filesystem navigation
+    Plugin 'Xuyuanp/nerdtree-git-plugin'  " NERDtree shows git statuses
+    Plugin 'vim-syntastic/syntastic'      " syntax checking
+    Plugin 'sheerun/vim-polyglot'         " on-demand language packs
+    Plugin 'tpope/vim-surround'           " ( for {surrounding} 'text' )
+    Plugin 'gcmt/wildfire.vim'            " growing text object selection
+    Plugin 'mattn/emmet-vim'              " HTML/CSS hackery
+    Plugin 'itchyny/lightline.vim'        " lightweight statusline
+    Plugin 'tomasr/molokai'               " high-contrast theme
+    Plugin 'romainl/Apprentice'           " low-contrast theme
+    Plugin 'NLKNguyen/papercolor-theme'   " inspired by material design
+    Plugin 'fadein/vim-FIGlet'            " for headers
+    Plugin 'easymotion/vim-easymotion'    " show motions in realtime
+    Plugin 'mhinz/vim-startify'           " start screen
+    Plugin 'ajh17/VimCompletesMe'         " tab completion all the ways
+    Plugin 'roxma/nvim-yarp'              " supports deoplete
+    Plugin 'roxma/vim-hug-neovim-rpc'     " supports deoplete (experimental)
+    Plugin 'Shougo/deoplete.nvim'         " asynchronous completion
+    Plugin 'Shougo/denite.nvim'           " fuzzy search for anything
+    Plugin 'valloric/MatchTagAlways'      " highlights matching close tag
+    Plugin 'sirver/UltiSnips'             " snippets engine (in python)
+    Plugin 'honza/vim-snippets'           " the snippetz
+    Plugin 'farmergreg/vim-lastplace'     " return to the last place
+    Plugin 'svermeulen/vim-easyclip'      " makes sense of copy-paste
+    Plugin 'junegunn/vim-easy-align'      " easy vertical alignments
+    Plugin 'tpope/vim-sensible'           " sensible defaults
+    Plugin 'Yggdroot/indentLine'          " shows vertical lines for indents
+    Plugin 'junegunn/goyo.vim'            " distraction-free writing in vim
+    Plugin 'reedes/vim-wordy'             " highlights bad word usage
+    Plugin 'vimwiki/vimwiki', { 'branch': 'dev' }   " linkable notes
+    Plugin 'bronson/vim-trailing-whitespace' " highlights trailing spaces in red
+    Plugin 'nathanaelkane/vim-indent-guides' " nice-lookin indent signifiers
+    Plugin 'christoomey/vim-tmux-navigator'  " move seamlessly from vim to tmux
+
+    call vundle#end()                     " required after Vundle
+    filetype plugin indent on             " auto-detect filetypes
+
+" styling
+    set background=dark
+    syntax on
+    scriptencoding utf-8
+
+" vim doesn't play well with fish as its internal shell
+    if &shell =~# 'fish$'
+        set shell=sh
+    endif
+
+" Tabs
+    set tabstop=4                   " tabs are 4 spaces
+    set softtabstop=4               " insert/<bs> use 4-space tabs
+    set shiftwidth=4                " autoindent 4-space tabs
+    set expandtab                   " autoindent with space-tabs
+    set autoindent                  " according to previous line
+    set smartindent                 " according to brackets and such
+
+" Lines
+    set nowrap		                " leave lines intact by
+     set textwidth=78		        " encourage readable line length
+    set number                      " shows line number
+    if (exists('+colorcolumn'))     " make final column visible
+      set colorcolumn=80
+      highlight ColorColumn ctermbg=8
+    endif
+
+" Status line
+    set noshowmode                  " lightline shows mode
+    set showcmd                     " show partial cmds in status line
+    set ruler                       " shows cursor position in status bar
+    set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " spf13 steroid ruler
+    set laststatus=2                " (default 1) 2 for airline/lightline
+
+" Wildmenu
+    set wildmenu                    " show a navigable menu for tab completion
+    set wildmode=list:longest,full  " list all matches, no longest completion
+
+" Hygiene
+    set list
+    set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
+    set nomodeline                  " don't look for vim settings at the top
+
+    " NERDCommenter
+    " Add spaces after comment delimiters by default
+    let g:NERDSpaceDelims = 1
+    " Use compact syntax for prettified multi-line comments
+    let g:NERDCompactSexyComs = 1
+    " Align line-wise comment delimiters flush left, not with indents
+    let g:NERDDefaultAlign = 'left'
+    " Allow commenting and inverting empty lines
+    let g:NERDCommentEmptyLines = 1
+    " Enable trimming of trailing whitespace when uncommenting
+    let g:NERDTrimTrailingWhitespace = 1
+    " Enable NERDCommenterToggle to check whether all selected lines
+    let g:NERDToggleCheckAllLines = 1
+
+" Search
+    set hlsearch                   " highlight search matches
+    set incsearch                  " search as you type
+    set ignorecase                 " case insensitive search
+    set smartcase                  " case sensitive when UC used
+    set showmatch                  " Show matching brackets/parenthesis
+
+" Panes and Windows
+    set splitright                 " vertical splits go to the right
+    set splitbelow                 " horizontal splits go below
+
+    " TODO: default to vertical split for help pane
+
+" Cursor
+    set backspace=indent,eol,start " allow backspace when inserting
+    set cursorline                 " shows line cursor is on
+    set whichwrap+=<,>,h,l,[,]     " wrap arrow keys between lines
+    set scrolljump=5                " Lines to scroll when cursor leaves screen
+    set scrolloff=3                 " Minimum lines to keep above and below cursor
+    set foldenable                  " Auto fold code
+
+" Copy/paste
+    if has('clipboard')
+        if has('unnamedplus')      " try to use + register for copy-paste
+            set clipboard=unnamed,unnamedplus
+        else
+            set clipboard=unnamed  " otherwise use * register on Mac/Win
+        endif
+    endif
+
+" Mouse
+    set mouse=a                    " all mouse functions on
+    set mousehide                  " hide mouse when typing
+
+" Memory mgmt
+    set noswapfile
+    set nobackup
 
 
-" Install vim-plug if not found
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-
-let g:pluggedin=1
-
-"                     .
-" .  , . ,-,-.    ,-. |  . . ,-.
-" | /  | | | | -- | | |  | | | |
-" `'   ' ' ' '    |-' `' `-' `-|
-"                 |           ,|
-"                 '           `'
-
-call plug#begin(expand('~/.vim/plugins'))
-
-" e.g., Plug 'git_username/git_repo_name'
-
-" TODO: look for redundants in here with `vim-sensible`
-Plug 'tpope/vim-sensible'       " sensible defaults
-
-" guessing
-Plug 'mileszs/ack.vim'          " adds silver searcher to vim
-Plug 'Shougo/denite.nvim'       " fuzzy search for anything in a project
-Plug 'ajh17/VimCompletesMe'     " tab completion all the ways
-
-" tags
-Plug 'xolox/vim-easytags'       " indexes and highlights ctags
-Plug 'xolox/vim-misc'           " supports easytags
-Plug 'majutsushi/tagbar'        " show ctags in rightside bar
-Plug 'scrooloose/nerdtree'      " replace netrw with sweet tree
-
-" utilities
-Plug 'svermeulen/vim-easyclip'  " d deletes, m moves, y yanks and more
-Plug 'tpope/vim-surround'       " add/change/remove surrounds
-Plug 'tpope/vim-repeat'         " expands dot repeat scope
-Plug 'junegunn/vim-easy-align'  " vertical alignment made easy
-Plug 'scrooloose/nerdcommenter' " auto commenter
-
-" lint
-Plug 'Yggdroot/indentLine'      " shows vertical lines where spaces indent
-Plug 'bronson/vim-trailing-whitespace'  " highlights trailing spaces in red
-
-" git
-Plug 'tpope/vim-fugitive'       " de facto git integration
-Plug 'airblade/vim-gitgutter'   " mark lines with changes
-
-" web
-Plug 'mattn/webapi-vim'         " puts vim in touch with web APIs (for playpen)
-Plug 'vimwiki/vimwiki', { 'branch': 'dev' }  " linkable notes
-
-" syntax and langs
-Plug 'sheerun/vim-polyglot'     " supports for >140 languages
-Plug 'scrooloose/syntastic'     " syntax checking for lots of langs
-Plug 'mattn/emmet-vim'          " HTML CSS completion
-Plug 'stephpy/vim-yaml'         " YAML added magic love
-Plug 'rust-lang/rust.vim'       " Rust syntax, rustfmt, tagbar, playground
-
-" colorschemes and interface
-Plug 'itchyny/lightline.vim'    " status bar, better than powerline/airline
-Plug 'tomasr/molokai'           " molokai theme for vim
-Plug 'NLKNguyen/papercolor-theme'  " inspired by material design
-
-" bliss
-Plug 'junegunn/goyo.vim'        " distraction-free writing in vim
-Plug 'fadein/vim-FIGlet'        " make Figlets in vim
-
-call plug#end()
-
-" Required:
-filetype plugin on
-
-
-"           _/                _/_/                      _/    _/
-"      _/_/_/    _/_/      _/        _/_/_/  _/    _/  _/  _/_/_/_/    _/_/_/
-"   _/    _/  _/_/_/_/  _/_/_/_/  _/    _/  _/    _/  _/    _/      _/_/
-"  _/    _/  _/          _/      _/    _/  _/    _/  _/    _/          _/_/
-"   _/_/_/    _/_/_/    _/        _/_/_/    _/_/_/  _/      _/_/  _/_/_/
-
-
-syntax enable                   " turn on syntax highlighting
-
-set autoindent                      " indents new line to follow previous
-set autoread
-set autowrite
-set backspace=indent,eol,start      " allow backspace when inserting
-set clipboard^=unnamed,unnamedplus  " use system clipboard on OSX or Linux
-set conceallevel=0                  " disable concealing
-set directory-=.                    " don't store swap files in current dir
-set encoding=utf-8                  " set charset
-set expandtab                       " autoindent with $tabstop spaces for tabs
-set fileformats=unix,mac            " derp
-set foldlevelstart=5                " super nested docs get folded
-set hidden                          " enable background buffers
-set history=222                     " extend cmd line history
-set hlsearch                        " highlight / search matches
-set ignorecase                      " ignore case for searches
-set incsearch                       "
-set laststatus=2                    " always show status bar for lightline
-set linebreak                       "
-set mouse=a                         " enable resizing buffers with mouse, etc.
-set mousemodel=popup                " let the mouse pop up
-set nobackup                        "
-set nomodeline                      " use modeline overrides
-set noshowmode                      " show editor mode below
-set noswapfile                      "
-set nowb                            "
-set nowrap                          " don't auto-wrap lines by default
-set nowritebackup                   "
-set number                          " show line numbers
-set ruler                           " show where you are
-set scrolloff=3                     " show context above/below cursor-line
-set shiftwidth=4                    " autoindent uses 4-space tabs
-set showcmd                         " show incomplete cmds below
-set smartcase                       "
-set smartindent                     " autoindents when brackets or other such
-set smarttab                        "
-set softtabstop=4                   " insert/backspace use 4-space tabs
-set t_Co=256                        " use 256 colors bleeotch
-set tabstop=4                       " tab takes up 4 spaces
-set textwidth=79                    " allow 79 characters in a line
-set title                           "
-set titleold="Terminal"             "
-set titlestring=%F                  "
-set visualbell                      " don't ding, flash
-set whichwrap+=<,>,h,l,[,]          " Wrap between lines with arrow keys
-set wildmenu                        " show a navigable menu for tab completion
-set wildmode=longest,list,full      "
-
-
-
-"     /^^
-"  /^^   /^^
-" /^^       /^^  /^^/^ /^^^ /^^^^    /^^    /^ /^^^ /^^^^
-" /^^       /^^  /^^ /^^   /^^     /^^  /^^  /^^   /^^
-" /^^       /^^  /^^ /^^     /^^^ /^^    /^^ /^^     /^^^
-"  /^^   /^^/^^  /^^ /^^       /^^ /^^  /^^  /^^       /^^
-"    /^^^^    /^^/^^/^^^   /^^ /^^   /^^    /^^^   /^^ /^^
-"
-
-" Reset cursorline when switching buffers or windows
-augroup Cursorline
-  autocmd!
-  autocmd WinEnter,BufEnter * set cursorline
-  autocmd WinLeave,BufLeave * set nocursorline
-augroup END
-
-" Activate cursorline when in insert mode
-autocmd InsertEnter * set cul
-autocmd InsertLeave * set nocul
-
-" Change cursor shape to indicate mode
-"
-" N.B., This was very difficult to figure out and there is a multitude of
-"       scattered and conflicting advice on StackOverflow and the usual
-"       haunts. The crux was the proper escape character. On OS X, using
-"       Terminal.app, running tmux as the shell, and zsh within that, the
-"       escape character can be \033 or  which is generated with Ctrl-V.
-
-" SHAPES
-" 0 - blinking block
-" 1 - blinking block
-" 2 - solid block
-" 3 - blinking underscore
-" 4 - solid underscore
-" 5 - blinking pipe
-" 6 - solid pipe
-"
-" MODES
-" SI - start insert mode
-" SR - start replace mode
-" EI - end insert mode
-
-" let &t_MODE='\033[SHAPE q'
-" let &t_EI='[4 q'
-
-let &t_SI="[6\ q"   " cursor is a pipe where text will go in insert mode
-let &t_SR="[4\ q"   " cursor underlines what gets swapped in replace mode
-let &t_EI="[2\ q"   " cursor is an obvious block in normal mode
-
-
-
-"                                                    _/
-"     _/_/_/  _/_/      _/_/_/  _/_/_/    _/_/_/        _/_/_/      _/_/_/
-"    _/    _/    _/  _/    _/  _/    _/  _/    _/  _/  _/    _/  _/    _/
-"   _/    _/    _/  _/    _/  _/    _/  _/    _/  _/  _/    _/  _/    _/
-"  _/    _/    _/    _/_/_/  _/_/_/    _/_/_/    _/  _/    _/    _/_/_/
-"                           _/        _/                            _/
-"                          _/        _/                        _/_/
+"_  _ ____ _   _    _  _ ____ ___  ___  _ _  _ ____ ____
+"|_/  |___  \_/     |\/| |__| |__] |__] | |\ | | __ [__
+"| \_ |___   |      |  | |  | |    |    | | \| |__] ___]
 
 " elect a <leader>
-let mapleader = ','
+    let mapleader = ','
 
-" Move things down a line
-nmap <cr> O<esc>
+" open help with K
+    autocmd FileType vim setlocal keywordprg=:help
 
-" Add a single character
-nnoremap <space>i i_<esc>r
-nnoremap <space>a a_<esc>r
+" .vimrc
+" edit .vimrc
+    noremap <leader>ev :e $MYVIMRC<cr>
+" save and reload .vimrc
+    noremap <leader>sv :source $MYVIMRC<cr> :exe 'echo ".vimrc resourced"'<cr>
 
-" Autoindent pasted text
-nnoremap p p=`]<C-o>
-nnoremap P P=`]<C-o>
-
-" Pane splitting
-noremap <leader>s :<C-u>split<cr>
-noremap <leader>v :<C-u>vsplit<cr>
-
-" Pane navigation
-noremap <C-h> <C-w>h
-inoremap <C-h> <esc><C-w>h
-noremap <C-j> <C-w>j
-noremap <C-k> <C-w>k
-noremap <C-l> <C-w>l
-
-" Tab for tabs
-nnoremap <Tab> gt
-nnoremap <S-Tab> gT
-nnoremap <silent> <S-t> :tabnew<cr>
-
-" Jetpack between buffers
-nnoremap <leader>l :ls<CR>:b<Space>
-
-" set working directory to here
-nnoremap <leader>d :lcd %:p:h<cr>
-
-" find files by name
-set path=.,**
-nnoremap <leader>f :find *
-nnoremap <leader>s :sfind *
-nnoremap <leader>v :vert sfind *
-nnoremap <leader>t :tabfind *
-
-" Clear search (and its highlighting)
-noremap <leader>/ :let @/ = ""<CR>
-
-" Reload .vimrc
-noremap <silent> <leader>V :source $MYVIMRC<cr>:exe ":echo 'vimrc reloaded'"<cr>
-
-" Save, close, quit
-noremap <silent> <leader>u :update<cr>
-noremap <silent> <C-s> :update<cr>
-noremap <silent> <C-x> :x<cr>
-inoremap <silent> <C-s> <esc>:update<cr>i
-inoremap <silent> <C-x> <esc>:x<cr>
-
-" pbcopy for OSX copy/paste
-if has('macunix')
-  vmap <C-x> :!pbcopy<cr>
-  vmap <C-c> :w !pbcopy<cr><cr>
-endif
-
-
-
-" ____ ____ _  _ ___  _ ___ _ ____ _  _ ____ _    ____
-" |    |  | |\ | |  \ |  |  | |  | |\ | |__| |    [__
-" |___ |__| | \| |__/ |  |  | |__| | \| |  | |___ ___]
+" ____ _  _ ____ ____ ____ ____
+" |    |  | |__/ [__  |  | |__/
+" |___ |__| |  \ ___] |__| |  \
 "
 
-" Determine operating system
-if !exists('g:os')
-  if has('win64') || has('win32') || has('win16')
-    let g:os = "Windows"
-  else
-    let g:os = substitute(system('uname'), '\n', '', '')
-  endif
-endif
+    " cursor moves gracefully over wrapped lines
+        noremap j gj
+        noremap k gk
 
-" set dictionary to Mac dict
-if g:os == "Darwin"
-  set dictionary=/usr/share/dict/words
-endif
+    " Easier horizontal scrolling
+        map zl zL
+        map zh zH
 
-" allow mouse with TMUX
-if exists('$TMUX')
-  set ttymouse=xterm
-endif
+" ____ _ _    ____ ____ _   _ ____ ___ ____ _  _
+" |___ | |    |___ [__   \_/  [__   |  |___ |\/|
+" |    | |___ |___ ___]   |   ___]  |  |___ |  |
+"
 
-" include fugitive in status line
-if exists('*fugitive#statusline')
-  set statusline+=%{fugitive#statusline()}
-endif
+    " save/write
+        noremap <C-s> :w<cr>
+        inoremap <C-s> <esc>:w<cr>
 
-" make final column visible as black gutter
-if (exists('+colorcolumn'))
-  set colorcolumn=80
-  highlight ColorColumn ctermbg=8
-endif
+    " change working directory to this
+        cmap cwd lcd %:p:h
+    " auto-change working directory
+        set autochdir                       " auto `cd` opened file's dir
+        autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://"
+                    \| lcd %:p:h | endif
 
-" Highlight up to 200 lines
-augroup vimrc-sync-fromstart
-  autocmd!
-  autocmd BufEnter * :syntax sync maxlines=200
-augroup END
+    " For when you forget to sudo... Wreally! Write!
+        cmap w!! w !sudo tee % >/dev/null
 
-" Remember cursor position
-augroup vimrc-remember-cursor-position
-  autocmd!
-  autocmd BufReadPost * if line("'\"") > 1 && line("'\"")
-        \ <= line("$") | exe "normal! g`\"" | endif
-augroup END
+" _ _ _ _ _  _ ___  ____ _ _ _ ___  ____ _  _ ____ ____
+" | | | | |\ | |  \ |  | | | | |__] |__| |\ | |___ [__
+" |_|_| | | \| |__/ |__| |_|_| |    |  | | \| |___ ___]
+"
+"
+    " jump more easily
+        map <C-h> <C-w>h
+        map <C-j> <C-w>j
+        map <C-k> <C-w>k
+        map <C-l> <C-w>l
 
-" PYTHON
-au BufNewFile,BufRead *.py set fileformat=unix
+    " Pane splitting
+        noremap <leader>s :<C-u>split<cr>
+        noremap <leader>v :<C-u>vsplit<cr>
 
-" HTML/CSS/JS
-let g:user_emmet_install_global = 0
+    " Window resizing
+        " nnoremap <C-=> <C-w>>
+        " nnoremap <C--> <C-w><
 
-augroup BufNewFile,BufRead *.{html, js, css}
-  " set tabstop=2
-  " set shiftwidth=2
-  " set softtabstop=2
-  " turns on html autocomplete
-  autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-  autocmd FileType html,css EmmetInstall
-augroup END
+" ____ _  _ ____ ____ ___ ____ _  _ ___ ____
+" [__  |__| |  | |__/  |  |    |  |  |  [__
+" ___] |  | |__| |  \  |  |___ |__|  |  ___]
+"
+    " toggle search highlighting
+        nmap <silent> <leader>/ :set invhlsearch<CR>
 
-" MARKDOWN
+    " enter visual mode
+        nmap <enter> V
+        vnoremap < <gv
+        vnoremap > >gv
+
+    " make a new line above or below w/o insert mode
+        nmap <C-o> o<esc>
+        nmap <S-o> O<esc>
+
+    " repeat operator with a visual selection (!)
+        " http://stackoverflow.com/a/8064607/127816
+        vnoremap . :normal .<CR>
+
+
+        " quitting made easy
+        nnoremap <C-q> :q<cr>
+
+" ____ _ ____ _    ____ ___
+" |___ | | __ |    |___  |
+" |    | |__] |___ |___  |
+"
+    " figlet heading - small, medium, large
+        nmap <leader>fgs <plug>NERDCommenterUncomment ^d0vg_:FIGlet -f pepper
+                    \<cr><S-v>3j,c<space>
+        nmap <leader>fgm ,c<space>^d0vg_:FIGlet -f cybermedium
+                    \<cr><S-v>3j,c<space>
+        nmap <leader>fgl ,c<space>^d0vg_:FIGlet -f basic
+                    \<cr><S-v>5j,c<space>6jdddd
+
+"   _
+"  / `_  _  __ _  _   __/__
+" /_,/_//_//_//_//_|_\ / /_'
+"      /   _//
+
+    " Yank to the end of the line like C and D
+        nnoremap Y y$
+
+" .88b  d88.  .d8b.  d8888b. db   dD d8888b.  .d88b.  db   d8b   db d8b   db
+" 88'YbdP`88 d8' `8b 88  `8D 88 ,8P' 88  `8D .8P  Y8. 88   I8I   88 888o  88
+" 88  88  88 88ooo88 88oobY' 88,8P   88   88 88    88 88   I8I   88 88V8o 88
+" 88  88  88 88~~~88 88`8b   88`8b   88   88 88    88 Y8   I8I   88 88 V8o88
+" 88  88  88 88   88 88 `88. 88 `88. 88  .8D `8b  d8' `8b d8'8b d8' 88  V888
+" YP  YP  YP YP   YP 88   YD YP   YD Y8888D'  `Y88P'   `8b8' `8d8'  VP   V8P
+
 au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn,txt} setf markdown
 
 function! s:wrapGood()
@@ -353,213 +305,226 @@ augroup END
 let g:vim_markdown_conceal = 0 " disable markdown conceallevel setting
 let g:tex_conceal = ""         " disable math conceal with LaTeX enabled
 let g:vim_markdown_math = 1
+
+
+" ____ _  _ ____ _ ___ _ _  _ ____
+" |___ |  | | __ |  |  | |  | |___
+" |    |__| |__] |  |  |  \/  |___
 "
-" File Tree navigator
-" let g:netrw_banner = 0       " excise banner
-" let g:netrw_browse_split = 0 " not sure
-" let g:netrw_liststyle = 3    " tree mode
-" let g:netrw_altv = 1         " open in vertical split right
-" let g:netrw_preview = 1      " vertical previews
-" let g:netrw_winsize = 25     " 20% wide tree
-" let g:netrw_list_hide = '.*\.swp,.git/'
-
-
-
-"    .                   ,  ,
-" ._ |. . _ *._    __ _ -+--+-*._  _  __
-" [_)|(_|(_]|[ )  _) (/, |  | |[ )(_]_)
-" |      ._|                      ._|
-
-"  __       __                  __
-" |   |  | |    > >>|<< > |  | |
-" |<< |  | | >> |   |   | |  | |<<
-" |   '<<' '__| |   |   |  \/  |__
-
-noremap <leader>ga :Gwrite<cr>
-noremap <leader>gco :Gread<cr>
-noremap <leader>gc :Gcommit<cr>
-noremap <leader>gsh :Gpush<cr>
-noremap <leader>gll :Gpull<cr>
-noremap <leader>gs :Gstatus<cr>
-noremap <leader>gd :Gvdiff<cr>
-noremap <leader>grm :Gremove<cr>
-noremap <leader>gmv :Gmove<cr>
-nnoremap <leader>o :.Gbrowser<cr>
-
-
-"    /`-.      )\.-.      .'(
-"  ,' _  \   ,' ,-,_)  ,')\  )
-" (  '-' (  (  .   _  (  '/ /
-"  )   _  )  ) '..' )  )   (
-" (  ,' ) \ (  ,   (  (  .\ \
-"  )/    )/  )/'._.'   )/  )/
-
-" Ack search contents of current directory
-nnoremap <space>/ :Ack<space>
-
-" use the word under the cursor for Ack search
-nmap <space>* :Ack <c-r>=expand("<cword>")<cr><cr>
-
-" search contents of project files
-cnoreabbrev ag Ack
-cnoreabbrev aG Ack
-cnoreabbrev Ag Ack
-cnoreabbrev AG Ack
-let g:ackprg = 'ag --vimgrep --smart-case'
-
-
-
-" o--o                O  o
-" |                  / \ | o
-" O-o   oo o-o o  o o---o|   o--o o-o
-" |    | |  \  |  | |   || | |  | |  |
-" o--o o-o-o-o o--O o   oo | o--O o  o
-"                 |             |
-"              o--o          o--o
-
-" Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap <leader>a <Plug>(EasyAlign)
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap <leader>a <Plug>(EasyAlign)
-vnoremap <silent> <Enter> :EasyAlign<cr>
-
-
-" @@@@@@@  @@@@@@@@ @@@  @@@ @@@ @@@@@@@ @@@@@@@@
-" @@!  @@@ @@!      @@!@!@@@ @@!   @@!   @@!
-" @!@  !@! @!!!:!   @!@@!!@! !!@   @!!   @!!!:!
-" !!:  !!! !!:      !!:  !!! !!:   !!:   !!:
-" :: :  :  : :: ::: ::    :  :      :    : :: :::
-
-" denite file search (c-p uses gitignore, c-o looks at everything)
-nnoremap <space><space> :DeniteProjectDir -buffer-name=git
-                      \ -direction=top file_rec/git<CR>
-" map <C-O> :DeniteProjectDir -buffer-name=files -direction=top file_rec<CR>
-
-" denite fuzzy file search options
-" -u flag to unrestrict (see ag docs)
-call denite#custom#var('file_rec', 'command',
-            \ ['ag', '--follow', '--nocolor', '--nogroup', '-u', '-g', ''])
-call denite#custom#alias('source', 'file_rec/git', 'file_rec')
-call denite#custom#var('file_rec/git', 'command',
-            \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
-
-
-"                                   o
-"  ,         _  _  _|_  __,   , _|_     __
-" / \_|   | / |/ |  |  /  |  / \_|  |  /
-"  \/  \_/|/  |  |_/|_/\_/|_/ \/ |_/|_/\___/
-"        /|
-"        \|
-
-let g:syntastic_always_populate_loc_list=1
-
-
-
-"            _                     _
-"  ___  ___ | | ___  _ _  ___ ___ | |_  ___ ._ _ _  ___
-" / | '/ . \| |/ . \| '_><_-</ | '| . |/ ._>| ' ' |/ ._>
-" \_|_.\___/|_|\___/|_|  /__/\_|_.|_|_|\___.|_|_|_|\___.
+" fugitive key mappings
 "
+    if isdirectory(expand("~/.vim/bundle/vim-fugitive/"))
+        nnoremap <silent> <leader>ga :Gwrite<cr>
+        nnoremap <silent> <leader>gco :Gread<cr>
+        nnoremap <silent> <leader>gc :Gcommit<cr>
+        nnoremap <silent> <leader>gp :Gpush<cr>
+        nnoremap <silent> <leader>gl :Gpull<cr>
+        nnoremap <silent> <leader>gs :Gstatus<cr>
+        nnoremap <silent> <leader>gd :Gvdiff<cr>
+        nnoremap <silent> <leader>grm :Gremove<cr>
+        nnoremap <silent> <leader>gmv :Gmove<cr>
+        nnoremap <silent> <leader>gb :Gblame<CR>
+        nnoremap <silent> <leader>glog :Glog<CR>
+        nnoremap <silent> <leader>ge :Gedit<CR>
+        nnoremap <silent> <leader>gi :Git add -p %<CR>
+        nnoremap <silent> <leader>gg :SignifyToggle<CR>
+    endif
 
-set background=dark
-if exists('g:pluggedin')
-  colorscheme molokai
-  " colorscheme PaperColor
-endif
+" ____ _   _ _  _ ___ ____ ____ ___ _ ____
+" [__   \_/  |\ |  |  |__| [__   |  | |
+" ___]   |   | \|  |  |  | ___]  |  | |___
+"
+" syntastic checking
+"
+    set statusline+=%#warningmsg#
+    set statusline+=%{SyntasticStatuslineFlag()}
+    set statusline+=%*
 
+    let g:syntastic_always_populate_loc_list = 1
+    let g:syntastic_auto_loc_list = 1
+    let g:syntastic_check_on_open = 1
+    let g:syntastic_check_on_wq = 0
 
+" _  _ ____ ____ ___  ___ ____ ____ ____
+" |\ | |___ |__/ |  \  |  |__/ |___ |___
+" | \| |___ |  \ |__/  |  |  \ |___ |___
+"
+    nmap <C-n> :NERDTreeToggle<CR>
+    autocmd VimEnter * NERDTree | wincmd p
 
-"  __ __       __    __   __ __
-" |  |__.-----|  |--|  |_|  |__.-----.-----.
-" |  |  |  _  |     |   _|  |  |     |  -__|
-" |__|__|___  |__|__|____|__|__|__|__|_____|
-"       |_____|
+    let g:NERDTreeDirArrowExpandable = '▸'
+    let g:NERDTreeDirArrowCollapsible = '▾'
+    let NERDTreeQuitOnOpen = 1
+    let NERDTreeAutoDeleteBuffer = 1
+    let NERDTreeMinimalUI = 1
+    let NERDTreeDirArrows = 1
+    set ttyfast
+    set lazyredraw
+    autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+    autocmd StdinReadPre * let s:std_in=1
+    autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
 
-" TODO: configure the status line
-let g:lightline = {
-  \   'active': {
-  \     'left':  [ ['mode', 'paste' ],
-  \                ['readonly', 'filename', 'modified'] ],
-  \     'right': [ ['lineinfo'],
-  \                ['percent'],
-  \                ['filetype', 'fileformat', 'fileencoding'] ]
-  \   },
-  \   'colorscheme': 'molokai'
-  \ }
+" _ _ _ _ _    ___  ____ _ ____ ____
+" | | | | |    |  \ |___ | |__/ |___
+" |_|_| | |___ |__/ |    | |  \ |___
+"
+" Wildfire text object selection
+" fire grows, water shrinks
 
+    " This selects the next closest text object.
+    map <SPACE> <Plug>(wildfire-fuel)
 
-"    .          ..  .
-" . ...-.-.. . ..|_,.
-"  ` '' ' ' ` ` '' `'
+    " This selects the previous closest text object.
+    vmap <C-SPACE> <Plug>(wildfire-water)
+" _    _ ____ _  _ ___ _    _ _  _ ____
+" |    | | __ |__|  |  |    | |\ | |___
+" |___ | |__] |  |  |  |___ | | \| |___
+"
+    let g:lightline = {
+      \   'active': {
+      \     'left':  [ ['mode', 'paste' ],
+      \                ['readonly', 'filename', 'modified'] ],
+      \     'right': [ ['lineinfo'],
+      \                ['percent'],
+      \                ['filetype', 'fileformat', 'fileencoding'] ]
+      \   },
+      \   'colorscheme': 'molokai'
+      \ }
 
-" set wiki to store in Google Drive
-let wiki = {}
-let wiki.path = '~/Drive/Code/wiki/'
-let wiki.path_html = '~/Drive/Code/wiki/html/'
-let wiki.css_name = 'css/wiki.css'
-let wiki.auto_export = 1
+" ___  ____ ____ ___  _    ____ ___ ____
+" |  \ |___ |  | |__] |    |___  |  |___
+" |__/ |___ |__| |    |___ |___  |  |___
+"
+" completion popup
+    "let g:deoplete#enable_at_startup = 1
+    nnoremap <leader>deo :call deoplete#toggle()<cr>
 
-let g:vimwiki_list = [wiki]
+" ___  ____ _  _ _ ___ ____
+" |  \ |___ |\ | |  |  |___
+" |__/ |___ | \| |  |  |___
+"
+" fuzzy file search options
+    call denite#custom#var('file_rec', 'command',
+                \ ['ag', '--follow', '--nocolor', '--nogroup', '-u', '-g', ''])
+                " -u flag to unrestrict (see ag docs)
+    call denite#custom#alias('source', 'file_rec/git', 'file_rec')
+    call denite#custom#var('file_rec/git', 'command',
+                \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
 
-" Tagbar
-map [] :TagbarToggle<CR>
-
-
-
-"     __ _  _ ___
-" |\||_ |_)| \ |  __ _  _
-" | ||__| \|_/ |  | (/_(/_
-
-nmap <C-n> :NERDTreeToggle<CR>
-autocmd VimEnter * NERDTree | wincmd p
-
-let g:NERDTreeDirArrowExpandable = '▸'
-let g:NERDTreeDirArrowCollapsible = '▾'
-let NERDTreeQuitOnOpen = 1
-let NERDTreeAutoDeleteBuffer = 1
-let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 1
-set ttyfast
-set lazyredraw
-
-" detect whether a file is opened
-autocmd StdinReadPre * let s:std_in=1
-" if vim is opened raw, show and focus NERDTree
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in")
-      \ | NERDTree | NERDTreeFocus | endif
-" if vim opens to a directory, show NERDTree and open a new file there
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) &&
-      \ !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
-" if NERDTree is the only pane left open, close vim
-autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") &&
-      \ b:NERDTree.isTabTree()) | q | endif
-
-let g:NERDTreeMapOpenSplit = 's'
-let g:NERDTreeMapOpenVSplit = 'v'
-
-" FIGlet Fonts
-let g:figletFontDir = '/usr/local/share/figlet/fonts'
-
-" .  ..___.__ .__  __                     ,
-" |\ |[__ [__)|  \/  ` _ ._ _ ._ _  _ ._ -+- _ ._.
-" | \|[___|  \|__/\__.(_)[ | )[ | )(/,[ ) | (/,[
+" _  _ _ _  _ ____ ____ _  _ ___  _    ____ ___ ____ ____ _  _ ____
+" |  | | |\/| |    |  | |\/| |__] |    |___  |  |___ [__  |\/| |___
+"  \/  | |  | |___ |__| |  | |    |___ |___  |  |___ ___] |  | |___
 "
 
-" Add spaces after comment delimiters by default
-let g:NERDSpaceDelims = 1
+    inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+    set completeopt+=longest
+    inoremap <C-j> <Plug>vim_completes_me_forward
+    inoremap <C-k> <Plug>vim_completes_me_backward
 
-" Use compact syntax for prettified multi-line comments
-let g:NERDCompactSexyComs = 1
+" _  _ _    ___ _ ____ _  _ _ ___  ____
+" |  | |     |  | [__  |\ | | |__] [__
+" |__| |___  |  | ___] | \| | |    ___]
+"
+    let g:UltiSnipsExpandTrigger="<C-tab>"
+    let g:UltiSnipsJumpForwardTrigger="<c-x>"
+    let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+    " If you want :UltiSnipsEdit to split your window.
+    let g:UltiSnipsEditSplit="vertical"
 
-" Align line-wise comment delimiters flush left instead of following code
-" indentation
-let g:NERDDefaultAlign = 'left'
+" ____ ____ ____ _   _ ____ _    _ ____ _  _
+" |___ |__| [__   \_/  |__| |    | | __ |\ |
+" |___ |  | ___]   |   |  | |___ | |__] | \|
+"
+    vnoremap <silent> <Enter> :EasyAlign<cr>
 
-" Allow commenting and inverting empty lines (useful when commenting a region)
-let g:NERDCommentEmptyLines = 1
+" _  _ _ _  _ _ _ _ _ _  _ _
+" |  | | |\/| | | | | |_/  |
+"  \/  | |  | |_|_| | | \_ |
+"
+    " set wiki to store in Google Drive
+    let wiki = {}
+    let wiki.path = '~/Drive/Code/wiki/'
+    let wiki.path_html = '~/Drive/Code/wiki/html/'
+    let wiki.css_name = 'css/wiki.css'
+    let wiki.auto_export = 1
 
-" Enable trimming of trailing whitespace when uncommenting
-let g:NERDTrimTrailingWhitespace = 1
+    let g:vimwiki_list = [wiki]
 
-" Enable NERDCommenterToggle to check all selected lines is commented or not 
-let g:NERDToggleCheckAllLines = 1
+" ____ ___ ____ _    ___
+" |     |  |__/ |    |__]
+" |___  |  |  \ |___ |`
+"
+" from spf13: https://github.com/spf13/spf13-vim/blob/3.0/.vimrc#L641
+
+    if isdirectory(expand("~/.vim/bundle/ctrlp.vim/"))
+        let g:ctrlp_working_path_mode = 'ra'
+        nnoremap <silent> <d-t> :ctrlp<cr>
+        nnoremap <silent> <d-r> :ctrlpmru<cr>
+        let g:ctrlp_custom_ignore = {
+            \ 'dir':  '\.git$\|\.hg$\|\.svn$',
+            \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$' }
+
+        if executable('ag')
+            let s:ctrlp_fallback = 'ag %s --nocolor -l -g ""'
+        elseif executable('ack-grep')
+            let s:ctrlp_fallback = 'ack-grep %s --nocolor -f'
+        elseif executable('ack')
+            let s:ctrlp_fallback = 'ack %s --nocolor -f'
+        " on windows use "dir" as fallback command.
+        elseif windows()
+            let s:ctrlp_fallback = 'dir %s /-n /b /s /a-d'
+        else
+            let s:ctrlp_fallback = 'find %s -type f'
+        endif
+        if exists("g:ctrlp_user_command")
+            unlet g:ctrlp_user_command
+        endif
+        let g:ctrlp_user_command = {
+            \ 'types': {
+                \ 1: ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others'],
+                \ 2: ['.hg', 'hg --cwd %s locate -i .'],
+            \ },
+            \ 'fallback': s:ctrlp_fallback
+        \ }
+
+        if isdirectory(expand("~/.vim/bundle/ctrlp-funky/"))
+            " ctrlp extensions
+            let g:ctrlp_extensions = ['funky']
+
+            "funky
+            nnoremap <leader>fu :ctrlpfunky<cr>
+        endif
+    endif
+
+" ____ ____ _    ____ ____ ____ ____ _  _ ____ _  _ ____
+" |    |  | |    |  | |__/ [__  |    |__| |___ |\/| |___
+" |___ |__| |___ |__| |  \ ___] |___ |  | |___ |  | |___
+"
+    set t_co=256                        " enable 256 colors
+
+    " better to set colorscheme at the bottom
+    " to apply it to all preceding additions
+    colorscheme molokai               " iterm sets the colors
+
+    " then override anything you don't like
+    hi linenr ctermbg=bg ctermfg=darkgray
+    hi clear signcolumn
+
+
+" d888888b  .d88b.  d8888b.  .d88b.
+" `~~88~~' .8p  y8. 88  `8d .8p  y8.
+"    88    88    88 88   88 88    88
+"    88    88    88 88   88 88    88
+"    88    `8b  d8' 88  .8D `8b  d8'
+"    YP     `Y88P'  Y8888D'  `Y88P'
+
+" no distractions mode
+"   - nix line numbers
+"   - one pane only
+"   - centered pane
+" marker comment
+" figure out how to manage plugins
+" - vim-plug
+" - vundle
+" - vim 8 native plugins
+" - what is neovim compatible?

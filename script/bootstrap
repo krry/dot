@@ -2,259 +2,244 @@
 #
 # bootstrap installs things.
 
-# Required:
-# clone this repo into your $HOME
-alias echo=printf "\r  [ \033[00;34m^^\033[0m ] $1\n"
+# Required: clone this repo into your $HOME
 cd "$(dirname "$0")/.."
 DOTFILES_ROOT=$(pwd -P)
 
+# if things goes sideways quit suddenly
+# would leave more to undo otherwise
 set -e
 
-info () {
-  printf "\r  [ \033[00;34m..\033[0m ] $1\n"
+pfinfo () {
+    printf "\r  [ \033[00;34m..\033[0m ] $1\n"
 }
 
-user () {
-  printf "\r  [ \033[0;33m??\033[0m ] $1\n"
+pfwarn () {
+    printf "\r  [ \033[00;33mN.B.\033[0m ] $1\n"
 }
 
-success () {
-  printf "\r\033[2K  [ \033[00;32mOK\033[0m ] $1\n"
+pfuser () {
+    printf "\r  [ \033[0;33m??\033[0m ] $1\n"
 }
 
-fail () {
-  printf "\r\033[2K  [\033[0;31mFAIL\033[0m] $1\n"
-  exit
+pfsuccess () {
+    printf "\r\033[2K  [ \033[00;32mOK\033[0m ] $1\n"
+}
+
+pffail () {
+    printf "\r\033[2K  [\033[0;31mFAIL\033[0m] $1\n"
+    exit
 }
 
 setup_gitconfig () {
-  if ! [ -f git/gitconfig.local.symlink ]
-  then
-    info 'setup gitconfig'
-
-    git_credential='cache'
-    if [ "$(uname -s)" == "Darwin" ]
+    if ! [ -f git/gitconfig.local.symlink ]
     then
-      git_credential='osxkeychain'
+        pfinfo 'setup gitconfig'
+
+        git_credential='cache'
+
+        if [ "$(uname -s)" == "Darwin" ]
+        then
+            git_credential='osxkeychain'
+        fi
+
+        pfuser ' - What is your github author name?'
+        read -ep "My name is: " git_authorname
+        pfuser ' - What is your github author email?'
+        read -ep "Mail me at: " git_authoremail
+
+        sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" git/gitconfig.local.symlink.example > git/gitconfig.local.symlink
+
+        pfsuccess 'gitconfig'
     fi
-
-    user ' - What is your github author name?'
-    read -ep "My name is: " git_authorname
-    user ' - What is your github author email?'
-    read -ep "Mail me at: " git_authoremail
-
-    sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" git/gitconfig.local.symlink.example > git/gitconfig.local.symlink
-
-    success 'gitconfig'
-  fi
 }
 
-
 link_file () {
-  local src=$1 dst=$2
+    local src=$1 dst=$2
 
-  local overwrite= backup= skip=
-  local action=
+    local overwrite= backup= skip=
+    local action=
 
-  if [ -f "$dst" -o -d "$dst" -o -L "$dst" ]
-  then
-
-    if [ "$overwrite_all" == "false" ] && [ "$backup_all" == "false" ] && [ "$skip_all" == "false" ]
+    if [ -f "$dst" -o -d "$dst" -o -L "$dst" ]
     then
 
-      local currentSrc="$(readlink $dst)"
+        if [ "$overwrite_all" == "false" ] && [ "$backup_all" == "false" ] && [ "$skip_all" == "false" ]
+        then
 
-      if [ "$currentSrc" == "$src" ]
-      then
+            local currentSrc="$(readlink $dst)"
 
-        skip=true;
+            if [ "$currentSrc" == "$src" ]
+            then
 
-      else
+                skip=true;
 
-        user "File already exists: $dst ($(basename "$src")), what do you want to do?\n\
-        [s]kip, [S]kip all, [o]verwrite, [O]verwrite all, [b]ackup, [B]ackup all?"
-        read -n 1 action
+            else
 
-        case "$action" in
-          o )
-            overwrite=true;;
-          O )
-            overwrite_all=true;;
-          b )
-            backup=true;;
-          B )
-            backup_all=true;;
-          s )
-            skip=true;;
-          S )
-            skip_all=true;;
-          * )
-            ;;
-        esac
+                pfuser "File already exists: $dst ($(basename "$src"))\nWhat to do?\n\
+                    [s]kip, [S]kip all, [o]verwrite, [O]verwrite all, [b]ackup, [B]ackup all?"
+                read -n 1 action
 
-      fi
+                case "$action" in
+                    o )
+                        overwrite=true;;
+                    O )
+                        overwrite_all=true;;
+                    b )
+                        backup=true;;
+                    B )
+                        backup_all=true;;
+                    s )
+                        skip=true;;
+                    S )
+                        skip_all=true;;
+                    * )
+                        ;;
+                esac
 
+            fi
+
+        fi
+
+        overwrite=${overwrite:-$overwrite_all}
+        backup=${backup:-$backup_all}
+        skip=${skip:-$skip_all}
+
+        if [ "$overwrite" == "true" ]
+        then
+            rm "$dst"
+            pfsuccess "removed $dst"
+        fi
+
+        if [ "$backup" == "true" ]
+        then
+            mv "$dst" "${dst}.backup"
+            pfsuccess "moved $dst to ${dst}.backup"
+        fi
+
+        if [ "$skip" == "true" ]
+        then
+            pfsuccess "skipped $src"
+        fi
     fi
 
-    overwrite=${overwrite:-$overwrite_all}
-    backup=${backup:-$backup_all}
-    skip=${skip:-$skip_all}
-
-    if [ "$overwrite" == "true" ]
+    if [ "$skip" != "true" ]  # "false" or empty
     then
-      rm "$dst"
-      success "removed $dst"
+        ln -s "$1" "$2"
+        pfsuccess "linked $1 to $2"
     fi
-
-    if [ "$backup" == "true" ]
-    then
-      mv "$dst" "${dst}.backup"
-      success "moved $dst to ${dst}.backup"
-    fi
-
-    if [ "$skip" == "true" ]
-    then
-      success "skipped $src"
-    fi
-  fi
-
-  if [ "$skip" != "true" ]  # "false" or empty
-  then
-    ln -s "$1" "$2"
-    success "linked $1 to $2"
-  fi
 }
 
 install_dotfiles () {
-  info 'installing dotfiles'
+    pfinfo 'installing dotfiles'
 
-  local overwrite_all=false backup_all=false skip_all=false
+    local overwrite_all=false backup_all=false skip_all=false
 
-  for src in $(find -H "$DOTFILES_ROOT" -maxdepth 2 -name '*.symlink' -not -path '*.git*')
-  do
-    dst="$HOME/.$(basename "${src%.*}")"
-    link_file "$src" "$dst"
-  done
+    for src in $(find -H "$DOTFILES_ROOT" -maxdepth 2 -name '*.symlink' -not -path '*.git*')
+    do
+        dst="$HOME/.$(basename "${src%.*}")"
+        link_file "$src" "$dst"
+    done
+}
+
+install_fonts() {
+    pfinfo "Installing powerline patched hacker fonts"
+
+    . "$HOME/.dotfiles/fonts/install.sh"
+
+    pfsuccess "Hacker fonts installed. Powerline glyphs enabled."
+}
+
+import_colors() {
+    # Specify the preferences directory
+    defaults write com.googlecode.iterm2 PrefsCustomFolder -string "$HOME/.itermcfg/"
+    # Tell iTerm2 to use the custom preferences in the directory
+    defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true
+    if [[ $? -eq 0 ]]
+    then
+        pfsuccess "Configured iTerm2 to load the custom preferences"
+    else
+        pffail "Unable to apply iTerm2 preferences" >&2
+    fi
+}
+
+setup_vundle() {
+
+    pfinfo "Checking for previous vim files"
+
+    local system_shell="$SHELL"
+    export SHELL='/bin/sh'
+
+    if [[ -d ~/.vim ]] ; then
+        pfwarn "Existing vim files found"
+        date=date "+%Y%m%d%H%M"
+        pfinfo "Backing up old vim files in $HOME/.vim_$date"
+        mv "$HOME/.vim" "$HOME/.vim_$date"
+    fi
+
+    vim \
+        # -u "$1" \
+        "+set nomore" \
+        "+BundleInstall!" \
+        "+BundleClean" \
+        "+qall"
+
+    export SHELL="$system_shell"
+
+    pfsuccess "Installing vim plugins via Vundle..."
+}
+
+ask() {
+    pfuser $1
+    read -p "(y/n): " -n1
+    echo ''
+    if [[ $REPLY =~ '^[Yy]' ]] ; then
+        $2
+    else
+        pfinfo "That's ok. Maybe later."
+    fi
+}
+
+default_fish() {
+    sudo chsh -s $HOMEBREW_PREFIX/fish
+    echo $HOMEBREW_PREFIX/fish | sudo tee -a /etc/shells
+    pfinfo "Installing Oh My Fish in a subshell"
+    ( curl -L https://get.oh-my.fish | fish )
+}
+
+install_mosh() {
+    git clone https://github.com/mobile-shell/mosh
+    cd mosh
+    ./autogen.sh
+    ./configure
+    make
+    make install
 }
 
 setup_gitconfig
 install_dotfiles
-
-# If we're on a Mac, let's install and setup homebrew.
-if [ "$(uname -s)" == "Darwin" ]
-then
-  info "installing dependencies"
-  if source bin/dot | while read -r data; do info "$data"; done
-  then
-    success "dependencies installed"
-    echo "Now updating dependencies..."
-    pip3 install --upgrade setuptools
-  else
-    fail "error installing dependencies"
-  fi
-fi
-
-if [[ -z ~/.tmux.conf ]] ; then
-  info "installing .tmux"
-  git clone https://github.com/krry/.tmux.git
-  ln -s ".tmux/.tmux.conf" $HOME
-  cp ".tmux/.tmux.conf.local" $HOME
-fi
-
-info "Installing jldeen's bin utilities"
-# backup old bin, if exists
-if [ -d $HOME/bin ]
-then
-    echo "bin found in $HOME. Creating a backup."
-    sudo mv $HOME/bin bin_old
-    success "Backup created."
-else
-    echo "No current $HOME/bin folder found. Proceeding to link bin folder"
-    # symlink .dotfiles bin to ~
-    ln -s $HOME/.dotfiles/bin $HOME/bin && success "symlink for $HOME/bin folder created"
-fi
-
-echo "Initalizing submodules for dotfiles"
-git submodule init
-# echo "Installing submodules"
-# git submodule update --remote
-
-echo "Do you want powerline-patched hacker fonts?"
-read -p "(y/n): " -n1 REPLY
-echo ''
-if [[ $REPLY =~ ^[Yy]$ ]]
-then
-  cd $HOME/.dotfiles
-  # install powerline-patched fonts
-  . "$HOME/.dotfiles/fonts/install.sh"
-  success "Hacker fonts installed. Powerline glyphs enabled."
-fi
-
-info "Installing krry's vimrc, vim-plug, and plugins"
-if [ ! -d $HOME/.vim ] ; then
-  ln -s ~/.dotfiles/vim $HOME/.vim
-  cd ~/.vim
-else
-  echo "There is already a .vim dir."
-fi
-
-echo "Installing vim plugins..."
-vim +'PlugInstall --sync' +qa > /dev/null 2>&1
-
-info "Installing .tmux configuration"
-ln -s -f "$HOME/.dotfiles/tmux/.tmux.conf" $HOME
-cp "$HOME/.dotfiles/tmux/.tmux.conf.local" $HOME
-
-# .config permissions fix
-# sudo chown $(whoami) $HOME/.config
-# success '.config permissions fixed'
-
-# iterm2 config
-echo "Do you want iTerm to use the molokai colorscheme?"
-read -p "(y/n): " -n1 REPLY
-echo ''
-if [[ $REPLY =~ ^[Yy]$ ]]
-then
-  # Specify the preferences directory
-  defaults write com.googlecode.iterm2 PrefsCustomFolder -string "$HOME/.itermcfg/"
-  # Tell iTerm2 to use the custom preferences in the directory
-  defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true
-  if [[ $? -eq 0 ]]
-  then
-    success "successfully configured iTerm2 to use molokai"
-  else
-    fail "failed to apply molokai..." >&2
-  fi
-else
-  echo "Okay, no molokai'd iTerm for you."
-fi
-
-# echo "Do you want mosh for super smooth remote ssh action?"
-# read -p "(y/n): " -n1 REPLY
-# echo ''
-# if [[ $REPLY =~ ^[Yy]$ ]]; then
-#   cd ~/.dotfiles
-#   git clone https://github.com/mobile-shell/mosh
-#   cd mosh
-#   ./autogen.sh
-#   ./configure
-#   make
-#   make install
-# else
-#   echo "Maybe later."
-# fi
+install_fonts
+import_colors
+setup_vundle #TODO: pass bundles files as an argument to vim -u
+ask default_fish "Do you want to set \`fish\` as your default shell?"
+# ask install_mosh "Is this a remote terminal where you want \`mosh\`?"
 
 cat << EOF
 
 $&%#&%$&#$&%&#$&%&#$&%&#$&%&%#&#$&%&#$&#$&%&#$&#$&%#&*#%&#%&#%&#%&#
-This Mac has been HACKIFY'D, DOTFILE'D, SYMLINK'D, and BOOTSTRAP'D!
-I mean that in a good way.
 
-Enjoy devving!
+I think we're all feeling a bit dotty now.
 
-One last step, copy/paste these two lines:
+To test everything out launch \`iTerm\`,
+which will load \`fish\` as your shell,
+which will attach to a \`tmux\` session,
+which will open \`vim\` to ~/.dotfiles.
 
-exec zsh
-. ./zsh/install.zsh
+Try \`omf help\` to activate Oh My Fish!
+Oh, and fish uses \`help\` instead of man.
+
+Dev on!
+💓 krry
+
+$&%#&%$&#$&%&#$&%&#$&%&#$&%&%#&#$&%&#$&#$&%&#$&#$&%#&*#%&#%&#%&#%&#
 EOF
-exit
+exit 0
