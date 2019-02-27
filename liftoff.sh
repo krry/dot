@@ -11,7 +11,7 @@
 author=krry
 app_name='dot'
 [ -z "$APP_PATH" ] && APP_PATH="$HOME/.${app_name}"
-[ -z "$REPO_URI" ] && REPO_URI='https://github.com/${author}/${app_name}.git'
+[ -z "$REPO_URI" ] && REPO_URI="https://github.com/${author}/${app_name}.git"
 
 [ -z "$VIMRC" ] && VIMRC="$HOME/.vimrc"
 [ -z "$VIM_PATH" ] && VIM_PATH="$HOME/.vim"
