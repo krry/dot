@@ -1,4 +1,5 @@
 "
+"
 "    db    db d888888b .88b  d88. d8888b.  .o88b.
 "    88    88   `88'   88'YbdP`88 88  `8D d8P  Y8
 "    Y8    8P    88    88  88  88 88oobY' 8P
@@ -6,37 +7,88 @@
 " db  `8bd8'    .88.   88  88  88 88 `88. Y8b  d8
 " VP    YP    Y888888P YP  YP  YP 88   YD  `Y88P'
 "
+" 🧞 krry
 "
-" by   .:
-"      ::
-"      ;;.-.   .;.::..;.::..    .-.
-"      ;; .'   .;    .;     `:  ;
-"    _.'`  `..;'   .;'       `.'
-"                         -.;'
-"
+" available at github.com/krry/dot
 
 " Always the quintessential opener
     set nocompatible
-
-" load ALL the vundles
+" Load ALL the vundles
     if filereadable(expand("~/.vimrc.bundles"))
         source ~/.vimrc.bundles
     endif
+" Third things third
+    filetype plugin indent on      " required after Vundle
 
-    filetype plugin indent on             " auto-detect filetypes after Vundle
-
-" styling
     set background=dark
     syntax on
-    scriptencoding utf-8
-    set t_co=256                        " enable 256 colors
+    set encoding=utf-8
+    set t_co=256                   " enable 256 colors
 
-" vim doesn't play well with fish as its internal shell
-    if &shell =~# 'fish$'
-        set shell=sh
-    endif
+" .-. .-. .-. .-. . . .-. .-. .-. .   .-.
+" |-  `-. `-. |-  |\|  |   |  |-| |   `-.
+" `-' `-' `-' `-' ' `  '  `-' ` ' `-' `-'
+"
+" Essential modifications
 
-" Tabs
+    " Elect a new <leader>
+        let mapleader = ','
+
+    " Help is on the K!
+        autocmd FileType vim setlocal keywordprg=:help
+
+    " Edit .vimrc
+        noremap <leader>ev :e ~/.dot/vimrc.symlink<cr>
+
+    " Source .vimrc
+        noremap <leader>sv :source $MYVIMRC<cr>
+                     \:exe 'echo ".vimrc resourced"'<cr>
+
+    " Save quickly
+        noremap <C-s> :w<cr>
+        inoremap <C-s> <esc>:w<cr>
+
+    " Quit easily
+        nnoremap <C-q> :q<cr>
+
+    " Change directory to here
+        cmap cwd lcd %:p:h
+
+    " Really Write! - for when you forget to sudo (thx @spf13)
+        cmap w!! w !sudo tee % >/dev/null
+
+    " Mouse
+        set mouse=a                    " all mouse functions on
+        set mousehide                  " hide mouse when typing
+
+    " Copy & Paste anywhere
+        if has('clipboard')
+            if has('unnamedplus')      " try to use + register for copy-paste
+                set clipboard=unnamed,unnamedplus
+            else
+                set clipboard=unnamed  " otherwise use * register on mac/win
+            endif
+        endif
+
+        " Yank to the end of the line like C and D
+            nnoremap Y y$
+
+    " Play nice with the shell
+        set noswapfile
+        set nobackup
+
+        if &shell =~# 'fish$'
+            set shell=sh               " vim doesn't like fish for its shell
+        endif
+
+    " Markdown, not Modula-2
+        au BufRead,BufNewFile *.{md,markdown} setf markdown
+
+" ~|~ _  _| _  _ _|_ _ _|_. _  _
+" _|_| |(_|(/_| | | (_| | |(_)| |
+"
+" Indentation
+
     set tabstop=4                   " tabs are 4 spaces
     set softtabstop=4               " insert/<bs> use 4-space tabs
     set shiftwidth=4                " autoindent 4-space tabs
@@ -44,351 +96,58 @@
     set autoindent                  " according to previous line
     set smartindent                 " according to brackets and such
 
+" | . _  _  _
+" |_|| |(/__\
+"
 " Lines
-    set nowrap		                " leave lines intact by
-    " set textwidth=78		        " encourage readable line length
+
+    set nowrap                      " leave lines intact by
     set number                      " shows line number
     if (exists('+colorcolumn'))     " make final column visible
       set colorcolumn=80
       highlight ColorColumn ctermbg=8
     endif
 
-" Status line
-    set noshowmode                  " lightline shows mode
-    set showcmd                     " show partial cmds in status line
-    set ruler                       " shows cursor position in status bar
-    set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " spf13 steroid ruler
-    set laststatus=2                " (default 1) 2 for airline/lightline
-
-" Wildmenu
-    set wildmenu                    " show a navigable menu for tab completion
-    set wildmode=list:longest,full  " list all matches, no longest completion
-
+" |_|   _ . _  _  _
+" | |\/(_||(/_| |(/_
+"    /  _|
+"
 " Hygiene
+
     set list
-    set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
+    set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " highlight problematic whitespace
     set nomodeline                  " don't look for vim settings at the top
 
-    " NERDCommenter
-    " Add spaces after comment delimiters by default
-    let g:NERDSpaceDelims = 1
-    " Use compact syntax for prettified multi-line comments
-    let g:NERDCompactSexyComs = 1
-    " Align line-wise comment delimiters flush left, not with indents
-    let g:NERDDefaultAlign = 'left'
-    " Allow commenting and inverting empty lines
-    let g:NERDCommentEmptyLines = 1
-    " Enable trimming of trailing whitespace when uncommenting
-    let g:NERDTrimTrailingWhitespace = 1
-    " Enable NERDCommenterToggle to check whether all selected lines
-    let g:NERDToggleCheckAllLines = 1
+    " EasyAlign horizontal whitespace
+    vnoremap <silent> <Enter> :EasyAlign<cr>
+
+    "Zenroom+Goyo
+    nnoremap <silent> <leader>z :Goyo<cr>
+
+
+" .dP"Y8 888888    db    88""Yb  dP""b8 88  88
+" `Ybo." 88__     dPYb   88__dP dP   `" 88  88
+" o.`Y8b 88""    dP__Yb  88"Yb  Yb      888888
+" 8bodP' 888888 dP""""Yb 88  Yb  YboodP 88  88
 
 " Search
+
     set hlsearch                   " highlight search matches
     set incsearch                  " search as you type
     set ignorecase                 " case insensitive search
-    set smartcase                  " case sensitive when UC used
-    set showmatch                  " Show matching brackets/parenthesis
+    set smartcase                  " case sensitive when uc used
+    set showmatch                  " show matching brackets/parenthesis
 
-" Panes and Windows
-    set splitright                 " vertical splits go to the right
-    set splitbelow                 " horizontal splits go below
-
-    " TODO: default to vertical split for help pane
-
-" Cursor
-    set backspace=indent,eol,start " allow backspace when inserting
-    set cursorline                 " shows line cursor is on
-    set whichwrap+=<,>,h,l,[,]     " wrap arrow keys between lines
-    set scrolljump=5                " Lines to scroll when cursor leaves screen
-    set scrolloff=3                 " Minimum lines to keep above and below cursor
-    set foldenable                  " Auto fold code
-
-" Copy/paste
-    if has('clipboard')
-        if has('unnamedplus')      " try to use + register for copy-paste
-            set clipboard=unnamed,unnamedplus
-        else
-            set clipboard=unnamed  " otherwise use * register on Mac/Win
-        endif
-    endif
-
-" Mouse
-    set mouse=a                    " all mouse functions on
-    set mousehide                  " hide mouse when typing
-
-" Memory mgmt
-    set noswapfile
-    set nobackup
-
-
-"_  _ ____ _   _    _  _ ____ ___  ___  _ _  _ ____ ____
-"|_/  |___  \_/     |\/| |__| |__] |__] | |\ | | __ [__
-"| \_ |___   |      |  | |  | |    |    | | \| |__] ___]
-
-" elect a <leader>
-    let mapleader = ','
-
-" open help with K
-    autocmd FileType vim setlocal keywordprg=:help
-
-" .vimrc
-" edit .vimrc
-    noremap <leader>ev :e $MYVIMRC<cr>
-" save and reload .vimrc
-    noremap <leader>sv :source $MYVIMRC<cr> :exe 'echo ".vimrc resourced"'<cr>
-
-" ____ _  _ ____ ____ ____ ____
-" |    |  | |__/ [__  |  | |__/
-" |___ |__| |  \ ___] |__| |  \
-"
-
-    " cursor moves gracefully over wrapped lines
-        noremap j gj
-        noremap k gk
-
-    " Easier horizontal scrolling
-        map zl zL
-        map zh zH
-
-" ____ _ _    ____ ____ _   _ ____ ___ ____ _  _
-" |___ | |    |___ [__   \_/  [__   |  |___ |\/|
-" |    | |___ |___ ___]   |   ___]  |  |___ |  |
-"
-
-    " save/write
-        noremap <C-s> :w<cr>
-        inoremap <C-s> <esc>:w<cr>
-
-    " change working directory to this
-        cmap cwd lcd %:p:h
-    " auto-change working directory
-        set autochdir                       " auto `cd` opened file's dir
-        autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://"
-                    \| lcd %:p:h | endif
-
-    " For when you forget to sudo... Wreally! Write!
-        cmap w!! w !sudo tee % >/dev/null
-
-" _ _ _ _ _  _ ___  ____ _ _ _ ___  ____ _  _ ____ ____
-" | | | | |\ | |  \ |  | | | | |__] |__| |\ | |___ [__
-" |_|_| | | \| |__/ |__| |_|_| |    |  | | \| |___ ___]
-"
-"
-    " jump more easily
-        map <C-h> <C-w>h
-        map <C-j> <C-w>j
-        map <C-k> <C-w>k
-        map <C-l> <C-w>l
-
-    " Pane splitting
-        noremap <leader>s :<C-u>split<cr>
-        noremap <leader>v :<C-u>vsplit<cr>
-
-    " Window resizing
-        " nnoremap <C-=> <C-w>>
-        " nnoremap <C--> <C-w><
-
-" ____ _  _ ____ ____ ___ ____ _  _ ___ ____
-" [__  |__| |  | |__/  |  |    |  |  |  [__
-" ___] |  | |__| |  \  |  |___ |__|  |  ___]
-"
     " toggle search highlighting
-        nmap <silent> <leader>/ :set invhlsearch<CR>
-
-    " enter visual mode
-        nmap <enter> V
-        vnoremap < <gv
-        vnoremap > >gv
-
-    " make a new line above or below w/o insert mode
-        nmap <C-o> o<esc>
-        nmap <S-o> O<esc>
-
-    " repeat operator with a visual selection (!)
-        " http://stackoverflow.com/a/8064607/127816
-        vnoremap . :normal .<CR>
-
-
-        " quitting made easy
-        nnoremap <C-q> :q<cr>
-
-" ____ _ ____ _    ____ ___
-" |___ | | __ |    |___  |
-" |    | |__] |___ |___  |
-"
-    " figlet heading - small, medium, large
-        nmap <leader>fgs ,c<space>^d0vg_:FIGlet -f pepper
-                    \<cr><S-v>3j,c<space>
-        nmap <leader>fgm ,c<space>^d0vg_:FIGlet -f cybermedium
-                    \<cr><S-v>3j,c<space>
-        nmap <leader>fgl ,c<space>^d0vg_:FIGlet -f basic
-                    \<cr><S-v>5j,c<space>6jdddd
-
-"   _
-"  / `_  _  __ _  _   __/__
-" /_,/_//_//_//_//_|_\ / /_'
-"      /   _//
-
-    " Yank to the end of the line like C and D
-        nnoremap Y y$
-
-" ____ _ _    ____ ___ _   _ ___  ____ ____
-" |___ | |    |___  |   \_/  |__] |___ [__
-" |    | |___ |___  |    |   |    |___ ___]
-"
-au BufRead,BufNewFile *.{md,markdown} setf markdown
-" ____ _  _ ____ _ ___ _ _  _ ____
-" |___ |  | | __ |  |  | |  | |___
-" |    |__| |__] |  |  |  \/  |___
-"
-" fugitive key mappings
-"
-    if isdirectory(expand("~/.vim/bundle/vim-fugitive/"))
-        nnoremap <silent> <leader>ga :Gwrite<cr>
-        nnoremap <silent> <leader>gco :Gread<cr>
-        nnoremap <silent> <leader>gc :Gcommit<cr>
-        nnoremap <silent> <leader>gp :Gpush<cr>
-        nnoremap <silent> <leader>gl :Gpull<cr>
-        nnoremap <silent> <leader>gs :Gstatus<cr>
-        nnoremap <silent> <leader>gd :Gvdiff<cr>
-        nnoremap <silent> <leader>grm :Gremove<cr>
-        nnoremap <silent> <leader>gmv :Gmove<cr>
-        nnoremap <silent> <leader>gb :Gblame<CR>
-        nnoremap <silent> <leader>glog :Glog<CR>
-        nnoremap <silent> <leader>ge :Gedit<CR>
-        nnoremap <silent> <leader>gi :Git add -p %<CR>
-        nnoremap <silent> <leader>gg :SignifyToggle<CR>
-    endif
-
-" ____ _   _ _  _ ___ ____ ____ ___ _ ____
-" [__   \_/  |\ |  |  |__| [__   |  | |
-" ___]   |   | \|  |  |  | ___]  |  | |___
-"
-" syntastic checking
-"
-    set statusline+=%#warningmsg#
-    set statusline+=%{SyntasticStatuslineFlag()}
-    set statusline+=%*
-
-    let g:syntastic_always_populate_loc_list = 1
-    let g:syntastic_auto_loc_list = 1
-    let g:syntastic_check_on_open = 1
-    let g:syntastic_check_on_wq = 0
-
-" _  _ ____ ____ ___  ___ ____ ____ ____
-" |\ | |___ |__/ |  \  |  |__/ |___ |___
-" | \| |___ |  \ |__/  |  |  \ |___ |___
-
-    :let g:netrw_dirhistmax = 0                 " don't save .netrwhist files
-    nmap <C-n> :NERDTreeToggle<CR>
-    autocmd VimEnter * NERDTree | wincmd p
-
-    let g:NERDTreeDirArrowExpandable = '▸'
-    let g:NERDTreeDirArrowCollapsible = '▾'
-    let NERDTreeQuitOnOpen = 1
-    let NERDTreeAutoDeleteBuffer = 1
-    let NERDTreeMinimalUI = 1
-    let NERDTreeDirArrows = 1
-    set ttyfast
-    set lazyredraw
-    " autocmd StdinReadPre * let s:std_in=1
-    " autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
-    " autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-
-
-" _ _ _ _ _    ___  ____ _ ____ ____
-" | | | | |    |  \ |___ | |__/ |___
-" |_|_| | |___ |__/ |    | |  \ |___
-"
-" Wildfire text object selection
-" fire grows, water shrinks
-
-    " This selects the next closest text object.
-    map <SPACE> <Plug>(wildfire-fuel)
-
-    " This selects the previous closest text object.
-    vmap <C-SPACE> <Plug>(wildfire-water)
-" _    _ ____ _  _ ___ _    _ _  _ ____
-" |    | | __ |__|  |  |    | |\ | |___
-" |___ | |__] |  |  |  |___ | | \| |___
-"
-    let g:lightline = {
-      \   'active': {
-      \     'left':  [ ['mode', 'paste' ],
-      \                ['readonly', 'filename', 'modified'] ],
-      \     'right': [ ['lineinfo'],
-      \                ['percent'],
-      \                ['filetype', 'fileformat', 'fileencoding'] ]
-      \   },
-      \   'colorscheme': 'molokai'
-      \ }
-
-" ___  ____ ____ ___  _    ____ ___ ____
-" |  \ |___ |  | |__] |    |___  |  |___
-" |__/ |___ |__| |    |___ |___  |  |___
-"
-" completion popup
-    "let g:deoplete#enable_at_startup = 1
-    nnoremap <leader>deo :call deoplete#toggle()<cr>
-
-" ___  ____ _  _ _ ___ ____
-" |  \ |___ |\ | |  |  |___
-" |__/ |___ | \| |  |  |___
-"
-" fuzzy file search options
-    call denite#custom#var('file_rec', 'command',
-                \ ['ag', '--follow', '--nocolor', '--nogroup', '-u', '-g', ''])
-                " -u flag to unrestrict (see ag docs)
-    call denite#custom#alias('source', 'file_rec/git', 'file_rec')
-    call denite#custom#var('file_rec/git', 'command',
-                \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
-
-" _  _ _ _  _ ____ ____ _  _ ___  _    ____ ___ ____ ____ _  _ ____
-" |  | | |\/| |    |  | |\/| |__] |    |___  |  |___ [__  |\/| |___
-"  \/  | |  | |___ |__| |  | |    |___ |___  |  |___ ___] |  | |___
-"
-
-    inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-    set completeopt+=longest
-    inoremap <C-j> <Plug>vim_completes_me_forward
-    inoremap <C-k> <Plug>vim_completes_me_backward
-
-" _  _ _    ___ _ ____ _  _ _ ___  ____
-" |  | |     |  | [__  |\ | | |__] [__
-" |__| |___  |  | ___] | \| | |    ___]
-"
-    let g:UltiSnipsExpandTrigger="<C-tab>"
-    let g:UltiSnipsJumpForwardTrigger="<c-x>"
-    let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-    " If you want :UltiSnipsEdit to split your window.
-    let g:UltiSnipsEditSplit="vertical"
-
-" ____ ____ ____ _   _ ____ _    _ ____ _  _
-" |___ |__| [__   \_/  |__| |    | | __ |\ |
-" |___ |  | ___]   |   |  | |___ | |__] | \|
-"
-    vnoremap <silent> <Enter> :EasyAlign<cr>
-
-" _  _ _ _  _ _ _ _ _ _  _ _
-" |  | | |\/| | | | | |_/  |
-"  \/  | |  | |_|_| | | \_ |
-"
-    " set wiki to store in Google Drive
-    let wiki = {}
-    let wiki.path = '~/Drive/Code/wiki/'
-    let wiki.path_html = '~/Drive/Code/wiki/html/'
-    let wiki.css_name = 'css/wiki.css'
-    let wiki.auto_export = 1
-
-    let g:vimwiki_list = [wiki]
+    nmap <silent> <leader>/ :set invhlsearch<CR>
 
 " ____ ___ ____ _    ___
 " |     |  |__/ |    |__]
 " |___  |  |  \ |___ |`
 "
-" from spf13: https://github.com/spf13/spf13-vim/blob/3.0/.vimrc#L641
+" Ctrl-P file finder with Ag and Ack support
 
+    " thx @spf13: https://github.com/spf13/spf13-vim/blob/3.0/.vimrc#L641
     if isdirectory(expand("~/.vim/bundle/ctrlp.vim/"))
         let g:ctrlp_working_path_mode = 'ra'
         nnoremap <silent> <d-t> :ctrlp<cr>
@@ -421,42 +180,355 @@ au BufRead,BufNewFile *.{md,markdown} setf markdown
         \ }
 
         if isdirectory(expand("~/.vim/bundle/ctrlp-funky/"))
-            " ctrlp extensions
             let g:ctrlp_extensions = ['funky']
-
-            "funky
             nnoremap <leader>fu :ctrlpfunky<cr>
         endif
     endif
+
+" ___  ____ _  _ _ ___ ____
+" |  \ |___ |\ | |  |  |___
+" |__/ |___ | \| |  |  |___
+"
+" Denite fuzzy file search options
+
+    nnoremap <leader>o :DeniteProjectDir -buffer-name=git -direction=top file_rec/git<CR>
+    " map <leader>O :DeniteProjectDir -buffer-name=files -direction=top file_rec<CR>
+
+    call denite#custom#var('file_rec', 'command',
+                \ ['ag', '--follow', '--nocolor', '--nogroup', '-u', '-g', ''])
+                " -u flag to unrestrict (see ag docs)
+    call denite#custom#alias('source', 'file_rec/git', 'file_rec')
+    call denite#custom#var('file_rec/git', 'command',
+                \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
+
+" 8b    d8  dP"Yb  Yb    dP 888888 8b    d8 888888 88b 88 888888
+" 88b  d88 dP   Yb  Yb  dP  88__   88b  d88 88__   88Yb88   88
+" 88YbdP88 Yb   dP   YbdP   88""   88YbdP88 88""   88 Y88   88
+" 88 YY 88  YbodP     YP    888888 88 YY 88 888888 88  Y8   88
+
+" /~`    _ _ _  _
+" \_,|_|| _\(_)|
+"
+" Cursor
+
+    set backspace=indent,eol,start " allow backspace when inserting
+    set cursorline                 " shows line cursor is on
+    set whichwrap+=<,>,h,l,[,]     " wrap arrow keys between lines
+    set scrolljump=5                " lines to scroll when cursor leaves screen
+    set scrolloff=3                 " minimum lines to keep above and below cursor
+    set foldenable                  " auto fold code
+
+" Wildfire text object selection
+
+    " fire grows, water shrinks
+
+    " This selects the next closest text object.
+    map <Space> <Plug>(wildfire-fuel)
+    " This selects the previous closest text object.
+    vmap <M-Space> <Plug>(wildfire-water)
+
+" (~|_  _  __|_ _  _|_ _
+" _)| |(_)|  | (_|_|| _\
+"
+" Shortcuts
+
+    " Cursor glides between lines, wrapped or not
+        noremap j gj
+        noremap k gk
+
+    " Easier horizontal scroll
+        map zl zL
+        map zh zH
+
+    " make a new line above or below w/o insert mode
+        nmap <C-o> O<Esc>
+        nmap <M-o> o<Esc>
+
+        nmap Ø O<Esc>
+        nmap ø o<Esc>
+
+    " move lines around with <M-h/j/k/l>
+        " also map to symbols they produce (˙∆˚¬ = hjkl)
+        " iTerm recognizes Option as Meta key
+        " but Terminal may not
+        nnoremap <M-h> <<
+        nnoremap <M-j> :m .+1<CR>==
+        nnoremap <M-k> :m .-2<CR>==
+        nnoremap <M-l> >>
+
+        nnoremap ˙ <<
+        nnoremap ∆ :m .+1<CR>==
+        nnoremap ˚ :m .-2<CR>==
+        nnoremap ¬ >>
+
+        inoremap <M-h> <C-d>
+        inoremap <M-j> <Esc>:m .+1<CR>==gi
+        inoremap <M-k> <Esc>:m .-2<CR>==gi
+        inoremap <M-l> <C-t>
+
+        inoremap ˙ <C-d>
+        inoremap ∆ <Esc>:m .+1<CR>==gi
+        inoremap ˚ <Esc>:m .-2<CR>==gi
+        inoremap ¬ <C-t>
+
+        vnoremap <M-h> <gv
+        vnoremap <M-j> :m '>+1<CR>gv=gv
+        vnoremap <M-k> :m '<-2<CR>gv=gv
+        vnoremap <M-l> >gv
+
+        vnoremap ˙ <gv
+        vnoremap ∆ :m '>+1<CR>gv=gv
+        vnoremap ˚ :m '<-2<CR>gv=gv
+        vnoremap ¬ >gv
+
+" \    /. _  _| _    _  ()   |~) _  _  _  _
+"  \/\/ || |(_|(_)VV_\  (_X  |~ (_|| |(/__\
+"
+" Windows & Panes
+
+    set splitright                 " vertical splits go to the right
+    set splitbelow                 " horizontal splits go below
+
+    " todo: default to vertical split for help pane
+
+    " windowpane navigation
+    " same bindings as Tmux
+        map <C-h> <C-w>h
+        map <C-j> <C-w>j
+        map <C-k> <C-w>k
+        map <C-l> <C-w>l
+
+    " Window split and open file
+        nnoremap <leader>s :sfind *
+        nnoremap <leader>v :vert sfind *
+
+" _  _ _ ____ _  _ ____ _       _  _ ____ ___  ____
+" |  | | [__  |  | |__| |       |\/| |  | |  \ |___
+"  \/  | ___] |__| |  | |___    |  | |__| |__/ |___
+"
+" VISUAL mode
+
+    " Enter visual mode
+        nmap <enter> V
+
+    " indent without leaving VISUAL mode
+        vnoremap < <gv
+        vnoremap > >gv
+
+    " repeat operator with a visual selection (!)
+        " http://stackoverflow.com/a/8064607/127816
+        vnoremap . :normal .<CR>
+
+
+" _  _ ____ ____ ___  ___ ____ ____ ____
+" |\ | |___ |__/ |  \  |  |__/ |___ |___
+" | \| |___ |  \ |__/  |  |  \ |___ |___
+"
+" NERDTree
+
+    set ttyfast                    " ensure fast terminal performance
+    set lazyredraw
+
+    nmap <leader>t :NERDTreeToggle<CR>
+    nmap <leader>f :NERDTreeFind<CR>
+
+    let g:NERDTreeDirArrowExpandable = '▸'
+    let g:NERDTreeDirArrowCollapsible = '▾'
+    let g:NERDTreeQuitOnOpen = 1
+    let g:NERDTreeAutoDeleteBuffer = 1
+    let g:NERDTreeMinimalUI = 1
+    let g:NERDTreeDirArrows = 1
+
+    " open for directories
+    autocmd StdinReadPre * let s:std_in=1
+    autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) &&
+                \ !exists("s:std_in") | exe 'NERDTree' argv()[0] |
+                \wincmd p | ene | endif
+    " close when last open
+    autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") &&
+                \b:NERDTreeType == "primary") | q | endif
+
+    let g:netrw_dirhistmax = 0                 " don't save .netrwhist files
+
+"/~` _  _ _  _ _  _  _ _|_ _
+"\_,(_)| | || | |(/_| | | _\
+"
+" Comments
+"
+    let g:NERDCommentEmptyLines = 1
+    let g:NERDRemoveExtraSpaces = 1
+    let g:NERDTrimTrailingWhitespace = 1
+    let g:NERDCompactSexyComs = 1
+    let g:NERDRemoveAltComs = 1
+
+" ____ _  _ ____ _ ___ _ _  _ ____
+" |___ |  | | __ |  |  | |  | |___
+" |    |__| |__] |  |  |  \/  |___
+"
+" Git mappings
+
+    if isdirectory(expand("~/.vim/bundle/vim-fugitive/"))
+        nnoremap <silent> <leader>ga :Gwrite<cr>
+        nnoremap <silent> <leader>gco :Gread<cr>
+        nnoremap <silent> <leader>gc :Gcommit<cr>
+        nnoremap <silent> <leader>gp :Gpush<cr>
+        nnoremap <silent> <leader>gl :Gpull<cr>
+        nnoremap <silent> <leader>gs :Gstatus<cr>
+        nnoremap <silent> <leader>gd :Gvdiff<cr>
+        nnoremap <silent> <leader>grm :Gremove<cr>
+        nnoremap <silent> <leader>gmv :Gmove<cr>
+        nnoremap <silent> <leader>gb :Gblame<CR>
+        nnoremap <silent> <leader>glog :Glog<CR>
+        nnoremap <silent> <leader>ge :Gedit<CR>
+        nnoremap <silent> <leader>gi :Git add -p %<CR>
+        nnoremap <silent> <leader>gg :SignifyToggle<CR>
+    endif
+
+" ____ _   _ _  _ ___ ____ ____ ___ _ ____
+" [__   \_/  |\ |  |  |__| [__   |  | |
+" ___]   |   | \|  |  |  | ___]  |  | |___
+"
+" syntastic checking
+"
+    set statusline+=%#warningmsg#
+    set statusline+=%{SyntasticStatuslineFlag()}
+    set statusline+=%*
+
+    let g:syntastic_always_populate_loc_list = 1
+    let g:syntastic_auto_loc_list = 1
+    let g:syntastic_check_on_open = 1
+    let g:syntastic_check_on_wq = 0
+    let syntastic_mode_map = { 'passive_filetypes': ['html'] }
+
+" ____ ___ ____ ___ _  _ ____    _    _ _  _ ____
+" [__   |  |__|  |  |  | [__     |    | |\ | |___
+" ___]  |  |  |  |  |__| ___]    |___ | | \| |___
+"
+" Status line
+
+    set noshowmode                  " lightline shows mode
+    set showcmd                     " show partial cmds in status line
+    set ruler                       " shows cursor position in status bar
+    set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " spf13 steroid ruler
+    set laststatus=2                " always show for lightline
+
+" | . _ |_ _|_|. _  _
+" |_|(_|| | | ||| |(/_
+"     _|
+" Lightline status line
+
+    let g:lightline = {
+      \   'colorscheme': 'default',
+      \   'active': {
+      \     'left':  [ ['mode', 'paste'],
+      \                [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
+      \     'right': [ ['lineinfo'],
+      \                ['charvaluehex', 'percent'],
+      \                ['filetype'] ]
+      \   },
+      \   'component': {
+      \      'charvaluehex': '0x%B'
+      \   },
+      \   'component_function': {
+      \      'gitbranch': 'fugitive#head',
+      \      'fileformat': 'LightlineFileformat',
+      \      'filetype': 'LightlineFiletype',
+      \   }
+      \ }
+
+    function! LightlineFileformat()
+      return winwidth(0) > 70 ? &fileformat : ''
+    endfunction
+
+    function! LightlineFiletype()
+      return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
+    endfunction
+
+"  dP""b8  dP"Yb  8b    d8 88""Yb 88     888888 888888 88  dP"Yb  88b 88
+" dP   `" dP   Yb 88b  d88 88__dP 88     88__     88   88 dP   Yb 88Yb88
+" Yb      Yb   dP 88YbdP88 88"""  88  .o 88""     88   88 Yb   dP 88 Y88
+"  YboodP  YbodP  88 YY 88 88     88ood8 888888   88   88  YbodP  88  Y8
+
+" Completion
+
+    " Wildmenu
+    "set wildmenu                     show a navigable menu for tab completion
+    "set wildmode=list:longest,full   list all matches, longest full match first
+    "set omnifunc=syntaxcomplete#Complete     turn on native completion
+
+" ___  ____ ____ ___  _    ____ ___ ____
+" |  \ |___ |  | |__] |    |___  |  |___
+" |__/ |___ |__| |    |___ |___  |  |___
+"
+" Deoplete completion popup
+
+    let g:deoplete#enable_at_startup = 1
+    nnoremap <leader>deo :call deoplete#toggle()<cr>
+
+" _  _ _    ___ _ ____ _  _ _ ___  ____
+" |  | |     |  | [__  |\ | | |__] [__
+" |__| |___  |  | ___] | \| | |    ___]
+"
+" UltiSnips Snippets
+
+    let g:UltiSnipsExpandTrigger="<C-tab>"
+    let g:UltiSnipsJumpForwardTrigger="<c-x>"
+    let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+    " If you want :UltiSnipsEdit to split your window.
+    let g:UltiSnipsEditSplit="vertical"
+
+" _  _ _ _  _ _ _ _ _ _  _ _
+" |  | | |\/| | | | | |_/  |
+"  \/  | |  | |_|_| | | \_ |
+"
+" Vim Wiki
+
+    let wiki = {}
+    " set wiki to store in Google Drive
+    let wiki.path = '~/Drive/Code/wiki/'
+    let wiki.path_html = '~/Drive/Code/wiki/html/'
+    let wiki.css_name = 'css/wiki.css'
+    let wiki.auto_export = 1
+
+    let g:vimwiki_list = [wiki]
+
+" ____ _ ____ _    ____ ___
+" |___ | | __ |    |___  |
+" |    | |__] |___ |___  |
+"
+" FIGlet comment headings
+
+    nmap <leader>hh3 yyp<leader>cu0vg_:FIGlet -f threepoint<cr>V2j<leader>cl
+    nmap <leader>hha yyp<leader>cu0vg_:FIGlet -f amc3line<cr>V3j<leader>cl
+    nmap <leader>hhm yyp<leader>cu0vg_:FIGlet -f cybermedium<cr>V3j<leader>cl
+    nmap <leader>hh4 yyp<leader>cu0vg_:FIGlet -f 4max<cr>V3j<leader>cl
+    nmap <leader>hhl yyp<leader>cu0vg_:FIGlet -f computer<cr>V6j<leader>cl
 
 " ____ ____ _    ____ ____ ____ ____ _  _ ____ _  _ ____
 " |    |  | |    |  | |__/ [__  |    |__| |___ |\/| |___
 " |___ |__| |___ |__| |  \ ___] |___ |  | |___ |  | |___
 "
+" Colorscheme
 
     " better to set colorscheme at the bottom
     " to apply it to all preceding additions
-    colorscheme molokai               " iterm sets the colors
+    colorscheme PaperColor
+    "colorscheme molokai
+    "colorscheme Apprentice
 
     " then override anything you don't like
     " hi linenr ctermbg=bg ctermfg=darkgray
+    hi LineNr ctermbg=bg ctermfg=darkgray
+    hi Folded cterm=bold ctermfg=black ctermbg=062
     hi clear signcolumn
 
+" Abbrevs
 
-" d888888b  .d88b.  d8888b.  .d88b.
-" `~~88~~' .8p  y8. 88  `8d .8p  y8.
-"    88    88    88 88   88 88    88
-"    88    88    88 88   88 88    88
-"    88    `8b  d8' 88  .8D `8b  d8'
-"    YP     `Y88P'  Y8888D'  `Y88P'
+    iab <expr> hugotime strftime("%Y-%m-%dT%H:%M%:%S%z")
+    iab <expr> w3time strftime("%FT%T%z")
+    iab <expr> nowtime strftime("%c")
 
-" no distractions mode
-"   - nix line numbers
-"   - one pane only
-"   - centered pane
-" marker comment
-" figure out how to manage plugins
-" - vim-plug
-" - vundle
-" - vim 8 native plugins
-" - what is neovim compatible?
+" Folding
+"
+    setlocal foldenable
+    setlocal foldmethod=indent
