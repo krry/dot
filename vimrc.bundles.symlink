@@ -1,10 +1,11 @@
+"
 " _  _ _  _ _  _ ___  _    ____
 " |  | |  | |\ | |  \ |    |___
 "  \/  |__| | \| |__/ |___ |___
 
 " https://github.com/VundleVim/Vundle.vim
 
-" author: krry
+" 🧞 krry
 
 set nocompatible                " always the first line
 set background=dark             " for colorschemes
