@@ -1,87 +1,125 @@
 "
-" _  _ _  _ _  _ ___  _    ____
-" |  | |  | |\ | |  \ |    |___
-"  \/  |__| | \| |__/ |___ |___
+"
+"    ee   e e  eeeeeee eeeee e     e   e eeeee
+"    88   8 8  8  8  8 8   8 8     8   8 8   8
+"    88  e8 8e 8e 8  8 8eee8 8e    8e  8 8e
+"     8  8  88 88 8  8 88    88    88  8 88 "8
+"     8ee8  88 88 8  8 88    88eee 88ee8 88ee8
+"
+"    https://github.com/junegunn/vim-plug
 
-" https://github.com/VundleVim/Vundle.vim
+"    🧞 krry
 
-" 🧞 krry
+" vim-plug autoconfig if not already installed
+    if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
+      silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+      augroup vimplugger
+          autocmd!
+          autocmd VimEnter * PlugInstall --sync | nested source $MYVIMRC
+      augroup END
+    endif
 
-set nocompatible                " always the first line
-set background=dark             " for colorschemes
+" Setup
+    if !has('nvim')
+        set nocompatible                  " always the first line
+    endif
+    scriptencoding utf-8
+    set background=dark                   " for colorschemes
+    filetype off                          " must precede vundle
+    set runtimepath+=~/.vim/bundle/vundle " set runtimepath to vundle
+    call plug#begin('~/.vim/bundle')      " you're now in Vundle's world
 
-filetype off                    " must precede vundle
-set rtp+=~/.vim/bundle/vundle   " set runtimepath to vundle
-" call vundle#rc()
-call vundle#begin()
+" Search
+    if executable('ag')                " try the faster search algos first
+        Plug 'mileszs/ack.vim'
+        let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
+    elseif executable('ack-grep')
+        Plug 'mileszs/ack.vim'
+        let g:ackprg = 'ack-grep -H --nocolor --nogroup --column'
+    elseif executable('ack')
+        Plug 'mileszs/ack.vim'
+    endif
+    Plug 'ctrlpvim/ctrlp.vim'          " fuzzy search on roids
+    Plug 'tacahiroy/ctrlp-funky'       " ctrl-p function navigator
+    Plug 'Shougo/denite.nvim'          " fuzzy search for anything
 
-" Add UnBundle cmd
-" credit: @spf_13
+" Git / Versioning
+    Plug 'tpope/vim-fugitive'          " git slicker
+    Plug 'airblade/vim-gitgutter'      " mark lines with changes
+    Plug 'Xuyuanp/nerdtree-git-plugin' " NERDtree shows git statuses
 
-function! UnBundle(arg, ...)
-    let bundle = vundle#config#init_bundle(a:arg, a:000)
-    call filter(g:vundle#bundles, 'v:val["name_spec"] != "' . a:arg . '"')
-endfunction
+" File / Project Navigation
+    Plug 'scrooloose/nerdtree'         " filesystem navigation
+    Plug 'vim-scripts/mru.vim'         " Most Recently Used files viewer
+    Plug 'bogado/file-line'            " Jump to a line in a file!
+    Plug 'mhinz/vim-startify'          " start screen
+    Plug 'farmergreg/vim-lastplace'    " return to the last place
+    Plug 'xolox/vim-misc'              " supports vim-session
+    Plug 'xolox/vim-session'           " :mksession expanded
+    Plug 'vimwiki/vimwiki'             " linkable, publishable notes
 
-com! -nargs=+   UnBundle
-            \ call UnBundle(<args>)
+" Completion
+    Plug 'ervandew/supertab'              " tabtastic completion
+    if !has('nvim')
+        Plug 'roxma/nvim-yarp'            " supports deoplete for neovim
+        Plug 'roxma/vim-hug-neovim-rpc'   " supports deoplete for neovim
+    endif
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
+    Plug 'deoplete-plugins/deoplete-jedi' " python lang serv completion
+    Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+    Plug 'Shougo/neosnippet.vim'          " snippet support for Deoplete
+    Plug 'Shougo/neosnippet-snippets'     " snippets for neosnippets
+    Plug 'mattn/emmet-vim'                " HTML/CSS hackery
+    Plug 'heracek/HTML-AutoCloseTag'      " Never close a tag again
 
+" Language / syntax
+    Plug 'w0rp/ale'                      " asynchronous lint engine
+    Plug 'sheerun/vim-polyglot'          " on-demand language packs
+    Plug 'godlygeek/tabular'             " table-maker for markdown
+    Plug 'plasticboy/vim-markdown'       " Improved markdown support
+    Plug 'iamcco/markdown-preview.nvim'  " preview markdown en el browsero
+    Plug 'fatih/vim-go'                  " Go tools
 
-Plugin 'gmarik/vundle'                " required for Vundle
-Plugin 'MarcWeber/vim-addon-mw-utils' " makes the vundle#rc work
-if executable('ag')                   " try the faster search algos first
-    Plugin 'mileszs/ack.vim'
-    let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
-elseif executable('ack-grep')
-    Plugin 'mileszs/ack.vim'
-    let g:ackprg = 'ack-grep -H --nocolor --nogroup --column'
-elseif executable('ack')
-    Plugin 'mileszs/ack.vim'
-endif
-Plugin 'ctrlpvim/ctrlp.vim'           " fuzzy search on roids
-Plugin 'tacahiroy/ctrlp-funky'        " ctrl-p function navigator
-Plugin 'tpope/vim-fugitive'           " git slicker
-Plugin 'airblade/vim-gitgutter'       " mark lines with changes
-Plugin 'scrooloose/nerdcommenter'     " comment ease and grace
-Plugin 'scrooloose/nerdtree'          " filesystem navigation
-Plugin 'Xuyuanp/nerdtree-git-plugin'  " NERDtree shows git statuses
-Plugin 'vim-syntastic/syntastic'      " syntax checking
-Plugin 'sheerun/vim-polyglot'         " on-demand language packs
-Plugin 'tpope/vim-surround'           " ( for {surrounding} 'text' )
-Plugin 'xolox/vim-misc'               " supports vim-session
-Plugin 'xolox/vim-session'            " :mksession expanded
-Plugin 'gcmt/wildfire.vim'            " growing text object selection
-Plugin 'mattn/emmet-vim'              " HTML/CSS hackery
-Plugin 'itchyny/lightline.vim'        " lightweight statusline
-Plugin 'tomasr/molokai'               " high-contrast theme
-Plugin 'romainl/Apprentice'           " low-contrast theme
-Plugin 'NLKNguyen/papercolor-theme'   " inspired by material design
-Plugin 'fadein/vim-FIGlet'            " for headers
-Plugin 'easymotion/vim-easymotion'    " show motions in realtime
-Plugin 'mhinz/vim-startify'           " start screen
-Plugin 'rust-lang/rust.vim'           " Syntastic, Tagbar, rustfmt integration
-Plugin 'racer-rust/vim-racer'         " completions for rust
-Plugin 'roxma/nvim-yarp'              " supports deoplete
-Plugin 'roxma/vim-hug-neovim-rpc'     " supports deoplete (experimental)
-Plugin 'Shougo/deoplete.nvim'         " asynchronous completion
-Plugin 'Shougo/neosnippet.vim'        " snippet support for Deoplete
-Plugin 'Shougo/neosnippet-snippets'   " snippets for neosnippets
-Plugin 'Shougo/denite.nvim'           " fuzzy search for anything
-Plugin 'valloric/MatchTagAlways'      " highlights matching close tag
-Plugin 'farmergreg/vim-lastplace'     " return to the last place
-Plugin 'vim-scripts/mru.vim'          " Most Recently Used files viewer
-Plugin 'svermeulen/vim-easyclip'      " makes sense of copy-paste
-Plugin 'terryma/vim-multiple-cursors' " Sublime multi-cursor action
-Plugin 'junegunn/vim-easy-align'      " easy vertical alignments
-Plugin 'tpope/vim-sensible'           " sensible defaults
-Plugin 'Yggdroot/indentLine'          " shows vertical lines for indents
-Plugin 'junegunn/goyo.vim'            " distraction-free writing in vim
-Plugin 'curiousleo/vim-zenroom2'      " iA Writer-like; deps on Goyo
-Plugin 'fatih/vim-go'                 " Go tools
-Plugin 'reedes/vim-wordy'             " highlights bad word usage
-Plugin 'bronson/vim-trailing-whitespace' " highlights trailing spaces in red
-Plugin 'nathanaelkane/vim-indent-guides' " nice-lookin indent signifiers
-Plugin 'christoomey/vim-tmux-navigator'  " move seamlessly from vim to tmux
-Plugin 'vimwiki/vimwiki', { 'branch': 'dev' }   " linkable notes
+" Rust
+    Plug 'rust-lang/rust.vim'            " Syntastic, Tagbar, rustfmt integration
+    Plug 'racer-rust/vim-racer'          " completions for rust
+    Plug 'sebastianmarkow/deoplete-rust' " completions from racer to deoplete
 
-call vundle#end()                     " required after Vundle
+" Magic tricks
+    Plug 'tpope/vim-sensible'             " sensible defaults
+    Plug 'tpope/vim-repeat'               " ( for {surrounding} 'text' )
+    Plug 'tpope/vim-surround'             " ( for {surrounding} 'text' )
+    Plug 'Raimondi/delimitMate'           " surround for insert mode
+    Plug 'Yggdroot/indentLine'            " shows vertical lines for indents
+    Plug 'easymotion/vim-easymotion'      " show motions in realtime
+    Plug 'scrooloose/nerdcommenter'       " comment ease and grace
+    Plug 'gcmt/wildfire.vim'              " growing text object selection
+    Plug 'svermeulen/vim-easyclip'        " makes sense of copy-paste
+    Plug 'terryma/vim-multiple-cursors'   " Sublime multi-cursor action
+    Plug 'christoomey/vim-tmux-navigator' " move seamlessly from vim to tmux
+
+" Hygiene
+    Plug 'bronson/vim-trailing-whitespace' " FixWhitespace, highlight it red
+    Plug 'valloric/MatchTagAlways'         " highlight matching close tag
+    Plug 'reedes/vim-wordy'                " highlight bad word usage
+
+" Cosmetics
+    Plug 'tomasr/molokai'                  " high-contrast theme
+    Plug 'romainl/Apprentice'              " low-contrast theme
+    Plug 'NLKNguyen/papercolor-theme'      " inspired by material design
+    Plug 'fadein/vim-FIGlet'               " for headers
+    Plug 'itchyny/lightline.vim'           " lightweight statusline
+    Plug 'junegunn/vim-easy-align'         " easy vertical alignments
+    Plug 'junegunn/goyo.vim'               " distraction-free writing in vim
+    Plug 'curiousleo/vim-zenroom2'         " iA Writer-like; deps on Goyo
+    Plug 'nathanaelkane/vim-indent-guides' " nice-lookin indent signifiers
+
+" Tags / Tagging
+    Plug 'majutsushi/tagbar'          " puts ctags in a rightside bar
+    Plug 'krry/vim-easytags'          " tag generation and highlighting
+    " made a patched fork since repo is unmaintained
+    " original repo 'xolox/vim-easytags'
+
+call plug#end()                       " leaving Vundleland

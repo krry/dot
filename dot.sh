@@ -8,37 +8,37 @@
 
 ########## parameters ##########
 
-author=krry
-app_name='dot'
-[ -z "$APP_PATH" ] && APP_PATH="$HOME/.${app_name}"
-[ -z "$REPO_URI" ] && REPO_URI="https://github.com/${author}/${app_name}.git"
+AUTHOR=krry
+APP_NAME='dot'
+
+[ -z "$APP_PATH" ] && APP_PATH="$HOME/.${APP_NAME}"
+[ -z "$REPO_URI" ] && REPO_URI="https://github.com/${AUTHOR}/${APP_NAME}.git"
 
 [ -z "$VIMRC" ] && VIMRC="$HOME/.vimrc"
 [ -z "$VIM_PATH" ] && VIM_PATH="$HOME/.vim"
 
-[ -z "$VUNDLE_PATH" ] && VUNDLE_PATH="$VIM_PATH/bundle/vundle"
-[ -z "$VUNDLE_URI" ] && VUNDLE_URI="https://github.com/gmarik/vundle.git"
+HOMEBREW_PREFIX=$(brew --prefix)
 
 ########## tools ##########
 
-msg () {
-  printf "\r  [ \033[00;34m..\033[0m ] $1\n"
+message () {
+  printf "\r  [ \033[00;34m..\033[0m ] %s\n" "$1"
 }
 
-warn () {
-  printf "\r  [ \033[00;33mN.B.\033[0m ] $1\n"
+warning () {
+  printf "\r  [ \033[00;33mN.B.\033[0m ] %s\n" "$1"
 }
 
-user () {
-  printf "\r  [ \033[0;36m??\033[0m ] $1\n"
+request () {
+  printf "\r  [ \033[0;36m??\033[0m ] %s\n" "$1"
 }
 
 success () {
-  printf "\r\033[2K  [ \033[00;32mOK\033[0m ] $1\n"
+  printf "\r\033[2K  [ \033[00;32mOK\033[0m ] %s\n" "$1"
 }
 
 failure () {
-  printf "\r\033[2K  [\033[0;31mFAIL\033[0m] $1\n"
+  printf "\r\033[2K  [\033[0;31mFAIL\033[0m] %s\n" "$1"
   exit
 }
 
@@ -47,52 +47,49 @@ failure () {
 
 have_homebrew() {
     if ! type -f brew && [[ "$OSTYPE" == "darwin"* ]]; then
-        msg 'Installing homebrew...'
+        message 'Installing homebrew...'
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     else
-        msg "Updating homebrew..."
+        message "Updating homebrew..."
         brew update
     fi
 }
 
 setup_git_in_bash() {
-
     brew install git bash-completion
-    
-    GIT_VERSION=`git --version | awk '{print $3}'`
-    
-    for i in $@; do
-        msg "Downloading ${1}@v${GIT_VERSION}..."
+    GIT_VERSION=$(git --version | awk '{print $3}')
+    for i in "${@}"; do
+        message "Downloading ${i}@v${GIT_VERSION}..."
         URL="https://raw.githubusercontent.com/git/git/v$GIT_VERSION/contrib/completion/${i}"
-        $(curl "$URL" --silent --output "$HOME/.${i}") || failure "Couldn't download ${i} script."
+        (curl "$URL" --silent --output "$HOME/.${i}") || failure "Couldn't download ${i} script."
     done
 }
 
 back_up() {
     if [[ -d $1 ]] ; then
-        warn "Older install found"
-        now=`date +%Y%m%d_%s`
-        msg "Backing up older install in ${1}_${now}"
+        warning "Older install found"
+        now=$(date +%Y%m%d_%s)
+        message "Backing up older install in ${1}_${now}"
         mv "$1" "${1}_${now}"
     fi
 }
 
 import_submodules() {
-    msg "importing submodules"
+    message "importing submodules"
     git submodule init
     git submodule update --remote
 }
 
 sync_repo() {
-    msg "cloning $1 to $2"
-    git clone $1 $2
-    if $3; then cd $2 && import_submodules; fi
+    message "cloning $1 to $2"
+    git clone "$1" "$2"
+    if "$3"; then cd "$2" && import_submodules; fi
 }
 
 setup_gitconfig () {
-    if ! [ -f ${APP_PATH}/git/gitconfig.local.symlink ]
+    if ! [ -f "${APP_PATH}/git/gitconfig.local.symlink" ]
     then
-        msg 'setup system .gitconfig'
+        message 'setup system .gitconfig'
 
         git_credential='cache'
 
@@ -101,11 +98,11 @@ setup_gitconfig () {
             git_credential='osxkeychain'
         fi
 
-        user ' - What are your Github author credentials?'
-        read -ep "Name: " git_authorname
-        read -ep "Email: " git_authoremail
+        request ' - What are your Github author credentials?'
+        read -rep "Name: " git_authorname
+        read -rep "Email: " git_authoremail
 
-        sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" ${APP_PATH}/git/gitconfig.local.symlink.example > ${APP_PATH}/git/gitconfig.local.symlink
+        sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" "${APP_PATH}/git/gitconfig.local.symlink.example" > "${APP_PATH}/git/gitconfig.local.symlink"
 
         success '.gitconfig configured'
     fi
@@ -114,16 +111,17 @@ setup_gitconfig () {
 link_file () {
     local src=$1 dst=$2
 
-    local overwrite= backup= skip=
-    local action=
+    local overwrite='' backup='' skip=''
+    local action=''
 
-    if [ -f "$dst" -o -d "$dst" -o -L "$dst" ]
+    if [ -f "$dst" ] || [ -d "$dst" ] || [ -L "$dst" ]
     then
 
         if [ "$overwrite_all" == "false" ] && [ "$backup_all" == "false" ] && [ "$skip_all" == "false" ]
         then
 
-            local currentSrc="$(readlink $dst)"
+            local currentSrc
+            currentSrc="$(readlink "$dst")"
 
             if [ "$currentSrc" == "$src" ]
             then
@@ -132,9 +130,9 @@ link_file () {
 
             else
 
-                user "File already exists: $dst ($(basename "$src"))\nWhat to do?\n\
+                request "File already exists: $dst ($(basename "$src"))\nWhat to do?\n\
                     [s]kip, [S]kip all, [o]verwrite, [O]verwrite all, [b]ackup, [B]ackup all?"
-                read -n 1 action
+                read -rn 1 action
 
                 case "$action" in
                     o )
@@ -187,64 +185,68 @@ link_file () {
 }
 
 install_dotfiles () {
-    msg 'Installing dotfiles'
+    message 'Installing dotfiles'
 
     local overwrite_all=false backup_all=false skip_all=false
 
-    for src in $(find -H "$APP_PATH" -maxdepth 2 -name '*.symlink' -not -path '*.git*')
-    do
+    find -H "$APP_PATH" -maxdepth 2 -name '*.symlink' -not -path '*.git*' | \
+    while read src ; do
         dst="$HOME/.$(basename "${src%.*}")"
         link_file "$src" "$dst"
     done
 }
 
 set_mac_defaults() {
-    msg "This computer is named :$1. Change it?"
-    read -e -p "$1"
-    ./macos/set-default.sh $REPLY
+    message "This computer is named :$1. Change it?"
+    read -rep "$1"
+    ./macos/set-default.sh "$REPLY"
 }
 
 install_deps() {
-    for i in $@; do
-        msg "Installing $i"
+    for i in "$@" ; do
+        message "Installing $i"
+        # shellcheck source=./fonts/install.sh
         . "${APP_PATH}/${i}/install.sh"
         success "$i installed"
     done
 }
 
-setup_vundle() {
+install_plugins() {
+
+    curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
     local system_shell="$SHELL"
     export SHELL='/bin/sh'
 
 
-    vim \
+    nvim \
         -u "$1" \
         "+set nomore" \
-        "+BundleInstall!" \
-        "+BundleClean" \
+        "+PlugInstall!" \
+        "+PlugClean" \
         "+qall"
 
     export SHELL="$system_shell"
 
-    success "Installing vim plugins via Vundle..."
+    success "Installing plugins"
 }
 
 ask() {
-    user $1
-    read -p "(y/n): " -n1
+    request "$1"
+    read -rp "(y/n): " -n1
     echo ''
-    if [[ $REPLY =~ '^[Yy]' ]] ; then
-        $2 $3
+    if [[ $REPLY =~ ^[Yy] ]] ; then
+        "$2" "$3"
     else
-        msg "That's ok. Maybe later."
+        message "That's ok. Maybe later."
     fi
 }
 
 default_fish() {
-    sudo chsh -s $HOMEBREW_PREFIX/fish
-    echo $HOMEBREW_PREFIX/fish | sudo tee -a /etc/shells
-    msg "Installing Oh My Fish in a subshell"
+    sudo chsh -s "$HOMEBREW_PREFIX/fish"
+    echo "$HOMEBREW_PREFIX/fish" | sudo tee -a /etc/shells
+    message "Installing Oh My Fish in a subshell"
     ( curl -L https://get.oh-my.fish | fish )
 }
 
@@ -261,16 +263,15 @@ Let's get .filed up!
 EOF
 
 setup_git_in_bash "git-completion.bash" "git-prompt.sh"
-back_up $APP_PATH
-back_up $VIM_PATH
-back_up $VIMRC
-sync_repo $REPO_URI $APP_PATH true
+back_up "$APP_PATH"
+back_up "$VIM_PATH"
+back_up "$VIMRC"
+sync_repo "$REPO_URI" "$APP_PATH" true
 setup_gitconfig
 install_dotfiles
-ask set_mac_defaults "Scrub MacOS defaults?" $hostname
+ask set_mac_defaults "Scrub MacOS defaults?" "$HOSTNAME"
 install_deps "fonts" "colors"
-sync_repo $VUNDLE_URI $VUNDLE_PATH
-setup_vundle "$APP_PATH/vimrc.bundles.symlink"
+install_plugins "$APP_PATH/vim.plugs.symlink"
 ask default_fish "Fish as default shell?"
 
 cat << EOF

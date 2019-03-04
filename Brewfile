@@ -15,6 +15,7 @@ brew 'grc'           # colorize log files and cli output
 # brew 'libgit2'
 brew 'mosh'
 brew 'openssl'
+brew 'neovim'
 brew 'node'
 # brew 'postgresql'
 brew 'python'
