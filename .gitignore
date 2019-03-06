@@ -1,3 +1,4 @@
 vim.symlink/bundle/
 .DS_Store
 .netrwhist
+plug.vim
