@@ -16,10 +16,10 @@
         set nocompatible            " always first, neovim doesn't need this
     endif
 
-    if filereadable(expand('~/.vimrc.bundles'))
-        source ~/.vimrc.bundles " Load ALL THE PLUGINS!!!
-    endif
-    filetype plugin indent on   " required after vim-plug
+    " if filereadable(expand('~/.vimrc.bundles'))
+        " source ~/.vimrc.bundles " Load ALL THE PLUGINS!!!
+    " endif
+    filetype plugin indent on   " detects filetype, ftplugins, and indent files
     set background=dark         " PaperColor responds
     syntax enable               " enable highlighting
     set encoding=utf-8          " one typeset to rule them all
@@ -42,15 +42,13 @@
         augroup helpers
             autocmd!
             autocmd FileType vim setlocal keywordprg=:help
-            " It's a lot more *helpful* when it's vertical.
-            autocmd FileType help wincmd L
         augroup END
 
     " Edit .vimrc
-        noremap <leader>ev :e ~/.dot/vimrc.symlink<cr>
+        noremap <leader>ec :e ~/.dot/vimrc.symlink<cr>
 
     " Source .vimrc
-        noremap <leader>sv :source $MYVIMRC<cr>
+        noremap <leader>rc :source $MYVIMRC<cr>
                      \:exe 'echo ".vimrc resourced"'<cr>
 
     " Save quickly
@@ -73,6 +71,7 @@
     " Mouse
         set mouse=a                    " No need to be a homerow nazi
         set mousehide                  " Hide mouse when typing
+        set mousemodel=popup_setpos    " popup menu applies to visual selection
 
     " Copy & Paste anywhere
         if has('clipboard')
@@ -83,15 +82,16 @@
             endif
         endif
 
-        " Yank to the end of the line like C and D
-            nnoremap Y y$
-        " Extend substitute function with easyclip
-            let g:EasyClipUseSubstituteDefaults = 1
-        " Preserve mark making, while using `m` to move with vim-easyclip
-            nnoremap gm m
-        " Preserve jump back, while still making newlines above with <C-o>
-            nnoremap <C-[> <C-o>
-            "
+    " Yank to the end of the line like C and D
+        nnoremap Y y$
+    " Extend substitute function with easyclip
+        let g:EasyClipUseSubstituteDefaults = 1
+    " Preserve mark making, while using `m` to move with vim-easyclip
+        nnoremap gm m
+    " Preserve jump back, while still making newlines above with <C-o>
+        " nnoremap <C-[> <C-o>
+    " Skip Ex Mode and format with Q
+        map Q gq
     " Play nice with the shell
         set noswapfile
         set nobackup
@@ -193,8 +193,7 @@
 
     call denite#custom#map('insert', '<Esc>', '<denite:enter_mode:normal>',
           \'noremap')
-    call denite#custom#map('normal', '<Esc>', '<NOP>',
-          \'noremap')
+    "call denite#custom#map('normal', '<Esc>', '<NOP>', 'noremap')
     call denite#custom#map('insert', '<C-v>', '<denite:do_action:vsplit>',
           \'noremap')
     call denite#custom#map('normal', '<C-v>', '<denite:do_action:vsplit>',
@@ -203,7 +202,7 @@
           \'noremap')
 
     nnoremap <C-p> :<C-u>Denite file_rec<CR>
-    nnoremap <leader>db :<C-u>Denite buffer<CR>
+    "nnoremap <leader>db :<C-u>Denite buffer<CR>
     nnoremap <leader>dbd :<C-u>DeniteBufferDir buffer<CR>
     nnoremap <leader>d* :<C-u>DeniteCursorWord grep:. -mode=normal<CR>
     nnoremap <leader>dg :<C-u>Denite grep:. -mode=normal<CR>
@@ -235,11 +234,11 @@
         map zh zH
 
     " make a new line above or below w/o insert mode
-        nmap <C-o> O<Esc>
-        nmap <M-o> o<Esc>
+        nnoremap <C-o> O<Esc>
+        nnoremap <M-o> o<Esc>
 
-        nmap Ø O<Esc>
-        nmap ø o<Esc>
+        nnoremap Ø O<Esc>
+        nnoremap ø o<Esc>
 
 " _  _ ____ ___ ____ _  _ ____ _  _ ____ ____
 " |\/| |___  |  |__| |\/| |  | |  | |___ |__/
@@ -289,17 +288,10 @@
     set scrolljump=5                " lines to scroll when cursor leaves screen
     set scrolloff=3                 " minimum lines to keep above and below cursor
     set foldenable                  " auto fold code
-
-" _ _ _ _ _    ___  ____ _ ____ ____
-" | | | | |    |  \ |___ | |__/ |___
-" |_|_| | |___ |__/ |    | |  \ |___
-
-    " fire grows, water shrinks
-
-    " This selects the next closest text object.
-    map <Space> <Plug>(wildfire-fuel)
-    " This selects the previous closest text object.
-    vmap <M-Space> <Plug>(wildfire-water)
+    autocmd BufReadPost *           " restores cursor position
+        \ if line("'\"") > 1 && line("'\"") <= line("$") |
+        \ exe "normal! g`\"" |
+        \ endif
 
 " _ _ _ _ _  _ ___  ____ _ _ _ ____   |   ___  ____ _  _ ____ ____
 " | | | | |\ | |  \ |  | | | | [__    |   |__] |__| |\ | |___ [__

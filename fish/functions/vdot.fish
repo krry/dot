@@ -1,3 +1,3 @@
 function vdot
-	vim -S ~/.dot/Session.vim 
+	vim ~/.dot/
 end

@@ -21,43 +21,10 @@
     endif
 
 " Setup
-    if !has('nvim')
-        set nocompatible                  " always the first line
-    endif
     scriptencoding utf-8
     set background=dark                   " for colorschemes
-    filetype off                          " must precede vundle
-    set runtimepath+=~/.vim/bundle/vundle " set runtimepath to vundle
-    call plug#begin('~/.vim/bundle')      " you're now in Vundle's world
-
-" Search
-    if executable('ag')                " try the faster search algos first
-        Plug 'mileszs/ack.vim'
-        let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
-    elseif executable('ack-grep')
-        Plug 'mileszs/ack.vim'
-        let g:ackprg = 'ack-grep -H --nocolor --nogroup --column'
-    elseif executable('ack')
-        Plug 'mileszs/ack.vim'
-    endif
-    Plug 'ctrlpvim/ctrlp.vim'          " fuzzy search on roids
-    Plug 'tacahiroy/ctrlp-funky'       " ctrl-p function navigator
-    Plug 'Shougo/denite.nvim'          " fuzzy search for anything
-
-" Git / Versioning
-    Plug 'tpope/vim-fugitive'          " git slicker
-    Plug 'airblade/vim-gitgutter'      " mark lines with changes
-    Plug 'Xuyuanp/nerdtree-git-plugin' " NERDtree shows git statuses
-
-" File / Project Navigation
-    Plug 'scrooloose/nerdtree'         " filesystem navigation
-    Plug 'vim-scripts/mru.vim'         " Most Recently Used files viewer
-    Plug 'bogado/file-line'            " Jump to a line in a file!
-    Plug 'mhinz/vim-startify'          " start screen
-    Plug 'farmergreg/vim-lastplace'    " return to the last place
-    Plug 'xolox/vim-misc'              " supports vim-session
-    Plug 'xolox/vim-session'           " :mksession expanded
-    Plug 'vimwiki/vimwiki'             " linkable, publishable notes
+    filetype off                          " must precede vimplug
+    call plug#begin('~/.local/share/nvim/bundles') " let's get ready to BUNDLE!
 
 " Completion
     Plug 'ervandew/supertab'              " tabtastic completion
@@ -73,6 +40,22 @@
     Plug 'Shougo/neosnippet-snippets'     " snippets for neosnippets
     Plug 'mattn/emmet-vim'                " HTML/CSS hackery
     Plug 'heracek/HTML-AutoCloseTag'      " Never close a tag again
+
+" Git / Versioning
+    Plug 'tpope/vim-fugitive'          " git slicker
+    Plug 'airblade/vim-gitgutter'      " mark lines with changes
+    Plug 'Xuyuanp/nerdtree-git-plugin' " NERDtree shows git statuses
+
+" File / Project Navigation
+    Plug 'Shougo/denite.nvim'          " fuzzy search for anything
+    Plug 'scrooloose/nerdtree'         " filesystem navigation
+    Plug 'vim-scripts/mru.vim'         " Most Recently Used files viewer
+    Plug 'bogado/file-line'            " Jump to a line in a file!
+    Plug 'mhinz/vim-startify'          " start screen
+    Plug 'farmergreg/vim-lastplace'    " return to the last place
+    Plug 'xolox/vim-misc'              " supports vim-session
+    Plug 'xolox/vim-session'           " :mksession expanded
+    Plug 'vimwiki/vimwiki'             " linkable, publishable notes
 
 " Language / syntax
     Plug 'w0rp/ale'                      " asynchronous lint engine
@@ -122,4 +105,4 @@
     " made a patched fork since repo is unmaintained
     " original repo 'xolox/vim-easytags'
 
-call plug#end()                       " leaving Vundleland
+call plug#end()                       " leaving Vimplugville

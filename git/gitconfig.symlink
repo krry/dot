@@ -7,7 +7,7 @@
   name = Kerry Snyder
   username = krry
 [core]
-	editor = vim
+	editor = /usr/local/bin/nvim
   excludesfile = ~/.gitignore
 	; filemode = true
 	; bare = false
