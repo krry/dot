@@ -78,6 +78,7 @@
     Plug 'Yggdroot/indentLine'            " shows vertical lines for indents
     Plug 'easymotion/vim-easymotion'      " show motions in realtime
     Plug 'scrooloose/nerdcommenter'       " comment ease and grace
+    Plug 'tpope/vim-commentary'           " simpler commenting
     Plug 'gcmt/wildfire.vim'              " growing text object selection
     Plug 'svermeulen/vim-easyclip'        " makes sense of copy-paste
     Plug 'terryma/vim-multiple-cursors'   " Sublime multi-cursor action

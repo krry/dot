@@ -1,5 +1,8 @@
-" TODO: remove
-" source ~/.vimrc
+
+" ____ ___  ___ _ ____ _  _ ____
+" |  | |__]  |  | |  | |\ | [__
+" |__| |     |  | |__| | \| ___]
+"
 
 " tools
     function! SourceIfExists(file)
@@ -17,11 +20,7 @@
     endfunction
 
 " plugins
-    call SourceIfExists('~/.config/nvim/bundles.vim') " Load ALL THE PLUGINS!!!
-"
-" ____ ___  ___ _ ____ _  _ ____
-" |  | |__]  |  | |  | |\ | [__
-" |__| |     |  | |__| | \| ___]
+    call SourceIfExists('~/.local/share/nvim/config/bundles.vim') " Load ALL THE PLUGINS!!!
 "
 " 1 important
     " set nocompatible
@@ -67,7 +66,6 @@
     set lazyredraw
     set list
     set number
-    highlight LineNr ctermbg=none ctermfg=darkgray
     set conceallevel=2
 
  " 5 syntax, highlighting and spelling
@@ -75,21 +73,20 @@
     filetype plugin indent on
     syntax enable
     set notermguicolors
-    highlight ErrorMsg ctermbg=red ctermfg=white cterm=bold
     " set hl=
-    " \ 8:SpecialKey,~:EndOfBuffer,z:TermCursor,Z:TermCursorNC,@:NonText,
-    " \ d:Directory,e:ErrorMsg,i:IncSearch,l:Search,m:MoreMsg,M:ModeMsg,
-    " \ n:LineNr,N:CursorLineNr,r:Question,s:StatusLine,S:StatusLineNC,
-    " \ c:VertSplit,t:Title,v:Visual,V:VisualNOS,w:WarningMsg,W:WildMenu,
-    " \ f:Folded,F:FoldColumn,A:DiffAdd,C:DiffChange,D:DiffDelete,
-    " \ T:DiffText,>:SignColumn,-:Conceal,B:SpellBad,P:SpellCap,
-    " \ R:SpellRare,L:SpellLocal,+:Pmenu,=:PmenuSel,x:PmenuSbar,
-    " \ X:PmenuThumb,*:TabLine,#:TabLineSel,_:TabLineFill,!:CursorColumn,
-    " \ .:CursorLine,o:ColorColumn,q:QuickFixLine,0:Whitespace,I:NormalNC
+    " \ 8:specialkey,~:endofbuffer,z:termcursor,z:termcursornc,@:nontext,
+    " \ d:directory,e:errormsg,i:incsearch,l:search,m:moremsg,m:modemsg,
+    " \ n:linenr,n:cursorlinenr,r:question,s:statusline,s:statuslinenc,
+    " \ c:vertsplit,t:title,v:visual,v:visualnos,w:warningmsg,w:wildmenu,
+    " \ f:folded,f:foldcolumn,a:diffadd,c:diffchange,d:diffdelete,
+    " \ t:difftext,>:signcolumn,-:conceal,b:spellbad,p:spellcap,
+    " \ r:spellrare,l:spelllocal,+:pmenu,=:pmenusel,x:pmenusbar,
+    " \ x:pmenuthumb,*:tabline,#:tablinesel,_:tablinefill,!:cursorcolumn,
+    " \ .:cursorline,o:colorcolumn,q:quickfixline,0:whitespace,i:normalnc
     set cursorline
     set cursorcolumn
     set colorcolumn=80
-    highlight ColorColumn ctermbg=8
+    highlight colorcolumn ctermbg=8
     set nospell
 
  " 6 multiple windows
@@ -98,7 +95,7 @@
     set equalalways
     set eadirection=both
     set winminheight=0
-    set previewwindow
+    " set previewwindow
     set previewheight=12
     set hidden
     set switchbuf=useopen,split
@@ -134,7 +131,7 @@
     " set rulerformat
     set verbose=0
     set report=2
-    set verbosefile=~/.local/share/nvim/log/editor.log
+    " set verbosefile=~/.local/share/nvim/log/editor.log
     set confirm
     set noerrorbells
     set visualbell
@@ -159,6 +156,7 @@
     set nojoinspaces
     set textwidth=78
     set wrapmargin=0
+    set formatoptions-=o
 
 " 14 tabs and indenting
     set tabstop=4
@@ -167,6 +165,7 @@
     set softtabstop=4
     set expandtab
     set autoindent
+    set cindent
     set smartindent
     " set indentkeys=  " other than tab
     set preserveindent
@@ -174,13 +173,12 @@
 " 15 folding
     set foldopen=all
     set foldclose=all
-    set foldminlines=0
+    set foldminlines=1
     set foldmethod=indent
     set foldignore=#
-    set foldlevelstart=0
+    set foldlevelstart=1
     set foldmarker={{{,}}}
     set foldtext=foldtext()
-    highlight Folded cterm=bold ctermfg=black ctermbg=240
 
 " 16 diff mode
     set diffopt=internal,filler
@@ -254,10 +252,16 @@
     highlight clear signcolumn
     " set pyxversion=3
 
-" 51 key mapping
-    call SourceIfExists('~/.config/nvim/keymap.vim') " keymap city
+" custom config
+call SourceDirectory('~/.local/share/nvim/config')
 
-" 52 colorscheme
-    colorscheme PaperColor
-
+" plugin settings
 call SourceDirectory('~/.local/share/nvim/site/plugins') " plugin options
+
+" 50 colorscheme
+    colorscheme PaperColor
+    " overriding styles
+    highlight linenr ctermbg=none ctermfg=darkgray
+    highlight errormsg ctermbg=red ctermfg=white cterm=bold
+    highlight Folded cterm=bold ctermfg=black ctermbg=240
+

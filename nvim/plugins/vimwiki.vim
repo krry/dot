@@ -13,3 +13,6 @@
 
     let g:vimwiki_list = [wiki]
 
+    let wiki.nested_syntaxes = {'rust': 'rust'}
+    :nmap <leader>wb <Plug>VimwikiGoBackLink
+
