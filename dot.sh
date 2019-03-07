@@ -14,8 +14,8 @@ APP_NAME='dot'
 [ -z "$APP_PATH" ] && APP_PATH="$HOME/.${APP_NAME}"
 [ -z "$REPO_URI" ] && REPO_URI="https://github.com/${AUTHOR}/${APP_NAME}.git"
 
-[ -z "$VIMRC" ] && VIMRC="$HOME/.vimrc"
-[ -z "$VIM_PATH" ] && VIM_PATH="$HOME/.vim"
+[ -z "$VIMRC" ] && VIMRC="$HOME/.config/nvim/init.vim"
+[ -z "$NVIM_PATH" ] && NVIM_PATH="$HOME/.local/share/nvim"
 
 HOMEBREW_PREFIX=$(brew --prefix)
 
@@ -211,6 +211,13 @@ install_deps() {
     done
 }
 
+linkup_nvim() {
+    ln -s "$APP_PATH/nvim/init.vim" "$VIMRC"
+    for dir in "$@" ; do
+        ln -s "$APP_PATH/nvim/$dir/" "$NVIM_PATH"
+    done
+}
+
 install_plugins() {
 
     curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
@@ -247,7 +254,6 @@ default_fish() {
     sudo chsh -s "$HOMEBREW_PREFIX/fish"
     echo "$HOMEBREW_PREFIX/fish" | sudo tee -a /etc/shells
     message "Installing Oh My Fish in a subshell"
-    ( curl -L https://get.oh-my.fish | fish )
 }
 
 
@@ -264,29 +270,29 @@ EOF
 
 setup_git_in_bash "git-completion.bash" "git-prompt.sh"
 back_up "$APP_PATH"
-back_up "$VIM_PATH"
+back_up "$NVIM_PATH"
 back_up "$VIMRC"
 sync_repo "$REPO_URI" "$APP_PATH" true
 setup_gitconfig
 install_dotfiles
 ask set_mac_defaults "Scrub MacOS defaults?" "$HOSTNAME"
 install_deps "fonts" "colors"
-install_plugins "$APP_PATH/vim.plugs.symlink"
+linkup_nvim "config" "ftplugin" "plugins"
+install_plugins "$APP_PATH/config/bundles.vim"
 ask default_fish "Fish as default shell?"
 
 cat << EOF
 
 $&%#&%$&#$&%&#$&%&#$&%&#$&%&%#&#$&%&#$&#$&%&#$&#$&%#&*#%&#%&#%&#%&#
 
-I think we're all feeling a bit dotty now.
+WAHOOOOO!!! We did it!
 
-To test everything out launch \`iTerm\`,
-which will load \`fish\` as your shell,
-which will attach to a \`tmux\` session,
-which will open \`vim\` to ~/.dotfiles.
+We're probably all feeling a bit dotty by now.
 
-Try \`omf help\` to activate Oh My Fish!
-Oh, and fish uses \`help\` instead of man.
+To test everything out, launch \`iTerm\`, then:
+exec fish
+tmux a -t devmo
+nvim ~/.dot
 
 Dev on!
 💓 krry

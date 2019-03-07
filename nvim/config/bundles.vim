@@ -54,7 +54,7 @@
     Plug 'mhinz/vim-startify'          " start screen
     Plug 'farmergreg/vim-lastplace'    " return to the last place
     Plug 'xolox/vim-misc'              " supports vim-session
-    Plug 'xolox/vim-session'           " :mksession expanded
+    Plug 'tpope/vim-obsession'             " slicker sessions
     Plug 'vimwiki/vimwiki'             " linkable, publishable notes
 
 " Language / syntax
@@ -70,6 +70,9 @@
     Plug 'racer-rust/vim-racer'          " completions for rust
     Plug 'sebastianmarkow/deoplete-rust' " completions from racer to deoplete
 
+" Langs
+    Plug 'tranvansang/octave.vim'         " octave syntax/indent support
+
 " Magic tricks
     Plug 'tpope/vim-sensible'             " sensible defaults
     Plug 'tpope/vim-repeat'               " ( for {surrounding} 'text' )
@@ -79,7 +82,7 @@
     Plug 'easymotion/vim-easymotion'      " show motions in realtime
     Plug 'scrooloose/nerdcommenter'       " comment ease and grace
     Plug 'tpope/vim-commentary'           " simpler commenting
-    Plug 'gcmt/wildfire.vim'              " growing text object selection
+    Plug 'gcmt/wildfire.vim'             " growing text object selection
     Plug 'svermeulen/vim-easyclip'        " makes sense of copy-paste
     Plug 'terryma/vim-multiple-cursors'   " Sublime multi-cursor action
     Plug 'christoomey/vim-tmux-navigator' " move seamlessly from vim to tmux

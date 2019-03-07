@@ -4,10 +4,9 @@
 " |__/ |___ |__| |    |___ |___  |  |___
 
     " Deoplete completes from language servers and snippets
-    if has('nvim')
-
+    if &runtimepath =~? 'deoplete'
         " get deoplete going on launch
-        " let g:deoplete#enable_at_startup = 1
+        let g:deoplete#enable_at_startup = 1
 
         function! ConfigureDeoplete()
 
@@ -20,7 +19,7 @@
             inoremap <silent><expr><C-l> deoplete#complete_common_string()
 
             " if popup showing, close popup
-            inoremap <silent><expr><cr> pumvisible() ? deoplete#close_popup()
+            inoremap <silent><expr><CR> pumvisible() ? deoplete#close_popup()
             \ : (delimitMate#WithinEmptyPair() ?
             \ "\<C-R>=delimitMate#ExpandReturn()\<CR>" : "\<CR>")
 

@@ -13,10 +13,10 @@
     let g:NERDTreeMinimalUI = 1
     let g:NERDTreeDirArrows = 1
 
-    " open for directories
     augroup nerdtree
         autocmd!
         autocmd StdinReadPre * let s:std_in=1
+        " open for directories
         autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) &&
                     \ !exists("s:std_in") | exe 'NERDTree' argv()[0] |
                     \ wincmd p | ene | endif

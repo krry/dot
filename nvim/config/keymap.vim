@@ -3,9 +3,9 @@
 " | \_ |___   |   |  | |  | |
 "
 " Elect a new <leader>
-    let mapleader = ','
+    let mapleader = ' '
 
-" Get a semi, save your pinky
+" Get a semi, save a pinky
 " https://nvie.com/posts/how-i-boosted-my-vim/
     nnoremap ; :
 
@@ -16,15 +16,14 @@
     noremap <leader>rc :source $MYVIMRC<cr>
              \:exe 'echo ".vimrc resourced"'<cr>
 
-" Save quickly
-    noremap <C-s> :w<cr>
+" Save and quit quickly
+    map <leader>w :w<cr>
+    map <leader>q :q<cr>
+    map <leader>wq :wq<cr>
     inoremap <C-s> <esc>:w<cr>
 
-" Quit easily
-    nnoremap <C-q> :q<cr>
-
 " Change directory to here
-    cmap cwd lcd %:p:h
+    cmap <leader>cd lcd %:p:h<cr>
 
 " Really Write! - for when you forget to sudo (thx @spf13)
     cmap w!! w !sudo tee % >/dev/null
@@ -52,11 +51,8 @@
     map zh zH
 
 " make a new line above or below w/o insert mode
-    nnoremap <S-M-o> O<Esc>
-    nnoremap <M-o> o<Esc>
-
-    nnoremap Ø O<Esc>
-    nnoremap ø o<Esc>
+    nnoremap <BS> O<esc>
+    nnoremap <Enter> o<esc>
 
 " Metamover moves lines around with <M-h/j/k/l>
 " also maps these movements to the symbols they produce (˙∆˚¬ = hjkl)
@@ -107,8 +103,8 @@
     vnoremap . :normal .<CR>
 
 " reclaim Wildfire!
-    " map <space> <Plug>(wildfire-fuel)
-    " xmap <BS> <Plug>(wildwire-water)
+    map \ <Plug>(wildfire-fuel)
+    vnoremap <BS> <Plug>(wildwire-water)
 
 " Yank to the end of the line like C and D
     nnoremap Y y$
@@ -118,9 +114,6 @@
 
 " Preserve mark making, while using `m` to move with vim-easyclip
     nnoremap gm m
-
-" Preserve jump back, while still making newlines above with <C-o>
-    " nnoremap <C-[> <C-o>
 
 " Skip Ex Mode and format with Q
     map Q gq
@@ -144,3 +137,7 @@ inoremap <C-l> <C-\><C-N><C-w>l
 " nnoremap <C-j> <C-w>j
 " nnoremap <C-k> <C-w>k
 " nnoremap <C-l> <C-w>l
+
+
+
+scriptencoding utf-8
