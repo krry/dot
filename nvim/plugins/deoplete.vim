@@ -24,7 +24,7 @@
             \ "\<C-R>=delimitMate#ExpandReturn()\<CR>" : "\<CR>")
 
             " to switch deoplete on and off
-            nmap <leader>dpl deoplete#toggle()
+            nmap <leader>dpt :call deoplete#toggle()
 
         endfunction
 

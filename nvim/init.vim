@@ -1,10 +1,10 @@
-
+"
 " ____ ___  ___ _ ____ _  _ ____
 " |  | |__]  |  | |  | |\ | [__
 " |__| |     |  | |__| | \| ___]
 "
 
-" tools
+" Utilities
     function! SourceIfExists(file)
         " Source only if file exists
         if filereadable(expand(a:file))
@@ -19,8 +19,8 @@
         endfor
     endfunction
 
-" plugins
-    call SourceIfExists('~/.local/share/nvim/config/bundles.vim') " Load ALL THE PLUGINS!!!
+" Load ALL THE PLUGINS!!!
+    call SourceIfExists('~/.local/share/nvim/config/bundles.vim')
 "
 " 1 important
     " set nocompatible
@@ -86,7 +86,6 @@
     set cursorline
     set cursorcolumn
     set colorcolumn=80
-    highlight colorcolumn ctermbg=8
     set nospell
 
  " 6 multiple windows
@@ -176,7 +175,7 @@
     set foldminlines=1
     set foldmethod=indent
     set foldignore=#
-    set foldlevelstart=1
+    set foldlevelstart=2
     set foldmarker={{{,}}}
     set foldtext=foldtext()
 
@@ -262,6 +261,7 @@ call SourceDirectory('~/.local/share/nvim/site/plugins') " plugin options
     colorscheme PaperColor
     " overriding styles
     highlight linenr ctermbg=none ctermfg=darkgray
-    highlight errormsg ctermbg=red ctermfg=white cterm=bold
+    highlight errormsg ctermbg=52 ctermfg=white cterm=bold
     highlight Folded cterm=bold ctermfg=black ctermbg=240
+    highlight colorcolumn ctermbg=8
 

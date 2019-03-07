@@ -1,3 +1,5 @@
+"
+"
 " _  _ ____ _   _ _  _ ____ ___
 " |_/  |___  \_/  |\/| |__| |__]
 " | \_ |___   |   |  | |  | |
@@ -10,20 +12,24 @@
     nnoremap ; :
 
 " Edit .vimrc
-    noremap <leader>ec :e ~/.dot/vimrc.symlink<cr>
+    nnoremap <leader>ec :e ~/.dot/vimrc.symlink<cr>
 
 " Source .vimrc
-    noremap <leader>rc :source $MYVIMRC<cr>
+    nnoremap <leader>rc :source $MYVIMRC<cr>
              \:exe 'echo ".vimrc resourced"'<cr>
 
+" Vimplug actions
+    nnoremap <leader>pi :PlugInstall<cr>
+    nnoremap <leader>pc :PlugClean<cr>
+
 " Save and quit quickly
-    map <leader>w :w<cr>
-    map <leader>q :q<cr>
-    map <leader>wq :wq<cr>
+    nnoremap <leader>w :w<cr>
+    nnoremap <leader>q :q<cr>
+    nnoremap <leader>wq :wq<cr>
     inoremap <C-s> <esc>:w<cr>
 
 " Change directory to here
-    cmap <leader>cd lcd %:p:h<cr>
+    nmap <leader>cwd :lcd %:p:h<cr>
 
 " Really Write! - for when you forget to sudo (thx @spf13)
     cmap w!! w !sudo tee % >/dev/null
@@ -40,7 +46,7 @@
     nnoremap <silent> <leader>z :Goyo<cr>
 
 " toggle search highlighting
-    nmap <silent> <leader>/ :set invhlsearch<CR>
+    nnoremap <silent> <leader>/ :set invhlsearch<CR>
 
 " Cursor glides between lines, wrapped or not
     noremap j gj
@@ -52,7 +58,8 @@
 
 " make a new line above or below w/o insert mode
     nnoremap <BS> O<esc>
-    nnoremap <Enter> o<esc>
+    nnoremap <CR> o<esc>
+    nnoremap <CR><CR> O<esc>jo<esc>k
 
 " Metamover moves lines around with <M-h/j/k/l>
 " also maps these movements to the symbols they produce (˙∆˚¬ = hjkl)
@@ -87,12 +94,15 @@
     vnoremap ˚ :m '<-2<CR>gv=gv
     vnoremap ¬ >gv
 
-" windowpane navigation
-" same bindings as Tmux
-    map <C-h> <C-w>h
-    map <C-j> <C-w>j
-    map <C-k> <C-w>k
-    map <C-l> <C-w>l
+" window mgmt like Tmux panes
+    " quicker window navigation
+    noremap <C-h> <C-w>h
+    noremap <C-j> <C-w>j
+    noremap <C-k> <C-w>k
+    noremap <C-l> <C-w>l
+    " easy, empty splits
+    noremap <C-v> :vs e<CR>
+    noremap <C-s> :sp e<CR>
 
 " indent without leaving VISUAL mode
     vnoremap < <gv
@@ -104,13 +114,10 @@
 
 " reclaim Wildfire!
     map \ <Plug>(wildfire-fuel)
-    vnoremap <BS> <Plug>(wildwire-water)
+    vmap <BS> <Plug>(wildwire-water)
 
 " Yank to the end of the line like C and D
     nnoremap Y y$
-
-" Extend substitute function with easyclip
-    let g:EasyClipUseSubstituteDefaults = 1
 
 " Preserve mark making, while using `m` to move with vim-easyclip
     nnoremap gm m
@@ -133,10 +140,6 @@ inoremap <C-h> <C-\><C-N><C-w>h
 inoremap <C-j> <C-\><C-N><C-w>j
 inoremap <C-k> <C-\><C-N><C-w>k
 inoremap <C-l> <C-\><C-N><C-w>l
-" nnoremap <C-h> <C-w>h
-" nnoremap <C-j> <C-w>j
-" nnoremap <C-k> <C-w>k
-" nnoremap <C-l> <C-w>l
 
 
 

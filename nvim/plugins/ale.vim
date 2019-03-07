@@ -9,6 +9,7 @@
     nmap <leader>alet :ALEToggle<cr>
     nmap <leader>alegd :ALEGoToDefinition<cr>
     nmap <leader>alefr :ALEFindReferences<cr>
+    nmap <leader>aled :ALEDetail<cr>
 
     " Ale does the linting
     " Error and warning signs.

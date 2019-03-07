@@ -10,16 +10,6 @@
 
 "    🧞 krry
 
-" vim-plug autoconfig if not already installed
-    if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
-      silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-      augroup vimplugger
-          autocmd!
-          autocmd VimEnter * PlugInstall --sync | nested source $MYVIMRC
-      augroup END
-    endif
-
 " Setup
     scriptencoding utf-8
     set background=dark                   " for colorschemes
@@ -43,6 +33,7 @@
 
 " Git / Versioning
     Plug 'tpope/vim-fugitive'          " git slicker
+    Plug 'tpope/vim-rhubarb'           " hub to fugitive's git
     Plug 'airblade/vim-gitgutter'      " mark lines with changes
     Plug 'Xuyuanp/nerdtree-git-plugin' " NERDtree shows git statuses
 
@@ -52,10 +43,12 @@
     Plug 'vim-scripts/mru.vim'         " Most Recently Used files viewer
     Plug 'bogado/file-line'            " Jump to a line in a file!
     Plug 'mhinz/vim-startify'          " start screen
+    Plug 'justinmk/vim-gtfo'           " got or gof :: terminal or finder
+    Plug 'justinmk/vim-sneak'          " two letter leaps around the text
     Plug 'farmergreg/vim-lastplace'    " return to the last place
-    Plug 'xolox/vim-misc'              " supports vim-session
-    Plug 'tpope/vim-obsession'             " slicker sessions
-    Plug 'vimwiki/vimwiki'             " linkable, publishable notes
+    Plug 'xolox/vim-misc'              " supports easyclip and vim-session
+    Plug 'xolox/vim-session'           " better sessions?
+    Plug 'vimwiki/vimwiki', {'branch': 'dev'} " linkable, publishable notes
 
 " Language / syntax
     Plug 'w0rp/ale'                      " asynchronous lint engine

@@ -38,8 +38,8 @@
     call denite#custom#map('normal', 'dw', '<denite:delete_word_after_caret>',
           \'noremap')
 
-    nnoremap <C-p> :<C-u>Denite file_rec<CR>
-    "nnoremap <leader>db :<C-u>Denite buffer<CR>
+    nnoremap <leader>de :<C-u>Denite file_rec<CR>
+    nnoremap <leader>db :<C-u>Denite buffer<CR>
     nnoremap <leader>dbd :<C-u>DeniteBufferDir buffer<CR>
     nnoremap <leader>d* :<C-u>DeniteCursorWord grep:. -mode=normal<CR>
     nnoremap <leader>dg :<C-u>Denite grep:. -mode=normal<CR>

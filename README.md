@@ -5,69 +5,70 @@
 Who doesn't love a good one-liner?
 
 ``` sh
-cd ~ && bash -c "$(curl -fsSL https://raw.githubusercontent.com/krry/dot/master/dot.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/krry/dot/master/dot.sh)"
 ```
 
 ---
 ## Usage
 
-Intended for OS X.
-This will turn a pristine machine into a glorybound CLI hound.
+Dot will turn a pristine machine into a glorybound CLI megazord.
+Initially for Mac. Coming soon for other distros.
+Your dot files will be backed up and datestamped.
 
-## Features
+## Dependencies
+
+- [Bourne Again Shell](https://www.gnu.org/software/bash/)
+- *nix, as new as possible
+
+## The Stack
 
 Here are the mainstays:
 
-- Neovim with all the bells and whistles (see [Plugins](#plugins))
-- Tmux nicely configured via [.tmux](https://github.com/krry/.tmux).
-- Fish in all its fishy glory.
-- iTerm2 with a few minor customizations.
-- Homebrew will do the early work.
+- [Neovim](https://neovim.io/) with all the bells and whistles (see [Plugins](#plugins))
+- [Tmux](https://github.com/tmux/tmux) via a slightly forked [.tmux](https://github.com/krry/.tmux).
+- [Fish](https://fishshell.com/) in all its 90s fishy glory.
+- [iTerm2](https://www.iterm2.com/) with Powerline fonts
 
 Getting Tmux, Neovim, Fish, and iTerm to play nice can be challenging,
 so I've unified some of the *key* bindings for analogous functions.
 
+## Features and Plugins
+
+#### N.B.
 - vim `<leader>` is `<space>`
 - tmux `<prefix>` is `<C-a>`
 
 ### Painless Panes
 
-- seamlessly nav to vim windows or tmux panes (<C-h>/<C-j>/<C-k>/<C-l>)
-- horizontal split with `<leader>s` or `<prefix>s`
-- vertical split with `<leader>v` or `<prefix>v`
+- Seamlessly nav to vim windows or tmux panes (<C-h>/<C-j>/<C-k>/<C-l>)
+- Horizontal splits with `<leader>s` or `<prefix>s`
+- Vertical splits with `<leader>v` or `<prefix>v`
 
 ### Copy/Paste
 
-- universal clipboard among vim, tmux, and system (OSX)
-- vim easyclip
-  - copy: y to yank, yy to yank line, Y to copy to line end
-  - cut: m to move, mm to move line, ...
-  - delete: d to delete, dd to delete line, D to delete to line end
-  - paste: p to put, P to put line
+- Universal clipboard/register among vim, tmux, and system (OSX)
+- [Easyclip](https://github.com/svermeulen/vim-easyclip)
 
-### Papercolor
+### Ridiculously Good Looking
 
-- a lovely medium contrast colorscheme applied everywhere
-
-### Opinions!
-
-They are underdeveloped, like a disappointing Polaroid. But they are right
-there in your face anyway, just like anyone else's.
-
-## Plugins
+- [Papercolor](https://github.com/NLKNguyen/papercolor-theme) - uniform, medium contrast, highly semantic/syntactic highlighting, colorscheming, and theming every which wizzle
+- [Fantasque](https://github.com/belluzj/fantasque-sans) - a Powerline-enabled comic (sans) relief typeface there's a stack of other [Powerline fonts](https://github.com/powerline/fonts) fonts too: Hack, Inconsolata, Fira, Source Code, Meslo, Roboto, Nova, Noto, etc.
 
 ### Dark Power
 
 Under the hood, it's jam-packed with the latest wizardry from Shougo.
-TBH I've only just begun to understand how to rev these babies up.
-But Denite will find just about anything in a flash,
-and Deoplete is always telling me what to type.
+[Denite](https://github.com/Shougo/denite.nvim) will find just about anything
+in a flash, and [Deoplete](https://github.com/Shougo/deoplete.nvim) is always
+telling me what to type.
 
-### Does tpope shit in the woods?
+### Take a ride in the tpopemobile
 
-I wouldn't know. But he does make Vimming a lot slicker. Thanks to him we've
-got easier comments, sessions, gitting, repeating, and surrounding. Bless you
-sir!
+Easier (but unobstrusive)
+[commenting](https://github.com/tpope/vim-commentary),
+[sessions](https://github.com/tpope/vim-obsession),
+[gitting](https://github.com/tpope/vim-fugitive),
+[repeating](https://github.com/tpope/vim-repeat), and
+[surrounding](https://github.com/tpope/vim-surround).
 
 ### Vim-plug
 
