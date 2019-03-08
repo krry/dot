@@ -54,14 +54,17 @@ As the fella says, "A JSON library downloaded by 10,000 users, with 3,000 closed
 ### Ridiculously Good Looking
 
 - [Papercolor](https://github.com/NLKNguyen/papercolor-theme) - uniform, medium contrast, highly semantic/syntactic highlighting, colorscheming, and theming every which wizzle
-- [Fantasque](https://github.com/belluzj/fantasque-sans) - a Powerline-enabled comic (sans) relief typeface there's a stack of other [Powerline fonts](https://github.com/powerline/fonts) fonts too: Hack, Inconsolata, Fira, Source Code, Meslo, Roboto, Nova, Noto, etc.
+  - tmux papercolor'd
+  - iterm papercolor'd
+  - I like dark mode
+- [Fantasque](https://github.com/belluzj/fantasque-sans) - a Powerline-enabled comic (sans) relief typeface
+- there's a stack of other [Powerline fonts](https://github.com/powerline/fonts) fonts too: Hack, Inconsolata, Fira, Source Code, Meslo, Roboto, Nova, Noto, etc.
 
 ### Dark Power
 
-Under the hood, it's jam-packed with the latest wizardry from Shougo.
-[Denite](https://github.com/Shougo/denite.nvim) will find just about anything
-in a flash, and [Deoplete](https://github.com/Shougo/deoplete.nvim) is always
-telling me what to type.
+Under the hood, it's jam-packed with the latest wizardry from Shougo.\
+[Denite](https://github.com/Shougo/denite.nvim) will find just about anything in a flash, and \
+[Deoplete](https://github.com/Shougo/deoplete.nvim) is always telling me what to type.
 
 ### tpopemobile
 
