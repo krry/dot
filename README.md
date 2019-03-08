@@ -24,7 +24,7 @@ Your dot files will be backed up and datestamped.
 
 Here are the mainstays:
 
-- [Neovim](https://neovim.io/) with all the bells and whistles (see [Plugins](#plugins))
+- [Neovim](https://neovim.io/) with all the [bells and whistles](#bells-and-whistles).
 - [Tmux](https://github.com/tmux/tmux) via a slightly forked [.tmux](https://github.com/krry/.tmux).
 - [Fish](https://fishshell.com/) in all its 90s fishy glory.
 - [iTerm2](https://www.iterm2.com/) with Powerline fonts
@@ -32,7 +32,9 @@ Here are the mainstays:
 Getting Tmux, Neovim, Fish, and iTerm to play nice can be challenging,
 so I've unified some of the *key* bindings for analogous functions.
 
-## Features and Plugins
+## Bells and Whistles
+
+As the fella says, "A JSON library downloaded by 10,000 users, with 3,000 closed issues, and over a 100 unit tests is typically far more robust than the average homegrown JSON library." So we use plugins instead of hand-rolls, for the most part. And we read the docs.
 
 #### N.B.
 - vim `<leader>` is `<space>`
@@ -61,11 +63,10 @@ Under the hood, it's jam-packed with the latest wizardry from Shougo.
 in a flash, and [Deoplete](https://github.com/Shougo/deoplete.nvim) is always
 telling me what to type.
 
-### Take a ride in the tpopemobile
+### tpopemobile
 
 Easier (but unobstrusive)
 [commenting](https://github.com/tpope/vim-commentary),
-[sessions](https://github.com/tpope/vim-obsession),
 [gitting](https://github.com/tpope/vim-fugitive),
 [repeating](https://github.com/tpope/vim-repeat), and
 [surrounding](https://github.com/tpope/vim-surround).
