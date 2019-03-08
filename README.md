@@ -1,4 +1,4 @@
-# dotfiles
+# .dot
 
 ## Installation
 
@@ -11,8 +11,8 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/krry/dot/master/dot.sh)"
 ---
 ## Usage
 
-Dot will turn a pristine machine into a glorybound CLI megazord.
-Initially for Mac. Coming soon for other distros.
+Dot will turn a pristine machine into a glorybound CLI megazord.\
+Initially for Mac. Coming soon for other distros.\
 Your dot files will be backed up and datestamped.
 
 ## Dependencies
@@ -29,7 +29,7 @@ Here are the mainstays:
 - [Fish](https://fishshell.com/) in all its 90s fishy glory.
 - [iTerm2](https://www.iterm2.com/) with Powerline fonts
 
-Getting Tmux, Neovim, Fish, and iTerm to play nice can be challenging,
+Getting Tmux, Neovim, Fish, and iTerm to play nice can be challenging,\
 so I've unified some of the *key* bindings for analogous functions.
 
 ## Bells and Whistles
@@ -42,7 +42,7 @@ As the fella says, "A JSON library downloaded by 10,000 users, with 3,000 closed
 
 ### Painless Panes
 
-- Seamlessly nav to vim windows or tmux panes (<C-h>/<C-j>/<C-k>/<C-l>)
+- Seamlessly nav to vim windows or tmux panes (`<C-h>`/`<C-j>`/`<C-k>`/`<C-l>`)
 - Horizontal splits with `<leader>s` or `<prefix>s`
 - Vertical splits with `<leader>v` or `<prefix>v`
 
@@ -65,13 +65,13 @@ telling me what to type.
 
 ### tpopemobile
 
-Easier (but unobstrusive)
-[commenting](https://github.com/tpope/vim-commentary),
-[gitting](https://github.com/tpope/vim-fugitive),
-[repeating](https://github.com/tpope/vim-repeat), and
+Easier (but unobstrusive)\
+[commenting](https://github.com/tpope/vim-commentary),\
+[gitting](https://github.com/tpope/vim-fugitive),\
+[repeating](https://github.com/tpope/vim-repeat), and\
 [surrounding](https://github.com/tpope/vim-surround).
 
 ### Vim-plug
 
-After toying with Vundle a bit, I came running back to junegunn's vim-plug to
+After toying with Vundle a bit, I came running back to junegunn's vim-plug to\
 manage all these goodies. Handles a lot flawlessly without a peep.
