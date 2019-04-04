@@ -1,3 +1,3 @@
-function cdot
+function dot
 	cd ~/.dot
 end

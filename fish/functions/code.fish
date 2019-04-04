@@ -1,3 +1,3 @@
-function ccode
+function code
 	cd ~/Drive/Code
 end

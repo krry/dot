@@ -1,3 +1,3 @@
 function cdgo
-	cd ~/.go/src/github.com/krry/
+	cd ~/go
 end
