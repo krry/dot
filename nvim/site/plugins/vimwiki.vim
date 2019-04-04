@@ -13,5 +13,8 @@
 
     let g:vimwiki_list = [wiki]
 
-    let wiki.nested_syntaxes = {'rust': 'rust'}
+    let wiki.nested_syntaxes = {
+        \ 'rust': 'rust',
+        \ 'go': 'go'
+        \}
 

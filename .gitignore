@@ -3,3 +3,4 @@ vim.symlink/bundle/
 .netrwhist
 plug.vim
 .nvimlog
+.tags

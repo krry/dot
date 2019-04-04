@@ -4,6 +4,7 @@
 " |_/  |___  \_/  |\/| |__| |__]
 " | \_ |___   |   |  | |  | |
 "
+    nnoremap <leader>ut :MundoToggle<CR>
 " Elect a new <leader>
     let mapleader = ' '
 
@@ -23,10 +24,9 @@
     nnoremap <leader>pc :PlugClean<cr>
 
 " Save and quit quickly
-    nnoremap <leader>w :w<cr>
-    nnoremap <leader>q :q<cr>
-    nnoremap <leader>wq :wq<cr>
     inoremap <C-s> <esc>:w<cr>
+    nnoremap <C-s> <esc>:w<cr>
+    nnoremap <C-q> <esc>:q<cr>
 
 " Change directory to here
     nmap <leader>cwd :lcd %:p:h<cr>
@@ -56,10 +56,15 @@
     map zl zL
     map zh zH
 
+" End of the line, jump
+    noremap H ^
+    noremap L g_
+    noremap ^ H
+    noremap $ L
+
 " make a new line above or below w/o insert mode
-    nnoremap <BS> O<esc>
-    nnoremap <CR> o<esc>
-    nnoremap <CR><CR> O<esc>jo<esc>k
+    nmap <BS> O<esc>
+    nmap <CR> o<esc>
 
 " Metamover moves lines around with <M-h/j/k/l>
 " also maps these movements to the symbols they produce (˙∆˚¬ = hjkl)
@@ -101,8 +106,8 @@
     noremap <C-k> <C-w>k
     noremap <C-l> <C-w>l
     " easy, empty splits
-    noremap <C-v> :vs e<CR>
-    noremap <C-s> :sp e<CR>
+    noremap <leader>v :vs e<CR>
+    noremap <leader>s :sp e<CR>
 
 " indent without leaving VISUAL mode
     vnoremap < <gv
@@ -118,12 +123,6 @@
 
 " Yank to the end of the line like C and D
     nnoremap Y y$
-
-" Preserve mark making, while using `m` to move with vim-easyclip
-    nnoremap gm m
-
-" Skip Ex Mode and format with Q
-    map Q gq
 
 " ___ ____ ____ _  _ _ _  _ ____ _
 "  |  |___ |__/ |\/| | |\ | |__| |

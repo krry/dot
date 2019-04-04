@@ -16,10 +16,6 @@
     let g:ale_sign_error = 'X'
     let g:ale_sign_warning = '?'
     let g:ale_sign_info = 'i'
-    " let g:ale_linters = {'html': ['jshint', 'hugo']}
-    " let g:ale_linters = {'javascript': ['eslint']}
-    " let g:ale_linters = {'javascript': []}
-    " let g:ale_linters = {'c': 'all'}
     "
     " enable all linters for the filetype
     " let b:ale_linters = 'all'
@@ -28,28 +24,48 @@
         \}
 
     let g:ale_linters = {
-        \ 'go':  ['gofmt'],
+        \ 'go':  'all',
         \ 'python': ['flake8', 'pyls'],
         \ 'rust': ['cargo', 'rls', 'rustfmt'],
         \ 'markdown': ['remark-lint'],
+        \ 'html': ['jshint', 'hugo'],
+        \ 'json': ['hugo'],
+        \ 'css': ['stylelint'],
+        \ 'scss': ['stylelint'],
+        \ 'stylus': ['stylint'],
+        \ 'vue': ['vls'],
+        \ 'javascript': ['eslint']
         \ }
-    " let g:ale_linters = {'c': 'all'}
-    " let g:airline#extensio=column_color = 1
     " highlight ALESignColumnWithErrors ctermbg=176 ctermfg=16
     " highlight ALESignColumnWithoutErrors ctermbg=176 ctermfg=16
 
     let g:ale_list_vertical = 0             " open loclist/quickfix vertically
     let g:ale_echo_cursor = 1               " echo error when cursed (default 1)
-    let g:ale_lint_delay = 250              " default 200
+    let g:ale_lint_delay = 450              " default 200
+    let g:ale_sign_column_always = 1
     let g:ale_set_quickfix = 1
     let g:ale_cursor_detail = 0             " show preview window when cursed
     let g:ale_close_preview_on_insert = 1   " close preview when ya fix it
     " let g:ale_completion_enabled = 1        " may overlap with deoplete
 
     " to lint JSX and embedded styles and scripts
-    let g:ale_linter_aliases = {'html': ['html', 'javascript', 'css']}
+    " let g:ale_linter_aliases = {'html': ['html', 'javascript', 'css']}
+    " let g:ale_linter_aliases = {'html': ['json', 'html', 'javascript', 'css']}
 
     " let g:ale_fixers = {'python': ['bar'], 'html': [], '*': ['foo']}
+    let g:ale_fixers = {
+    \   'json': [
+    \       'jq',
+    \       'fixjson',
+    \   ],
+    \   'css': [
+    \       'stylelint',
+    \   ],
+    \   'javascript': [
+    \       'prettier',
+    \       'prettier-eslint'
+    \   ],
+    \}
     " let g:ale_fix_on_save = 1
     " let g:ale_completion_delay = 100                  " default 100
     " let g:ale_completion_max_suggestions = 100        " default 50

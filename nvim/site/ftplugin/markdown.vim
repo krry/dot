@@ -5,30 +5,26 @@
 " 88  88  88 88   88 88 `88. 88 `88. 88  .8D `8b  d8' `8b d8'8b d8' 88  V888
 " YP  YP  YP YP   YP 88   YD YP   YD Y8888D'  `Y88P'   `8b8' `8d8'  VP   V8P
 
-function! Markdowner()
-    setl textwidth=78
-    setl formatoptions+=t
-    setl wrapmargin=0
-    setl nolist
-    setl conceallevel=0
-    setl foldmethod=marker
+augroup markdowners
+    autocmd!
+    autocmd BufRead,BufNewFile *.{md,markdown,txt} setf markdown
+
     " code blocks for markdown
     inoremap <buffer><silent> ~~~ ~~~<Enter>~~~<C-o>k<C-o>A
     inoremap <buffer><silent> ``` ```<Enter>```<C-o>k<C-o>A
-    nnoremap <M-m> :MarkdownPreview<cr>
-    let b:vim_markdown_folding_disabled = 1
-endfunction
 
-augroup markdowners
-    autocmd BufRead,BufNewFile *.{md,markdown,txt} setf markdown
-    autocmd filetype markdown filetype plugin indent off
-    autocmd filetype markdown call Markdowner()
+    nnoremap <buffer> <M-m> :MarkdownPreview<CR>
+
+    setlocal textwidth=78
+    setlocal formatoptions+=t
+    setlocal wrapmargin=2
+    setlocal nolist
+    setlocal conceallevel=0
+
 augroup END
-augroup vimrc_autocmds
-  autocmd BufEnter * highlight OverLength ctermbg=52 guibg=#592929
-  autocmd BufEnter * match OverLength /\%78v.*/
-augroup END
+
 " disable folding by default
+let b:vim_markdown_folding_disabled = 1
 " what gets highlit within fences
 let g:vim_markdown_fenced_languages = ['html', 'python', 'bash=sh', 'rust', 'go', 'js', 'css']
 " enable strikethrough

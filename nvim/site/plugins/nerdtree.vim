@@ -3,11 +3,11 @@
 " | \| |___ |  \ |__/  |  |  \ |___ |___
 
     " NERDTree makes navigating the filesystem a treat.
-    nmap <leader>t :NERDTreeToggle<CR>
-    nmap <leader>f :NERDTreeFind<CR>
+
+    nnoremap <leader>t :NERDTreeFind<CR>
 
     let g:NERDTreeDirArrowExpandable = '▸'
-    let g:NERDTreeDirArrowCollapsible = '▾'
+    let g:NERDTreeDirArrowCollpsible = '▾'
     let g:NERDTreeQuitOnOpen = 1
     let g:NERDTreeAutoDeleteBuffer = 1
     let g:NERDTreeMinimalUI = 1

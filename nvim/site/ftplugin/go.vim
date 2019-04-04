@@ -22,3 +22,6 @@ let g:go_auto_sameids = 1
 let g:go_fmt_command = 'goimports'
 
 let g:go_snippet_engine = 'neosnippet'
+
+" not recommended to use omnifunc for golang in deoplete because not async
+let g:deoplete#sources#go#gocode_binary = '/Users/alan/go/bin/gocode'
