@@ -12,3 +12,14 @@ augroup finalcountdown
     "nmap - :Lexplore<cr>
     nmap - :NERDTreeToggle<cr>
 augroup END
+
+function! s:TightenDents()
+  setl tabstop=2
+  setl shiftwidth=2
+  setl softtabstop=2
+endfunction
+
+augroup tightones
+    autocmd!
+    autocmd FileType {css,html,vue,javascript.jsx,json} call s:TightenDents()
+augroup END

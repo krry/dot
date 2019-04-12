@@ -14,10 +14,13 @@ end
 " \ .:cursorline,o:colorcolumn,q:quickfixline,0:whitespace,i:normalnc
 
 " 50 colorschemes
+" available:
+    " gruvbox
+    " PaperColor
 colorscheme PaperColor
 set colorcolumn=80
-" overriding styles
 
+" overriding styles wrapped in an autocmd so it runs after colorscheme load
 augroup Colorers
     autocmd!
     autocmd BufEnter * exe "hi! OverLength ctermbg=".(&bg=='light'?'203':'124')." guibg=".(&bg=='light'?'#ff9999':'#592929')

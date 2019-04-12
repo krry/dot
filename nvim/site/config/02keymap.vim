@@ -1,16 +1,20 @@
-"
-"
 " _  _ ____ _   _ _  _ ____ ___
 " |_/  |___  \_/  |\/| |__| |__]
 " | \_ |___   |   |  | |  | |
 "
-    nnoremap <leader>ut :MundoToggle<CR>
 " Elect a new <leader>
     let mapleader = ' '
+    noremap <space> <nop>
 
-" Get a semi, save a pinky
+" Get a semi, save a pinky for Ex mode
 " https://nvie.com/posts/how-i-boosted-my-vim/
     nnoremap ; :
+
+" fire off a quick S&R
+    nnoremap :: :%s:::g<Left><Left><Left>
+    nnoremap :' :%s:::cg<Left><Left><Left><Left>
+" add a pattern group to your search more easily
+    cmap ;\ \(\)<Left><Left>
 
 " Edit .vimrc
     nnoremap <leader>ec :e ~/.dot/vimrc.symlink<cr>
@@ -24,9 +28,9 @@
     nnoremap <leader>pc :PlugClean<cr>
 
 " Save and quit quickly
-    inoremap <C-s> <esc>:w<cr>
-    nnoremap <C-s> <esc>:w<cr>
-    nnoremap <C-q> <esc>:q<cr>
+    nnoremap <silent> <C-s> :w<cr>
+    inoremap <silent> <C-s> <esc>:w<cr>
+    nnoremap <silent> <C-q> <esc>:q<cr>
 
 " Change directory to here
     nmap <leader>cwd :lcd %:p:h<cr>
@@ -38,6 +42,16 @@
     " nmap <Tab> :tabnext<cr>
     " nmap <C-Tab> :tabclose<cr>
     " nmap <S-Tab> :tabprevious<cr>
+
+" preview file under the cursor
+    xnoremap <silent> <Leader>gf y:pedit <C-r><C-r>"<cr>
+    nnoremap <silent> <Leader>gf :pedit <C-r><C-f><cr>
+
+" sets cursor word to last search
+    nnoremap <silent> c<Tab> :let @/=expand('<cword>')<cr>cgn
+
+" toggle Mundo
+    nnoremap <leader>ut :MundoToggle<CR>
 
 " EasyAlign horizontal whitespace
     vnoremap <silent> <leader>ea :EasyAlign<cr>
@@ -124,6 +138,12 @@
 " Yank to the end of the line like C and D
     nnoremap Y y$
 
+" duplicate line
+    nmap <C-d> mzyyp`z
+
+" selects the last changed text (often pasted)
+    onoremap <expr> il ':<C-u>norm! `['.strpart(getregtype(), 0, 1).'`]<cr>'
+
 " ___ ____ ____ _  _ _ _  _ ____ _
 "  |  |___ |__/ |\/| | |\ | |__| |
 "  |  |___ |  \ |  | | | \| |  | |___
@@ -139,7 +159,6 @@ inoremap <C-h> <C-\><C-N><C-w>h
 inoremap <C-j> <C-\><C-N><C-w>j
 inoremap <C-k> <C-\><C-N><C-w>k
 inoremap <C-l> <C-\><C-N><C-w>l
-
 
 
 scriptencoding utf-8

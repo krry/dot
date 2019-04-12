@@ -12,13 +12,29 @@ set cmdheight=2
 set updatetime=300
 set signcolumn=yes
 
-" Use tab for trigger completion with characters ahead and navigate.
-" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+" Tab triggers completion popup and cycles through choices
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
+" Shift-tab cycles backward
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+" Enter confirms completion and applies snippets
+inoremap <expr><CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+    " `<C-g>u` breaks undo chain at cursor
+
+" jk to back out of completion popup
+inoremap <expr> jk pumvisible() ? "<C-e>" : "<Esc>"
+
+" use <c-space>for trigger completion
+imap <expr><c-space> coc#refresh()
+
+" Use <C-l> to trigger snippet expand.
+imap <C-l> <Plug>(coc-snippets-expand)
+
+" Use <C-j> to select text for visual text of snippet.
+vmap <C-j> <Plug>(coc-snippets-select)
 
 function! s:check_back_space() abort
     let col = col('.') - 1
@@ -31,50 +47,36 @@ command! -nargs=0 Format :call CocAction('format')
 command! -nargs=? Fold :call CocAction('fold', <f-args>)
 " call pretter on this buffer
 command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
-
-" use <c-space>for trigger completion
-imap <expr><c-space> coc#refresh()
-
-" Use <cr> for confirm completion, `<C-g>u` means break undo chain at current position.
-" Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-
-" Use <C-l> to trigger snippet expand.
-imap <C-l> <Plug>(coc-snippets-expand)
-
-" Use <C-j> to select text for visual text of snippet.
-vmap <C-j> <Plug>(coc-snippets-select)
-
+nnoremap <silent> <leader>pr :Prettier<cr>
+"
 " CocMaps
 " ask for more Coc
-nnoremap <silent><leader>ci :CocInstall
-
+nnoremap <leader>ci :CocInstall
 " config yr Coc
-nnoremap <silent><leader>cc :CocConfig<CR>
-
+nnoremap <leader>cc :CocConfig<CR>
 " Coc control!
-nnoremap <silent><leader>cl :CocList<CR>
-
+nnoremap <leader>cl :CocList<CR>
 " Show diagnostic message of current position, no truncate.
-nnoremap <silent><leader>cdi <Plug>(coc-diagnostic-info)
+nnoremap <leader>cdi <Plug>(coc-diagnostic-info)
+" Jump to declaration(s) of current symbol.
+nnoremap <leader>cdc <Plug>(coc-declaration)
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
 
 " Jump to next diagnostic position.
-nnoremap <silent> ]c <Plug>(coc-diagnostic-next)
-
+nnoremap ]c <Plug>(coc-diagnostic-next)
 " Jump to previous diagnostic position.
-nnoremap <silent> [c <Plug>(coc-diagnostic-prev)
-
+nnoremap [c <Plug>(coc-diagnostic-prev)
 " Jump to definition(s) of current symbol.
-nnoremap <silent> gd <Plug>(coc-definition)
+nnoremap gd <Plug>(coc-definition)
 " Jump to type definition(s) of current symbol.
-nnoremap <silent> gy <Plug>(coc-type-definition)
+nnoremap gy <Plug>(coc-type-definition)
 " Jump to implementation(s) of current symbol.
-nnoremap <silent> gi <Plug>(coc-implementation)
+nnoremap gi <Plug>(coc-implementation)
 " Jump to references of current symbol.
-nnoremap <silent> gr <Plug>(coc-references)
-
+nnoremap gr <Plug>(coc-references)
 " summon the doc
-nnoremap <silent><leader>K :call <SID>show_doc()<CR>
+nnoremap K :call <SID>show_doc()<CR>
 
 " Show doc
 function! s:show_doc()
@@ -84,12 +86,6 @@ function! s:show_doc()
         call CocAction('doHover')
     endif
 endfunction
-
-" Jump to declaration(s) of current symbol.
-nnoremap <silent><leader>cdc <Plug>(coc-declaration)
-
-" Remap for rename current word
-nmap <leader>rn <Plug>(coc-rename)
 
 " Remap for format selected region
 vmap <leader>f  <Plug>(coc-format-selected)

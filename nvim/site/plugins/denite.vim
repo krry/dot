@@ -38,7 +38,7 @@
     call denite#custom#var('grep/rg', 'command', ['rg'])
     call denite#custom#var('grep/rg', 'default_opts',
                 \ ['--mmap', '--threads=12', '--hidden', '--smart-case',
-                \ '--vimgrep', '--no-ignore-vcs', '--no-heading',
+                \ '--vimgrep', '--no-heading',
                 \ '--glob=!.git', '--glob=!node_modules'])
     call denite#custom#var('grep/rg', 'recursive_opts', [])
     call denite#custom#var('grep/rg', 'pattern_opt', ['--regexp'])
@@ -55,18 +55,21 @@
     call denite#custom#alias('source', 'line/rg', 'line')
 
     " map it easy
+    " seal it with a carriage return
     call denite#custom#map('insert', '<CR>',
-                \ '<denite:do_action:default>', 'noremap')
+    \ '<denite:do_action:default>', 'noremap')
+    " easier than <C-o> which I forget
     call denite#custom#map('insert', '<Esc>',
-                \ '<denite:enter_mode:normal>', 'noremap')
+    \ '<denite:enter_mode:normal>', 'noremap')
+    " which matches custom NERDTree behavior
     call denite#custom#map('insert', '<C-v>',
-                \ '<denite:multiple_mappings:denite:do_action:vsplit>', 'noremap')
+    \ '<denite:multiple_mappings:denite:do_action:vsplit>', 'noremap')
     call denite#custom#map('insert', '<C-s>',
-                \ '<denite:multiple_mappings:denite:do_action:split>', 'noremap')
+    \ '<denite:multiple_mappings:denite:do_action:split>', 'noremap')
     call denite#custom#map('insert', '<Down>',
-                \ '<denite:move_to_next_line>', 'noremap')
+    \ '<denite:move_to_next_line>', 'noremap')
     call denite#custom#map('insert', '<Up>',
-                \ '<denite:move_to_previous_line>', 'noremap')
+    \ '<denite:move_to_previous_line>', 'noremap')
 
     " quickeys for your fave denite dances
     nnoremap <leader>ds :Denite source<cr>
@@ -79,7 +82,7 @@
     " only search the buffers
     nnoremap <leader>db :<C-u>Denite buffer<CR>
     " this kicks asterisk
-    nnoremap <leader>d* :<C-u>DeniteCursorWord<CR>
+    nnoremap <leader>d* :<C-u>DeniteCursorWord grep:.<CR>
     " in case you've jump to a distant filetree
     nnoremap <leader>dbf :<C-u>DeniteBufferDir file/rec<CR>
     nnoremap <leader>dbg :<C-u>DeniteBufferDir grep<CR>

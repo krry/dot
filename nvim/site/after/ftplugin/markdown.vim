@@ -8,20 +8,19 @@
 augroup markdowners
     autocmd!
     autocmd BufRead,BufNewFile *.{md,markdown,txt} setf markdown
-
-    " code blocks for markdown
-    inoremap <buffer><silent> ~~~ ~~~<Enter>~~~<C-o>k<C-o>A
-    inoremap <buffer><silent> ``` ```<Enter>```<C-o>k<C-o>A
-
-    nnoremap <buffer> <M-m> :MarkdownPreview<CR>
-
-    setlocal textwidth=78
-    setlocal formatoptions+=t
-    setlocal wrapmargin=2
-    setlocal nolist
-    setlocal conceallevel=0
-
 augroup END
+
+" code blocks for markdown
+inoremap <buffer><silent> ~~~ ~~~<Enter>~~~<C-o>k<C-o>A
+inoremap <buffer><silent> ``` ```<Enter>```<C-o>k<C-o>A
+
+nnoremap <buffer> <M-m> :MarkdownPreview<CR>
+
+setlocal textwidth=78
+setlocal formatoptions+=t
+setlocal wrapmargin=2
+setlocal nolist
+setlocal conceallevel=0
 
 " disable folding by default
 let b:vim_markdown_folding_disabled = 1

@@ -1,8 +1,3 @@
-augroup helpers
-    autocmd!
-    autocmd Filetype help call NavigateHelp()
-augroup END
-
 function! NavigateHelp()
     nnoremap <buffer> <CR> <C-]>
     nnoremap <buffer> <BS> <C-T>
@@ -11,3 +6,8 @@ function! NavigateHelp()
     nnoremap <buffer> s /\|\zs\S\+\ze\|<CR>
     nnoremap <buffer> S ?\|\zs\S\+\ze\|<CR>
 endfunction
+
+augroup helpers
+    autocmd!
+    autocmd Filetype help :call NavigateHelp()
+augroup END

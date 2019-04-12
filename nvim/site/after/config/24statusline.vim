@@ -13,14 +13,16 @@ endfunction
 function! Statusline() abort
     let l:line=''
     let l:line.='%#Comment#%5.c '
-    let l:line.='%#Debug#%{coc#status()}%*'
-    " let l:line.='%#Debug#%{LinterStatus()}%*'
-    let l:line.='%#Debug#%{gutentags#statusline()}%*'
+    let l:line.='%*%#CursorLine# %#Debug# %{coc#status()} %*'
+    let l:line.='%*%#CursorLine# %#Debug# %{LinterStatus()} %*'
+    let l:line.='%*%#CursorLine# %#Debug# %{gutentags#statusline()} %*'
     let l:line.='%#CursorLine#%<'
     let l:line.='%='
     let l:line.='%10.50f'
     let l:line.='%( [%M%R%H]%)'
     let l:line.='%='
+    let l:line.='%#title# %Y %*'
+    let l:line.='%#CursorLine# %*'
     let l:line.='%#agitHead# %{fugitive#head()} '
     return l:line
 endfunction

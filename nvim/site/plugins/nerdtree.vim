@@ -5,13 +5,20 @@
     " NERDTree makes navigating the filesystem a treat.
 
     nnoremap <leader>t :NERDTreeFind<CR>
+    " nnoremap <C-s> :NERDTreeMapOpenSplit<CR>
+    " nnoremap <C-v> :NERDTreeMapOpenVSplit<CR>
 
-    let g:NERDTreeDirArrowExpandable = '▸'
-    let g:NERDTreeDirArrowCollpsible = '▾'
+    let g:NERDTreeDirArrowExpandable = '⚀'
+    let g:NERDTreeDirArrowCollapsible = '␣'
     let g:NERDTreeQuitOnOpen = 1
     let g:NERDTreeAutoDeleteBuffer = 1
     let g:NERDTreeMinimalUI = 1
+    let g:NERDTreeMinimalMenu = 1
+
     let g:NERDTreeDirArrows = 1
+    let g:NERDTreeHijackNetrw = 1
+    let g:NERDTreeRemoveFileCmd = 'trash '
+    let g:NERDTreeRemoveDirCmd = 'trash '
 
     augroup nerdtree
         autocmd!

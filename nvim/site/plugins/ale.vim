@@ -13,7 +13,7 @@
 
     " Ale does the linting
     " Error and warning signs.
-    let g:ale_sign_error = 'X'
+    let g:ale_sign_error = '•'
     let g:ale_sign_warning = '?'
     let g:ale_sign_info = 'i'
     "
@@ -21,7 +21,7 @@
     " let b:ale_linters = 'all'
     let g:ale_linters_ignore = {
         \ 'python': ['pylint'],
-        \}
+        \ }
 
     let g:ale_linters = {
         \ 'go':  'all',
@@ -29,7 +29,7 @@
         \ 'rust': ['cargo', 'rls', 'rustfmt'],
         \ 'markdown': ['remark-lint'],
         \ 'html': ['jshint', 'hugo'],
-        \ 'json': ['hugo'],
+        \ 'json': ['jsonlint'],
         \ 'css': ['stylelint'],
         \ 'scss': ['stylelint'],
         \ 'stylus': ['stylint'],
@@ -42,6 +42,7 @@
     let g:ale_list_vertical = 0             " open loclist/quickfix vertically
     let g:ale_echo_cursor = 1               " echo error when cursed (default 1)
     let g:ale_lint_delay = 450              " default 200
+    let g:ale_lint_on_enter = 0             " less distracting at first buff
     let g:ale_sign_column_always = 1
     let g:ale_set_quickfix = 1
     let g:ale_cursor_detail = 0             " show preview window when cursed

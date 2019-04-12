@@ -23,15 +23,8 @@ scriptencoding utf-8
     endfunction
 
 " Load ALL THE PLUGINS!!!
-    call SourceIfExists('~/.local/share/nvim/site/config/bundles.vim')
-    " in the proper order to overwrite with more specific settings
-    call SourceIfExists('~/.local/share/nvim/site/config/default.vim')
-    call SourceIfExists('~/.local/share/nvim/site/config/keymap.vim')
-    call SourceIfExists('~/.local/share/nvim/site/config/autocmd.vim')
-    call SourceIfExists('~/.local/share/nvim/site/config/abbrev.vim')
-    call SourceIfExists('~/.local/share/nvim/site/config/number.vim')
-    call SourceIfExists('~/.local/share/nvim/site/config/statusline.vim')
+    call SourceDirectory('~/.local/share/nvim/site/config')
     call SourceDirectory('~/.local/share/nvim/site/plugins')
     " these get found automagically
-    call SourceDirectory('~/.local/share/nvim/site/ftplugin')
-    call SourceIfExists('~/.local/share/nvim/site/config/color.vim')
+    call SourceDirectory('~/.local/share/nvim/site/after/config')
+    call SourceDirectory('~/.local/share/nvim/site/after/ftplugin')
