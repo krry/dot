@@ -1,0 +1,6 @@
+extends: /Users/alan/.config/yarn/global/node_modules/stylelint-config-standard
+rules:
+  number-leading-zero: always
+  indentation: 2
+  at-rule-no-unknown: null
+  comment-empty-line-before: null
