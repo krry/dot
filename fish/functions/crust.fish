@@ -1,3 +1,3 @@
-function crusty
+function crust
 	cd ~/Drive/Code/rust/
 end
