@@ -12,7 +12,8 @@ if status --is-interactive
     set PATH $PATH (go env GOROOT)/bin
     set PATH $PATH (go env GOPATH)/bin
     set PATH $PATH $HOME/.cargo/bin
-    kamadhenu
+    set PATH $PATH $HOME/flutter/bin
+    Kamadhenu
 end
 
 # tabtab source for serverless package

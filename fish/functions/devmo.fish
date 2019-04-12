@@ -1,3 +1,3 @@
-function code
+function devmo
 	cd ~/Drive/Code
 end
