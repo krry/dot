@@ -17,6 +17,11 @@ end
 " available:
     " gruvbox
     " PaperColor
+
+if exists('theme') && theme ==# 'light'
+    set background=light
+endif
+
 colorscheme PaperColor
 set colorcolumn=80
 

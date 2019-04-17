@@ -13,6 +13,7 @@ if status --is-interactive
     set PATH $PATH (go env GOPATH)/bin
     set PATH $PATH $HOME/.cargo/bin
     set PATH $PATH $HOME/flutter/bin
+    set IP (ipconfig getifaddr en0)
     Kamadhenu
 end
 
