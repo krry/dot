@@ -12,34 +12,39 @@ set cmdheight=2
 set updatetime=300
 set signcolumn=yes
 
-" Tab triggers completion popup and cycles through choices
+" Tab triggers completion popup and cycles through suggestions/snippets
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? coc#rpc#request('doKeymap', ['snippets-expand-jump','']) :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
+
+    " old version, before snippets like VSCode
+      " \ pumvisible() ? '\<C-n>' :
+      " \ <SID>check_back_space() ? '\<TAB>' :
+      " \ coc#refresh()
+
 " Shift-tab cycles backward
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
+inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 " Enter confirms completion and applies snippets
-inoremap <expr><CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
     " `<C-g>u` breaks undo chain at cursor
-
 " jk to back out of completion popup
 inoremap <expr> jk pumvisible() ? "<C-e>" : "<Esc>"
-
-" use <c-space>for trigger completion
-imap <expr><c-space> coc#refresh()
-
 " Use <C-l> to trigger snippet expand.
 imap <C-l> <Plug>(coc-snippets-expand)
-
 " Use <C-j> to select text for visual text of snippet.
 vmap <C-j> <Plug>(coc-snippets-select)
+" use <c-space>for trigger completion
+imap <expr><c-space> coc#refresh()
 
 function! s:check_back_space() abort
     let col = col('.') - 1
     return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+
+let g:coc_snippet_next = '<Tab>'
+let g:coc_snippet_prev = '<S-Tab>'
 
 " Format whole buffer
 command! -nargs=0 Format :call CocAction('format')
@@ -48,7 +53,7 @@ command! -nargs=? Fold :call CocAction('fold', <f-args>)
 " call pretter on this buffer
 command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 nnoremap <silent> <leader>pr :Prettier<cr>
-"
+
 " CocMaps
 " ask for more Coc
 nnoremap <leader>ci :CocInstall

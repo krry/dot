@@ -32,6 +32,7 @@
         \ 'json': ['jsonlint'],
         \ 'css': ['stylelint'],
         \ 'scss': ['stylelint'],
+        \ 'sass': ['sasslint'],
         \ 'stylus': ['stylint'],
         \ 'vue': ['vls'],
         \ 'javascript': ['eslint']

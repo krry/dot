@@ -18,9 +18,14 @@ end
     " gruvbox
     " PaperColor
 
-if exists('theme') && theme ==# 'light'
-    set background=light
-endif
+" use $THEME env variable if available
+"if $THEME ==# 'light'
+"    execute 'set bg='.$THEME
+"else
+"    set background=dark
+"endif
+
+execute 'set bg='.$THEME
 
 colorscheme PaperColor
 set colorcolumn=80

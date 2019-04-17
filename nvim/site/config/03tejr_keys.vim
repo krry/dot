@@ -1,6 +1,6 @@
 " Stack normal/visual/select Ctrl-L to clear search highlight
-    nnoremap <silent> <C-L> :<C-U>nohlsearch<CR><C-L>
-    vnoremap <silent> <C-L> :<C-U>nohlsearch<CR>gv<C-L>
+    nnoremap <silent> <space>hl :<C-U>nohlsearch<CR><C-L>
+    vnoremap <silent> <space>hl :<C-U>nohlsearch<CR>gv<C-L>
 
 " Cycle through argument list
     nnoremap [a :previous<CR>

@@ -17,7 +17,7 @@
     cmap ;\ \(\)<Left><Left>
 
 " Edit .vimrc
-    nnoremap <leader>ec :e ~/.dot/vimrc.symlink<cr>
+    nnoremap <leader>ec :e $MYVIMRC<cr>
 
 " Source .vimrc
     nnoremap <leader>rc :source $MYVIMRC<cr>

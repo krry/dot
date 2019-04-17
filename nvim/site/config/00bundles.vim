@@ -11,7 +11,6 @@
 
 " Setup
     scriptencoding utf-8
-    set background=dark                       " for colorschemes
     filetype off                              " must precede vimplug
     call plug#begin('~/.local/share/nvim/bundles') " let's get ready to BUNDLE!
 
@@ -25,6 +24,8 @@
     Plug 'neoclide/coc.nvim', { 'tag': '*', 'do': { -> coc#util#install()} }
     Plug 'w0rp/ale'                         " asynchronous lint engine
     Plug 'sheerun/vim-polyglot'             " on-demand language packs
+    Plug 'Shougo/neosnippet'                " an aging snippet completor
+    Plug 'Shougo/neosnippet-snippets'       " supporting snippet library
 
 " Git / Versioning
     Plug 'tpope/vim-fugitive'                 " git slicker
@@ -41,6 +42,8 @@
     Plug 'gcmt/wildfire.vim'                  " growing text object selection
     Plug 'easymotion/vim-easymotion'          " show motions in realtime
     Plug 'justinmk/vim-sneak'                 " two letter leaps around the text
+    Plug 'AndrewRadev/switch.vim'           " flip bits like plumpjacks
+    Plug 'raghur/fruzzy', {'do': { -> fruzzy#install()}}  " crazy fast matcher
 
 " Documentation
     Plug 'vimwiki/vimwiki', {'branch': 'dev'} " linkable, publishable notes
@@ -70,6 +73,8 @@
     Plug 'fadein/vim-FIGlet'               " for headers
     Plug 'junegunn/goyo.vim'               " distraction-free writing in vim
     Plug 'curiousleo/vim-zenroom2'         " iA Writer-like; deps on Goyo
+    Plug 'chrisbra/unicode.vim'             " discover Unicode, digraphs, etc.
+    Plug 'tpope/vim-characterize'          " identify Unicode, digraphs, etc.
 
 " Alignment
     Plug 'junegunn/vim-easy-align'         " easy vertical alignments

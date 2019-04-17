@@ -23,7 +23,6 @@
  " 5 syntax, highlighting and spelling
     filetype plugin indent on
     syntax enable
-    set background=dark
     set cursorline
     set cursorcolumn
 

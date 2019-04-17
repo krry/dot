@@ -53,7 +53,9 @@
     call denite#custom#alias('source', 'rec_fd', 'file/rec')
     call denite#custom#alias('source', 'grep/rg', 'grep')
     call denite#custom#alias('source', 'line/rg', 'line')
-
+    " tell denite to use fruzzy matcher by default for all sources
+    call denite#custom#source('_', 'matchers', ['matcher/fruzzy'])
+    call denite#custom#source('grep/rg', 'matchers', ['matcher/fuzzy', 'matcher/project_files'])
     " map it easy
     " seal it with a carriage return
     call denite#custom#map('insert', '<CR>',
@@ -82,7 +84,7 @@
     " only search the buffers
     nnoremap <leader>db :<C-u>Denite buffer<CR>
     " this kicks asterisk
-    nnoremap <leader>d* :<C-u>DeniteCursorWord grep:.<CR>
+    nnoremap <leader>d* :<C-u>DeniteCursorWord grep/rg<CR>
     " in case you've jump to a distant filetree
     nnoremap <leader>dbf :<C-u>DeniteBufferDir file/rec<CR>
     nnoremap <leader>dbg :<C-u>DeniteBufferDir grep<CR>

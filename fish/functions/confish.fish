@@ -1,3 +1,4 @@
 function confish
-	vim ~/.config/fish
+    cd ~/.config/fish
+	vim .
 end
