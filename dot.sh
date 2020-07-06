@@ -283,8 +283,6 @@ ask default_fish "Fish as default shell?"
 
 cat << EOF
 
-$&%#&%$&#$&%&#$&%&#$&%&#$&%&%#&#$&%&#$&#$&%&#$&#$&%#&*#%&#%&#%&#%&#
-
 WAHOOOOO!!! We did it!
 
 We're probably all feeling a bit dotty by now.
@@ -297,7 +295,6 @@ nvim ~/.dot
 Dev on!
 💓 krry
 
-$&%#&%$&#$&%&#$&%&#$&%&#$&%&%#&#$&%&#$&#$&%&#$&#$&%#&*#%&#%&#%&#%&#
 EOF
 exit 0
 

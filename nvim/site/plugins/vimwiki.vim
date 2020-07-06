@@ -12,6 +12,7 @@
     let wiki.auto_export = 1
 
     let g:vimwiki_list = [wiki]
+    let g:vimwiki_global_ext = 0
 
     let wiki.nested_syntaxes = {
         \ 'rust': 'rust',

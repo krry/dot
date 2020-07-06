@@ -1,17 +1,9 @@
 if has('termguicolors')
     set termguicolors
 end
-"
-" set hl=
-" \ 8:specialkey,~:endofbuffer,z:termcursor,z:termcursornc,@:nontext,
-" \ d:directory,e:errormsg,i:incsearch,l:search,m:moremsg,m:modemsg,
-" \ n:linenr,n:cursorlinenr,r:question,s:statusline,s:statuslinenc,
-" \ c:vertsplit,t:title,v:visual,v:visualnos,w:warningmsg,w:wildmenu,
-" \ f:folded,f:foldcolumn,a:diffadd,c:diffchange,d:diffdelete,
-" \ t:difftext,>:signcolumn,-:conceal,b:spellbad,p:spellcap,
-" \ r:spellrare,l:spelllocal,+:pmenu,=:pmenusel,x:pmenusbar,
-" \ x:pmenuthumb,*:tabline,#:tablinesel,_:tablinefill,!:cursorcolumn,
-" \ .:cursorline,o:colorcolumn,q:quickfixline,0:whitespace,i:normalnc
+
+" add'l highlight-groups
+" NormalFloat
 
 " 50 colorschemes
 " available:
