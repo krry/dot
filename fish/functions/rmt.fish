@@ -1,3 +1,5 @@
-function rm
+function rmt
 	trash $argv
 end
+
+

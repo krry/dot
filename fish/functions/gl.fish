@@ -1,3 +1,3 @@
-function gpl
+function gl
 	git pull
 end
