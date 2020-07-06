@@ -4,11 +4,11 @@
 "
 " Elect a new <leader>
     let mapleader = ' '
-    noremap <space> <nop>
+    " noremap <space> <nop>
 
 " Get a semi, save a pinky for Ex mode
 " https://nvie.com/posts/how-i-boosted-my-vim/
-    nnoremap ; :
+    " nnoremap ; :
 
 " fire off a quick S&R
     nnoremap :: :%s:::g<Left><Left><Left>
@@ -34,6 +34,7 @@
 
 " Change directory to here
     nmap <leader>cwd :lcd %:p:h<cr>
+    cmap vmp verbose map
 
 " Really Write! - for when you forget to sudo (thx @spf13)
     cmap w!! w !sudo tee % >/dev/null
@@ -43,9 +44,12 @@
     " nmap <C-Tab> :tabclose<cr>
     " nmap <S-Tab> :tabprevious<cr>
 
+" search for help on cursorword
+    nnoremap <leader>h "hyaw:h <C-r>h<cr>
+
 " preview file under the cursor
-    xnoremap <silent> <Leader>gf y:pedit <C-r><C-r>"<cr>
-    nnoremap <silent> <Leader>gf :pedit <C-r><C-f><cr>
+    xnoremap <silent> <Leader>pf y:pedit <C-r><C-r>"<cr>
+    nnoremap <silent> <Leader>pf :pedit <C-r><C-f><cr>
 
 " sets cursor word to last search
     nnoremap <silent> c<Tab> :let @/=expand('<cword>')<cr>cgn
@@ -61,6 +65,16 @@
 
 " toggle search highlighting
     nnoremap <silent> <leader>/ :set invhlsearch<CR>
+
+" Output the current syntax group
+nnoremap <f10>
+            \ :echo "hi<"
+            \ . synIDattr(synID(line("."),col("."),1),"name")
+            \ . "> trans<"
+            \ . synIDattr(synID(line("."),col("."),0),"name")
+            \ . "> lo<"
+            \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name")
+            \ . ">"<cr>
 
 " Cursor glides between lines, wrapped or not
     noremap j gj
@@ -115,13 +129,14 @@
 
 " window mgmt like Tmux panes
     " quicker window navigation
-    noremap <C-h> <C-w>h
-    noremap <C-j> <C-w>j
-    noremap <C-k> <C-w>k
-    noremap <C-l> <C-w>l
+    nnoremap <C-h> <C-w>h
+    nnoremap <C-j> <C-w>j
+    nnoremap <C-k> <C-w>k
+    nnoremap <C-l> <C-w>l
+
     " easy, empty splits
-    noremap <leader>v :vs e<CR>
-    noremap <leader>s :sp e<CR>
+    nnoremap <leader>v :vs e<CR>
+    nnoremap <leader>s :sp e<CR>
 
 " indent without leaving VISUAL mode
     vnoremap < <gv
@@ -139,7 +154,7 @@
     nnoremap Y y$
 
 " duplicate line
-    nmap <C-d> mzyyp`z
+    nmap <leader>D mzyyp`z
 
 " selects the last changed text (often pasted)
     onoremap <expr> il ':<C-u>norm! `['.strpart(getregtype(), 0, 1).'`]<cr>'
