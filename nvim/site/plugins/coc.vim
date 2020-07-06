@@ -8,14 +8,19 @@
 
 set hidden
 set shortmess+=c
-set cmdheight=2
+set cmdheight=1
 set updatetime=300
 set signcolumn=yes
+
+function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
 " Tab triggers completion popup and cycles through suggestions/snippets
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? coc#_select_confirm() :
-      \ coc#expandableOrJumpable() ? coc#rpc#request('doKeymap', ['snippets-expand-jump','']) :
+      \ coc#expandableOrJumpable() ? coc#rpc#request('doKeymap', ['snippets-expand-jump', '']) :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
 
@@ -37,11 +42,6 @@ imap <C-l> <Plug>(coc-snippets-expand)
 vmap <C-j> <Plug>(coc-snippets-select)
 " use <c-space>for trigger completion
 imap <expr><c-space> coc#refresh()
-
-function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
 
 let g:coc_snippet_next = '<Tab>'
 let g:coc_snippet_prev = '<S-Tab>'
@@ -66,20 +66,20 @@ nnoremap <leader>cdi <Plug>(coc-diagnostic-info)
 " Jump to declaration(s) of current symbol.
 nnoremap <leader>cdc <Plug>(coc-declaration)
 " Remap for rename current word
-nmap <leader>rn <Plug>(coc-rename)
+nnoremap <leader>rn <Plug>(coc-rename)
 
 " Jump to next diagnostic position.
 nnoremap ]c <Plug>(coc-diagnostic-next)
 " Jump to previous diagnostic position.
 nnoremap [c <Plug>(coc-diagnostic-prev)
 " Jump to definition(s) of current symbol.
-nnoremap gd <Plug>(coc-definition)
+nnoremap <leader>ccd <Plug>(coc-definition)
 " Jump to type definition(s) of current symbol.
-nnoremap gy <Plug>(coc-type-definition)
+nnoremap <leader>cy <Plug>(coc-type-definition)
 " Jump to implementation(s) of current symbol.
-nnoremap gi <Plug>(coc-implementation)
+nnoremap <leader>cj <Plug>(coc-implementation)
 " Jump to references of current symbol.
-nnoremap gr <Plug>(coc-references)
+nnoremap <leader>cr <Plug>(coc-references)
 " summon the doc
 nnoremap K :call <SID>show_doc()<CR>
 
@@ -93,8 +93,8 @@ function! s:show_doc()
 endfunction
 
 " Remap for format selected region
-vmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+vmap <leader>cf <Plug>(coc-format-selected)
+nmap <leader>cf <Plug>(coc-format-selected)
 
 augroup coccers
     autocmd!
@@ -104,6 +104,8 @@ augroup coccers
     autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
     " Update signature help on jump placeholder
     autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+    " Close preview window when completion is done.
+    autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 augroup END
 
 " Remap for do codeAction of current line
