@@ -1,5 +1,5 @@
 " 1 important
-    set runtimepath^=~/.vim runtimepath+=~/.vim/after
+    set runtimepath^=~/.vim rtp+=~/.vim/after rtp+=/usr/local/opt/fzf
     let &packpath = &runtimepath
     set path-=/usr/include  " let C filetype add this
     set path+=**    " search current directory's whole tree
@@ -82,12 +82,13 @@
     set nomodeline
     set nostartofline
     set nowritebackup
-    set backup
+    set nobackup
     set backupdir=~/.local/share/nvim/backup
     set backupskip^=/dev/shm/*
     set backupskip+=node_modules/*
-    set autowrite
-    set autowriteall
+    set autoread                " watch for changes to files in buffers
+    set autowrite               " preserve all changes on buffer switch
+    set autowriteall            " also autosaves on edit, quit, etc.
 
 " 19 the swap file
     set noswapfile
@@ -107,9 +108,10 @@
 " 24 multi-byte characters
     scriptencoding utf-8
     set emoji
+    set guifont=Hack\ Nerd\ Font:h12
 
 " 25 various
-    " N.B., BE FUCKING AWARE THAT set virtualedit=all GETS ALL LOOSY GOOSEY!
+    " N.B., BE FUCKING AWARE THAT `set virtualedit=all` GETS ALL LOOSY GOOSEY!
     set virtualedit=onemore          " one char after end
     set virtualedit=block            " in visual block mod
     let g:session_autosave = 'no'
@@ -118,6 +120,6 @@
     set shortmess+=I                 " don't show startup splash screen
     set wildmenu
     set wildmode=list:longest        " tab press completes and lists
-    silent! set wildignorecase
-
+    silent! set wildignorecase       " exclude silliness from searches
+    set wildignore+=.git,.svn,.DS_Store,.npm,.vagrant,*.zip,*.tgz,*.pdf,*.psd,*.ai,*.mp3,*.mp4,*.bmp,*.ico,*.jpg,*.png,*.gif,*.epub,.hg,.dropbox,.config,.cache,*.pyc,node_modules/*,bower_components/*,*.min.*
 
