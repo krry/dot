@@ -20,12 +20,21 @@ function chakv
     vim .
 end
 
-function atma
-    cd ~/Drive/Code/web/atmanaut/
+function atme
+    cd ~/Drive/Code/web/atmanaut.me/
 end
 
-function atmav
-    atma
+function atmedev
+    atme
+    vim .
+end
+
+function atus
+    cd ~/Drive/Code/web/atmanaut.us/
+end
+
+function atusdev
+    atus
     vim .
 end
 
@@ -38,19 +47,19 @@ function dotv
     vim .
 end
 
-function folio
-    # jumps to my folio dir
-    cd ~/Drive/Code/web/folio
+function atcom
+    # jumps to my atcom dir
+    cd ~/Drive/Code/web/atmanautica
 end
 
-function foliv
-    # jumps to my folio dir and opens it in vim
-    folio
+function atcomdev
+    # jumps to my atcom dir and opens it in vim
+    atcom
     vim .
 end
 
-function foligo
-    folio
+function atcomrun
+    atcom
     bundle exec jekyll serve --livereload --incremental
 end
 
