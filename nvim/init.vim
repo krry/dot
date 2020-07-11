@@ -25,3 +25,5 @@ call SourceDirectory('~/.local/share/nvim/site/config')
 call SourceDirectory('~/.local/share/nvim/site/plugins')
 call SourceDirectory('~/.local/share/nvim/site/after/config')
 call SourceDirectory('~/.local/share/nvim/site/after/ftplugin')
+
+echo '^@;@^ hoo-t'
