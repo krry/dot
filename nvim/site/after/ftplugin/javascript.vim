@@ -18,3 +18,6 @@ let g:javascript_conceal_static         = '•'
 let g:javascript_conceal_super          = 'Ω'
 let g:javascript_conceal_arrow_function = '⇒'
 
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2

@@ -21,7 +21,7 @@ endfunction
 
 augroup tightones
     autocmd!
-    autocmd FileType {css,scss,html,vue,pug,javascript.jsx,json} call s:TightenDents()
+    autocmd FileType {css,scss,html,vue,pug,js,javascript.jsx,json} call s:TightenDents()
     autocmd FileType markdown vmap <space><Bslash> :EasyAlign*<Bar><Enter>
 augroup END
 

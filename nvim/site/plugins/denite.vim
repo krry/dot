@@ -125,7 +125,7 @@ endfunction
 call s:profile(s:denite_options)
 
 " quickeys for your fave denite filters
-nnoremap <leader>df :<C-u>Denite file/rec -no-empty<CR>
+nnoremap <leader>df :<C-u>Denite file/rec grep:::! -no-empty<CR>
 nnoremap <leader>dg :<C-u>Denite grep:. -no-empty<CR>
 nnoremap <leader>dh :<C-u>Denite help -no-empty -start-filter<CR>
 nnoremap <leader>dl :<C-u>Denite line<CR>

@@ -12,5 +12,4 @@ endfunction
 augroup helpers
     autocmd!
     autocmd Filetype help :call NavigateHelp()
-    echo 'found help'
 augroup END
