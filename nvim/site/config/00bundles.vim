@@ -24,9 +24,10 @@
     Plug 'mhinz/vim-startify'            " start screen
 
 " Completion / Lint / Syntax
-    Plug 'neoclide/coc.nvim', { 'tag': '*', 'do': { -> coc#util#install()} }
+    Plug 'neoclide/coc.nvim', {'branch': 'release'} " conquer of completion
     Plug 'w0rp/ale'                      " asynchronous lint engine
     Plug 'sheerun/vim-polyglot'          " on-demand language packs
+    Plug 'tpope/vim-liquid'              " liquid template support
     Plug 'Shougo/neosnippet'             " an aging snippet completor
     Plug 'Shougo/neosnippet-snippets'    " supporting snippet library
 
