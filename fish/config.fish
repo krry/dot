@@ -17,8 +17,8 @@ if status --is-interactive
     set PATH $PATH /usr/local/Cellar/node/14.5.0/bin
     set IP (ipconfig getifaddr en0)
     source (rbenv init -|psub)
-    source functions/devmo.fish
-    source functions/git.fish
+    source $HOME/.config/fish/functions/devmo.fish
+    source $HOME/.config/fish/functions/git.fish
     daymode
     Kamadhenu
 end
