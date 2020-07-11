@@ -24,8 +24,3 @@ augroup tightones
     autocmd FileType {css,scss,html,vue,pug,js,javascript.jsx,json} call s:TightenDents()
     autocmd FileType markdown vmap <space><Bslash> :EasyAlign*<Bar><Enter>
 augroup END
-
-augroup vimcomm
-  autocmd!
-  autocmd FileType vim setlocal commentstring=\"\ %s
-augroup END
