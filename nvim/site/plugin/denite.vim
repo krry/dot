@@ -19,22 +19,27 @@ try
 
 let g:denite#_python_version_check = '3'
 
-" OPTIONS
-let s:denite_options = {'default': {
-    \ 'auto_resize': v:true,
-    \ 'auto_accel': v:false,
-    \ 'split': 'floating',
-    \ 'floating_preview': 1,
-    \ 'filter_split_direction': 'floating',
-    \ 'empty': v:false,
-    \ 'max_dynamic_update_candidates': 50000,
-    \ 'prompt': 'ƛ',
-    \ 'reversed': v:true,
-    \ 'short_source_names': v:true,
-    \ 'sorter': 'sorter/word',
-    \ 'unique': v:true,
-    \ 'vertical_preview': v:true,
-    \ }}
+" Denite general settings
+call denite#custom#option('_', {
+	\ 'max_dynamic_update_candidates': 50000,
+  \ 'prompt': '⎈',
+  \ 'short_source_names': v:true,
+	\ 'start_filter': 1,
+	\ 'statusline': 1,
+	\ 'smartcase': 1,
+  \ 'unique': v:true,
+	\ 'vertical_preview': 1,
+	\ })
+
+" Use Neovim's floating window
+if has('nvim')
+	call denite#custom#option('_', {
+		\ 'statusline': 0,
+		\ 'split': 'floating',
+		\ 'floating_preview': 1,
+		\ 'filter_split_direction': 'floating',
+		\ })
+endif
 "
 " MATCHERS
 " Default is 'matcher/fuzzy'
