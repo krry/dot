@@ -15,7 +15,7 @@
     call plug#begin('~/.local/share/nvim/bundles') " let's get ready to BUNDLE!
 
 " Navigation
-    Plug 'Shougo/denite.nvim'            " fuzzy search for anything
+    Plug 'Shougo/denite.nvim'            " unite all the tools
     Plug 'jremmen/vim-ripgrep'           " fuzzy search for anything
     Plug 'scrooloose/nerdtree'           " filesystem navigation
     Plug 'yegappan/mru'                  " Most Recently Used files viewer
