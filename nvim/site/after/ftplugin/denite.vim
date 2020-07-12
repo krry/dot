@@ -1,3 +1,5 @@
+" loads after the plugin settings which are in:
+" nvim/site/plugins/denite.vim
 nnoremap <silent><buffer><expr> <CR> denite#do_map('do_action')
 nnoremap <silent><buffer><expr> <tab> denite#do_map('choose_action')
 nnoremap <silent><buffer><expr> d denite#do_map('do_action', 'delete')
