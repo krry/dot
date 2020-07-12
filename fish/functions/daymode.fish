@@ -19,17 +19,17 @@ function daymode
 end
 
 function lightup
+  # osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to no'
     echo -e "\033]50;SetProfile=Daymode\a"
-    osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to no'
     set -xg THEME 'light'
-    echo "🌞 daymode activated 😎"
+    echo "🌞 day rains on 😎"
 end
 
 function godark
-    osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to yes'
+  # osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to yes'
     echo -e "\033]50;SetProfile=Devmo\a"
     set -xg THEME 'dark'
-    echo "🌚 nightmode triggered ✨"
+    echo "🌚 night clothes in ✨"
 end
 
 alias nightmode godark
