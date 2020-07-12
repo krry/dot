@@ -5,6 +5,7 @@
 "
 " when in doubt, refer to @romainl's idiomatic vimrc
 " https://gist.github.com/romainl/9ecd7b09a693816997ba
+"
 " Utilities
 
 function! SourceIfExists(file)
@@ -21,9 +22,11 @@ function! SourceDirectory(file)
     endfor
 endfunction
 
+" source files in this order
 call SourceDirectory('~/.local/share/nvim/site/config')
-call SourceDirectory('~/.local/share/nvim/site/plugins')
+call SourceDirectory('~/.local/share/nvim/site/plugin')
 call SourceDirectory('~/.local/share/nvim/site/after/config')
+call SourceDirectory('~/.local/share/nvim/site/after/plugin')
 call SourceDirectory('~/.local/share/nvim/site/after/ftplugin')
 
 echo '^@;@^ hoo-t'

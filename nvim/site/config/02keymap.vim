@@ -142,10 +142,6 @@
   " http://stackoverflow.com/a/8064607/127816
   vnoremap . :normal .<CR>
 
-" reclaim Wildfire!
-  map \ <Plug>(wildfire-fuel)
-  vmap <BS> <Plug>(wildwire-water)
-
 " Yank to the end of the line like C and D
   nnoremap Y y$
 
