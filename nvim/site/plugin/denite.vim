@@ -220,15 +220,18 @@ function! s:denite_preview() abort
 endfunction
 
 " quickeys for your fave denite filters
-nnoremap <leader>g :<C-u>Denite file/rec grep:::! -start-filter<CR>
+nnoremap <leader>y :<C-u>Denite file/rec grep:::! -start-filter<CR>
 nnoremap <leader>dg :<C-u>Denite grep:. -no-empty<CR>
-nnoremap <leader>h :<C-u>Denite help -no-empty -start-filter<CR>
-nnoremap <leader>j :<C-u>DeniteCursorWord file/rec grep:::!<CR>
+nnoremap <leader>dh :<C-u>Denite help -no-empty -start-filter<CR>
 nnoremap <leader>dt :<C-u>Denite tags<CR>
 nnoremap <leader>dl :<C-u>Denite line<CR>
 nnoremap <leader>db :<C-u>Denite buffer<CR>
-nnoremap <leader>dt :<C-u>DeniteCursorWord tags<CR>
-nnoremap <leader>dh :<C-u>DeniteCursorWord help<CR>
+nnoremap <leader>jj :<C-u>DeniteCursorWord file/rec grep:::!<CR>
+nnoremap <leader>jt :<C-u>DeniteCursorWord tags<CR>
+nnoremap <leader>jh :<C-u>DeniteCursorWord help<CR>
+vnoremap <C-j> :<C-u>DeniteCursorWord file/rec grep:::!<CR>
+vnoremap <C-t> :<C-u>DeniteCursorWord tags<CR>
+vnoremap <C-h> :<C-u>DeniteCursorWord help<CR>
 " nnoremap <leader>dfb :<C-u>DeniteBufferDir file/rec  -start-filter<CR>
 " nnoremap <leader>dgb :<C-u>DeniteBufferDir grep -no-empty<CR>
 " nnoremap <leader>dpf :<C-u>DeniteProjectDir file/rec -start-filter <CR>
