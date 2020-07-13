@@ -50,7 +50,7 @@
 
 " Surroundings
     Plug 'tpope/vim-surround'             " ( for {surrounding} 'text' )
-    Plug 'jiangmiao/auto-pairs'           " pairs surrounds readily
+    Plug 'Raimondi/delimitMate'           " auto-closes surrounders
 
 " Comments
     Plug 'tpope/vim-commentary'           " simpler commenting
@@ -94,8 +94,6 @@
 
 " Typography
     Plug 'fadein/vim-FIGlet'               " for headers
-    Plug 'junegunn/goyo.vim'               " distraction-free writing in vim
-    Plug 'curiousleo/vim-zenroom2'         " iA Writer-like; deps on Goyo
     Plug 'chrisbra/unicode.vim'            " discover Unicode, digraphs, etc.
     Plug 'tpope/vim-characterize'          " identify Unicode, digraphs, etc.
     Plug 'ryanoasis/vim-devicons'           " icons for dev stuff

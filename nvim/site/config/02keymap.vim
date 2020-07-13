@@ -56,9 +56,6 @@
 " EasyAlign horizontal whitespace
   vnoremap <silent> <leader>ea :EasyAlign<cr>
 
-" Focus and isolate current buffer
-  nnoremap <silent> <leader>z :Goyo<cr>
-
 " toggle search highlighting
   nnoremap <silent> <leader>/ :set invhlsearch<CR>
 
