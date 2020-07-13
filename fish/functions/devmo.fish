@@ -1,98 +1,120 @@
 function devmo
-    # jumps to the main dev dir
-    cd ~/Drive/Code
+  # jumps to the main dev dir
+  cd ~/Drive/Code
 end
 
 function ccd
-    cd ~/Drive/Code
+  cd ~/Drive/Code
 end
 
 function cdgo
-    cd ~/go
+  cd ~/go
 end
 
 function chak
-    cd ~/Drive/Code/web/atmanaut/themes/chakra/
+  cd ~/Drive/Code/web/atmanaut/themes/chakra/
 end
 
 function chakv
-    chakv
-    vim .
+  chakv
+  vim .
 end
 
-function atme
-    cd ~/Drive/Code/web/atmanaut.me/
+function atm
+  cd ~/Drive/Code/web/atmanaut.me/
 end
 
-function atmedev
-    atme
-    vim .
+function atmr
+  atm
+  npm run dev
 end
 
-function atus
-    cd ~/Drive/Code/web/atmanaut.us/
+function atmv
+  atm
+  vim .
 end
 
-function atusdev
-    atus
-    vim .
+function atu
+  cd ~/Drive/Code/web/atmanaut.us/
+end
+
+function atur
+  atu
+  servepy
+end
+
+function atuv
+  atu
+  vim .
 end
 
 function dot
-    cd ~/.dot
+  cd ~/.dot
 end
 
 function dotv
-    dot
-    vim .
+  dot
+  vim .
 end
 
-function atcom
-    # jumps to my atcom dir
-    cd ~/Drive/Code/web/atmanautica
+function atc
+  # jumps to my atcom dir
+  cd ~/Drive/Code/web/atmanautica
 end
 
-function atcomdev
-    # jumps to my atcom dir and opens it in vim
-    atcom
-    vim .
+function atcv
+  # jumps to my atcom dir and opens it in vim
+  atc
+  vim .
 end
 
-function atcomrun
-    atcom
-    bundle exec jekyll serve --livereload --incremental
+function atcr
+  atc
+  bundle exec jekyll serve --livereload --incremental
 end
 
 function gov
-    cd ~/go/src/github.com/krry
-    vim .
+  cd ~/go/src/github.com/krry
+  vim .
 end
 
 function crust
-    cd ~/Drive/Code/rust/
+  cd ~/Drive/Code/rust/
 end
 
 function kmd
-    cd ~/Drive/Code/shell/kamadhenu/
+  cd ~/Drive/Code/shell/kamadhenu/
 end
 
 function kmdv
-    kmd; vim .
+  kmd; vim .
 end
 
 function psg
-	cd $HOME/Drive/Code/web/passage-clock
+  cd $HOME/Drive/Code/web/passage-clock
 end
 
 function psgv
-    psg; vim .
+  psg; vim .
 end
 
 function wiki
-    cd ~/Drive/Code/wiki
+  cd ~/Drive/Code/wiki
 end
 
 function wikiv
-    wiki
-    vim .
+  wiki
+  vim .
+end
+
+function fsw
+  cd ~/Drive/Code/web/full-smile-world
+end
+
+function fswv
+  fsw; vim .
+end
+
+function fswr
+  fsw; yarn run dev
 end
