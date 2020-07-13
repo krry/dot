@@ -5,39 +5,24 @@
 " Extensions available:
 " https://www.npmjs.com/search?q=keywords%3Acoc.nvim << Actual list
 " https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions << Explanation
-
-" set hidden
-" set shortmess+=c
-" set cmdheight=1
-" set updatetime=300
-" set signcolumn=yes
+" https://github.com/rafi/vim-config/blob/master/config/plugins/coc.vim
 
 let g:coc_snippet_next = '<Tab>'
 let g:coc_snippet_prev = '<S-Tab>'
 
 " COMPLETION Keymaps
 " Tab triggers completion popup and cycles through suggestions/snippets
-" Rafi's way https://github.com/rafi/vim-config/blob/master/config/plugins/coc.vim
 inoremap <silent><expr> <Tab>
 	    \ pumvisible() ? "\<C-n>" :
 	    \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
 	    \ <SID>check_back_space() ? "\<Tab>" :
 	    \ coc#refresh()
-" inoremap <silent><expr> <TAB>
-"       \ pumvisible() ? coc#_select_confirm() :
-"       \ coc#expandableOrJumpable() ? coc#rpc#request('doKeymap', ['snippets-expand-jump', '']) :
-"       \ <SID>check_back_space() ? "\<Tab>" :
-"       \ coc#refresh()
 
 " Shift-tab cycles backward
 inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-" Enter confirms completion and applies snippets
-" inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-" `<C-g>u` breaks undo chain at cursor
 " Rafi's way
 inoremap <silent><expr> <CR> pumvisible() ? coc#_select_confirm() :
-	    \ delimitMate#WithinEmptyPair() ? "\<C-R>=delimitMate#ExpandReturn()\<CR>" :
 	    \"\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 function! s:check_back_space() abort
@@ -101,3 +86,5 @@ endfunction
 command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 nnoremap <silent> <leader>pr :Prettier<cr>
 
+nnoremap <leader>ci :CocInstall<space>
+nnoremap <leader>coc :CocConfig<cr>

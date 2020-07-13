@@ -50,7 +50,7 @@
 
 " Surroundings
     Plug 'tpope/vim-surround'             " ( for {surrounding} 'text' )
-    Plug 'Raimondi/delimitMate'           " auto-closes surrounders
+    " Plug 'Raimondi/delimitMate'           " auto-closes surrounders
 
 " Comments
     Plug 'tpope/vim-commentary'           " simpler commenting
