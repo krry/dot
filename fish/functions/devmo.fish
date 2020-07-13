@@ -12,7 +12,7 @@ function cdgo
 end
 
 function chak
-  cd ~/Drive/Code/web/atmanaut/themes/chakra/
+  cd ~/Drive/Code/web/atmanaut.me/themes/chakra/
 end
 
 function chakv
@@ -26,7 +26,7 @@ end
 
 function atmr
   atm
-  npm run dev
+  npm start
 end
 
 function atmv
