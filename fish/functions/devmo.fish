@@ -70,7 +70,7 @@ end
 
 function atcr
   atc
-  bundle exec jekyll serve --livereload --incremental
+  bundle exec jekyll serve --livereload --incremental --host 0.0.0.0
 end
 
 function gov
