@@ -10116,6 +10116,8 @@
 	<string>{799, 448}</string>
 	<key>NSNavPanelExpandedSizeForSaveMode</key>
 	<string>{712, 448}</string>
+	<key>NSOverlayScrollersFallBackForAccessoryViews</key>
+	<false/>
 	<key>NSQuotedKeystrokeBinding</key>
 	<string></string>
 	<key>NSRepeatCountBinding</key>
@@ -10172,7 +10174,7 @@
 	<key>NSWindow Frame com.apple.typography_panel_RobotoMonoForPowerline-Light</key>
 	<string>246 532 260 36 0 0 1440 900 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>281 362 650 538 0 0 1440 900 </string>
+	<string>400 200 650 538 0 0 1440 900 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -12526,11 +12528,13 @@
 		<string>3.3.5beta2</string>
 		<string>3.3.8beta5</string>
 		<string>3.3.0beta12</string>
+		<string>3.4.0beta2</string>
 		<string>3.3.8beta4</string>
 		<string>3.3.0beta8</string>
 		<string>3.3.5beta3</string>
 		<string>3.3.2beta2</string>
 		<string>3.3.11beta1</string>
+		<string>3.4.0beta1</string>
 		<string>3.3.8beta1</string>
 		<string>3.3.10beta3</string>
 	</array>
@@ -12562,10 +12566,12 @@
 	<true/>
 	<key>NoSyncInstallationId</key>
 	<string>7C1AB5C2-21FB-4C0C-BC7B-D52E48942008</string>
+	<key>NoSyncLastOSVersion</key>
+	<string>Version 10.15.5 (Build 19F101)</string>
 	<key>NoSyncLastTipTime</key>
 	<real>573764612.326756</real>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>75</integer>
+	<integer>83</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -12699,6 +12705,14 @@
 				<key>isTerminal</key>
 				<true/>
 				<key>name</key>
+				<string>selectionLength</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
 				<string>path</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
@@ -12718,6 +12732,14 @@
 				<string>triggerName</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<false/>
+				<key>name</key>
+				<string>parentSession</string>
+				<key>nonterminalContext</key>
+				<integer>1</integer>
 			</dict>
 			<dict>
 				<key>isTerminal</key>
@@ -12836,6 +12858,14 @@
 				<true/>
 				<key>name</key>
 				<string>tmuxStatusLeft</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>selection</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
 			</dict>
@@ -13306,6 +13336,8 @@
 			</dict>
 		</array>
 	</dict>
+	<key>NoSyncRestoreWindowsCount</key>
+	<integer>0</integer>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
 	<real>570661033.72390902</real>
 	<key>NoSyncTipsDisabled</key>
@@ -13372,6 +13404,8 @@
 	<string>/Users/alan/.itermcfg/</string>
 	<key>PreventEscapeSequenceFromChangingProfile</key>
 	<false/>
+	<key>PreventEscapeSequenceFromClearingHistory</key>
+	<false/>
 	<key>Print In Black And White</key>
 	<true/>
 	<key>PromptOnQuit</key>
@@ -13385,11 +13419,11 @@
 	<key>SUFeedAlternateAppNameKey</key>
 	<string>iTerm</string>
 	<key>SUFeedURL</key>
-	<string>https://iterm2.com/appcasts/testing_new.xml?shard=49</string>
+	<string>https://iterm2.com/appcasts/testing_modern.xml?shard=49</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2020-07-11T23:44:24Z</date>
+	<date>2020-07-24T17:45:04Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateRelaunchingMarker</key>
@@ -13397,7 +13431,7 @@
 	<key>Secure Input</key>
 	<false/>
 	<key>ShowFullScreenTabBar</key>
-	<false/>
+	<true/>
 	<key>ShowNewOutputIndicator</key>
 	<false/>
 	<key>SmartPlacement</key>
@@ -13425,7 +13459,7 @@
 	<key>findMode_iTerm</key>
 	<integer>0</integer>
 	<key>iTerm Version</key>
-	<string>3.3.12beta3</string>
+	<string>3.4.0beta2</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>3</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
