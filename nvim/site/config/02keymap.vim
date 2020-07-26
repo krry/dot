@@ -130,6 +130,7 @@
 " easy, empty splits
   nnoremap <leader>v :vs e<CR>
   nnoremap <leader>s :sp e<CR>
+  nnoremap gvf <C-w>vgf
 
 " indent without leaving VISUAL mode
   vnoremap < <gv

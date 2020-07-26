@@ -24,3 +24,25 @@ augroup tightones
     autocmd FileType {css,scss,html,vue,pug,js,javascript.jsx,json} call s:TightenDents()
     autocmd FileType markdown vmap <space><Bslash> :EasyAlign*<Bar><Enter>
 augroup END
+
+augroup reloader
+  autocmd!
+  autocmd FocusGained * checktime
+augroup END
+
+" set filetypes as typescript.tsx
+augroup sxers
+  autocmd!
+  autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
+augroup END
+
+augroup jsoncers
+  autocmd!
+  " tsconfig.json is actually jsonc, help TypeScript set the correct filetype
+  autocmd BufRead,BufNewFile tsconfig.json set filetype=jsonc
+augroup END
+
+augroup gqlers
+  autocmd!
+  au BufNewFile,BufRead *.prisma setfiletype graphql
+augroup END
