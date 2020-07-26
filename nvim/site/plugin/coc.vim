@@ -86,5 +86,6 @@ endfunction
 command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 nnoremap <silent> <leader>pr :Prettier<cr>
 
-nnoremap <leader>ci :CocInstall<space>
+nnoremap <leader>coi :CocInstall<space>
 nnoremap <leader>coc :CocConfig<cr>
+nnoremap <leader>cos :CocSearch<space>
