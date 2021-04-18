@@ -88,6 +88,7 @@ Plug 'christoomey/vim-tmux-navigator'     " move seamlessly from vim to tmux
 " Alignment
 Plug 'junegunn/vim-easy-align'            " easy vertical alignments
 Plug 'nathanaelkane/vim-indent-guides'    " nice-lookin indent signifiers
+" Plug 'yggdroot/indentLine'
 
 " Tags / Tagging
 Plug 'ludovicchabant/vim-gutentags'

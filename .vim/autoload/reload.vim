@@ -12,5 +12,5 @@ function! reload#Vimrc() abort
   noautocmd source $MYVIMRC
   call reload#FileType()
   redraw
-  echomsg fnamemodify($MYVIMRC, ':p:~').' reloaded'
+"  echomsg fnamemodify($MYVIMRC, ':p:~').' reloaded'
 endfunction

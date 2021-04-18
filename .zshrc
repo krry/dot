@@ -12,3 +12,5 @@ eval "$(direnv hook zsh)"
 eval source <("/opt/homebrew/bin/starship" init zsh --print-full-init)
 Kamadhenu
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

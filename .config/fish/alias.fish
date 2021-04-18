@@ -1,12 +1,13 @@
 # apps... but better
 alias git=hub
-alias vim=nvim
+# alias vim=nvim
 alias ls=exa
 alias find=fd
-alias cat=lolcat
+alias cat=bat
 
 # git
 abbr -a gs   git status -sb
+abbr -a gst  git status
 abbr -a ga   git add
 abbr -a gad  git add .
 abbr -a gb   git branch

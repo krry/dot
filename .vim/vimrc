@@ -92,6 +92,9 @@ command! -bar ReloadFileType
 command! -bar ReloadVimrc
 			\ call reload#Vimrc()
 
+command! -bar ConfigVimrc
+			\ call config#Vimrc()
+
 augroup vimrc
 	autocmd!
 augroup END
@@ -181,70 +184,50 @@ if maplocalleader ==# ','
 	sunmap ,,
 endif
 "" Leader,w toggles soft wrapping
-noremap <Leader>w
-      \ :<C-U>set wrap! wrap?<CR>
+noremap <Leader>w :<C-U>set wrap! wrap?<CR>
 ounmap <Leader>w
 sunmap <Leader>w
 
 "" Leader,F reloads filetype settings
-nnoremap <Leader>F
-      \ :<C-U>ReloadFileType<CR>
+nnoremap <Leader>F :<C-U>ReloadFileType<CR>
 "" Leader,t shows current filetype
-nnoremap <Leader>t
-      \ :<C-U>set filetype?<CR>
+nnoremap <Leader>t :<C-U>set filetype?<CR>
 "" Leader,T clears filetype
-nnoremap <Leader>T
-      \ :<C-U>set filetype=<CR>
+nnoremap <Leader>T :<C-U>set filetype=<CR>
 "" Leader,g shows the current file’s fully expanded path
-nnoremap <Leader>g
-      \ :<C-U>echo expand('%:p')<CR>
+nnoremap <Leader>g :<C-U>echo expand('%:p')<CR>
 "" Leader,G changes directory to the current file’s location
-nnoremap <Leader>G
-      \ :<C-U>cd %:h <Bar> pwd<CR>
+nnoremap <Leader>G :<C-U>cd %:h <Bar> pwd<CR>
 "" Leader,P creates the path to the current file if it doesn’t exist
-nnoremap <Leader>P
-      \ :<C-U>call mkdir(expand('%:h'), 'p')<CR>
+nnoremap <Leader>P :<C-U>call mkdir(expand('%:h'), 'p')<CR>
 "" Leader,H shows command history
-nnoremap <Leader>H
-      \ :<C-U>history :<CR>
+nnoremap <Leader>H :<C-U>history :<CR>
 "" Leader,k shows my marks
-nnoremap <Leader>k
-      \ :<C-U>marks<CR>
+nnoremap <Leader>k :<C-U>marks<CR>
 "" Leader,P creates the path to the current file if it doesn’t exist
-nnoremap <Leader>P
-      \ :<C-U>call mkdir(expand('%:h'), 'p')<CR>
-      \ :<C-U>function<CR>
+nnoremap <Leader>P :<C-U>call mkdir(expand('%:h'), 'p')<CR>
 "" Leader,m shows normal maps
-nnoremap <Leader>m
-      \ :<C-U>nmap<CR>
+nnoremap <Leader>m :<C-U>nmap<CR>
 "" Leader,M shows buffer-local normal maps
-nnoremap <Leader>M
-      \ :<C-U>nmap <buffer><CR>
+nnoremap <Leader>M :<C-U>nmap <buffer><CR>
 "" Leader,s saves the file
-nnoremap <Leader>s
-      \ :w<CR>
+nnoremap <Leader>s :w<CR>
 "" Leader,S shows loaded scripts
-nnoremap <Leader>S
-      \ :<C-U>scriptnames<CR>
+nnoremap <Leader>S :<C-U>scriptnames<CR>
 "" Leader,U shows user commands
-nnoremap <Leader>U
-      \ :<C-U>command<CR>
+nnoremap <Leader>U :<C-U>command<CR>
 "" Leader,v shows all global and internal variables
-nnoremap <Leader>v
-      \ :<C-U>let g: v:<CR>
+nnoremap <Leader>v :<C-U>let g: v:<CR>
 "" Leader,V shows all buffer, tab, and window local variables
-nnoremap <Leader>V
-      \ :<C-U>let b: t: w:<CR>
+nnoremap <Leader>V :<C-U>let b: t: w:<CR>
 "" Leader,y shows all registers
-nnoremap <Leader>y
-      \ :<C-U>registers<CR>
-
+nnoremap <Leader>y :<C-U>registers<CR>
 "" Leader,j jumps to buffers—the “jetpack”
-nnoremap <Leader>j
-      \ :<C-U>buffers<CR>:buffer<Space>
+nnoremap <Leader>j :<C-U>buffers<CR>:buffer<Space>
 " reload the vimrc
-nnoremap <Leader>R
-      \ : <C-U>ReloadVimrc<CR>
+nnoremap <Leader>R : <C-U>ReloadVimrc<CR>
+" edit the vimrc
+nnoremap <Leader>E : <C-U>ConfigVimrc<CR>
 
 " ADDITIONAL OPTIONS
 let g:netrw_liststyle = 3
@@ -252,10 +235,10 @@ let g:netrw_banner = 0
 let g:netrw_browse_split = 4
 let g:netrw_altv=1
 let g:netrw_winsize = 25
+let g:netrw_fastbrowse = 0
+
 if &shell =~# 'fish$'
     set shell=sh
 endif
-augroup ProjectDrawer
-	autocmd!
-    autocmd VimEnter * :Vexplore
-augroup END
+
+source $HOME/.vim/init/plugins.vim

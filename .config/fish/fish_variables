@@ -37,6 +37,7 @@ SETUVAR _fish_abbr_grb:git\x20rebase\x20\x2di\x20HEAD\x7e15
 SETUVAR _fish_abbr_grhh:git\x20reset\x20\x2d\x2dhard\x20HEAD
 SETUVAR _fish_abbr_grs:git\x20reset\x20\x2d\x2dsoft
 SETUVAR _fish_abbr_gs:git\x20status\x20\x2dsb
+SETUVAR _fish_abbr_gst:git\x20status
 SETUVAR _fish_abbr_h:history
 SETUVAR _fish_abbr_npi:npm\x20install
 SETUVAR _fish_abbr_nrd:npm\x20run\x20dev
@@ -87,4 +88,5 @@ SETUVAR fish_pager_color_completion:\x1d
 SETUVAR fish_pager_color_description:B3A06D\x1eyellow
 SETUVAR fish_pager_color_prefix:white\x1e\x2d\x2dbold\x1e\x2d\x2dunderline
 SETUVAR fish_pager_color_progress:brwhite\x1e\x2d\x2dbackground\x3dcyan
+SETUVAR fish_user_paths:/opt/homebrew/opt/fzf/bin
 SETUVAR pisces_pairs:\x28\x2c\x29\x1e\x5b\x2c\x5d\x1e\x7b\x2c\x7d\x1e\x22\x2c\x22\x1e\x27\x2c\x27

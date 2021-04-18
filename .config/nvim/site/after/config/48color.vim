@@ -6,16 +6,10 @@ end
 " NormalFloat
 
 " use $THEME env variable if available
-if $THEME ==# 'light'
-"    execute 'set bg='.$THEME
-  colorscheme materialbox " dark grey and light ***
-else
-  " colorscheme gruvbox     " tan and brown, nice warm
-  colorscheme synthwave84
-  set background=dark
-endif
+set background=dark
+colorscheme synthwave84
 
-execute 'set bg='.$THEME
+" execute 'set bg='.$THEME
 
 " 50 colorschemes         " available:
 " colorscheme PaperColor  " dark and light, better dark
