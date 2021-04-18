@@ -1,0 +1,71 @@
+# zsh
+alias zalias="vim ~/.aliases"
+alias zshrc="vim ~/.zshrc"
+
+# fs
+alias ..="cd ../$@"
+alias ccd="cd ~/Code"
+alias smn="cd ~/Code/summon"
+
+# docker
+alias d="docker"
+alias dcu="docker compose up"
+
+# suffixes
+alias -s {html,css,js,jsx,ts,tsx,scss,mdx,json}="code"
+alias -s {md}="glow"
+
+# utils
+alias psef="ps -ef | grep"
+alias reload="source ~/.zshrc"
+
+# mac specific
+alias flush="dscacheutil -flushcache"
+alias browse="open -a /Applications/Google\ Chrome.app"
+
+# git aliases
+alias gs="git status"
+alias gp="git push"
+alias gl="git pull"
+alias gc="git commit -m"
+alias ga="git add ."
+
+# brew
+alias bru="brew update"
+alias bruu="brew update && brew upgrade"
+alias brdoc="brew doctor && brew cleanup"
+
+bri()
+	brew install "$@"
+
+# yarn / npm
+alias y="yarn"
+alias yrd="yarn dev"
+alias yrdw="yarn dev:watch"
+alias nrd="npm run dev"
+nr()
+	npm run "$1"
+
+mkc()
+  mkdir -p "$1" && cd "$1" || return 1
+
+alias reamde="npx readme-md-generator"
+
+cheat()
+	curl "cheat.sh/$1"
+
+alias ll='ls -alF'
+alias la='ls -a1l'
+alias l='ls'
+alias lg='ls -G'
+alias lx='ls -x'
+
+ls()
+	exa "$@"
+
+alias smn='cd ~/Code/summon'
+alias smnc='code ~/Code/summon'
+
+# alias clear='clear; echo; echo; seq 1 $(tput cols) | sort -R | spark; echo; echo'          # Non coloured
+alias clear='clear; echo; echo; seq 1 $(tput cols) | sort -R | spark | lolcat; echo; echo' # Coloured
+source ~/.git_aliases
