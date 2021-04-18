@@ -1,0 +1,261 @@
+" @krry's vimrc
+" adapted from @tejr's dotfiles
+" assumes Vim > 8
+
+if &runtimepath ==# ''
+	throw 'Empty ''runtimepath'''
+endif
+let $MYVIM = option#Split(&runtimepath)[0]
+filetype plugin indent on
+
+set history=300 " we go way back
+
+set tabstop=4 " the VSCode way
+set softtabstop=4
+set shiftwidth=4
+
+set noexpandtab " keeping tabs as tabs not spaces
+" set backspace=eol,indent,start " also set in sensible.vim
+set linebreak " for breaking btw words not in them
+set confirm " for readonly snafus
+
+set background=dark " default to the darkness
+" and bring back the synthwave
+if &background ==# 'dark'
+			\ && (has('gui_running') || &t_Co >= 256)
+			\ && globpath(&runtimepath, 'colors/synthwave84.vim') !=# ''
+	colorscheme synthwave84
+endif
+
+set showbreak=…
+set breakindent " make line wrap work with indents
+set noesckeys " eschew the escape key delay in INSERT mode
+set hidden " allow unwritten buffers
+set foldlevel=256 " open all the folds within reason
+set hlsearch " highlight the search target
+nohlsearch
+"set incsearch " searches b4 hitting enter
+set lazyredraw " wait to redraw during macros and such
+set listchars+=tab:>-   " Tab characters, preserve width with hyphens
+set listchars+=trail:-  " Trailing spaces
+set listchars+=nbsp:+   " Non-breaking spaces
+if has('multi_byte_encoding')
+  set listchars+=extends:»,precedes:«
+else
+  set listchars+=extends:>,precedes:<
+endif
+set nomodeline " use .editorconfig instead
+"set noruler
+
+set formatoptions+=l1jp " lines, singletons, joining lines
+set cpoptions+=J " two-space Joins
+" protect the plugins
+set sessionoptions-=localoptions  " No buffer options or mappings
+set sessionoptions-=options       " No global options or mappings
+set noshowcmd " watch out for longer lines
+set shortmess+=I " no intro screens
+set splitbelow splitright " we split as we read
+set virtualedit+=block " make visual block work as expected
+set visualbell t_vb= " don't bother with the flashing and clanging
+"set wildmenu
+set wildmode=list:longest,full
+"don't suggest the contents of these
+set wildignore=*~,#*#,*.7z,.DS_Store,.git,.hg,.svn,*.a,*.adf,*.asc,*.au,*.aup
+      \,*.avi,*.bin,*.bmp,*.bz2,*.class,*.db,*.dbm,*.djvu,*.docx,*.exe
+      \,*.filepart,*.flac,*.gd2,*.gif,*.gifv,*.gmo,*.gpg,*.gz,*.hdf,*.ico
+      \,*.iso,*.jar,*.jpeg,*.jpg,*.m4a,*.mid,*.mp3,*.mp4,*.o,*.odp,*.ods,*.odt
+      \,*.ogg,*.ogv,*.opus,*.pbm,*.pdf,*.png,*.ppt,*.psd,*.pyc,*.rar,*.rm
+      \,*.s3m,*.sdbm,*.sqlite,*.swf,*.swp,*.tar,*.tga,*.ttf,*.wav,*.webm,*.xbm
+      \,*.xcf,*.xls,*.xlsx,*.xpm,*.xz,*.zip
+set wildignorecase
+set cursorline " a line under the cursor
+"set cursorcolumn " a column around the cursor
+set nospell
+set nolist " invisible characters rise to meet your maker
+set autoindent
+"set ruler
+"set number
+set wrap
+set mouse=a
+
+if has('gui_running')
+	set guioptions+=M
+endif
+
+if !exists('syntax_on')
+	syntax enable
+endif
+
+command! -bar ReloadFileType
+			\ call reload#FileType()
+
+command! -bar ReloadVimrc
+			\ call reload#Vimrc()
+
+augroup vimrc
+	autocmd!
+augroup END
+
+autocmd vimrc BufWritePost $MYVIMRC,$MYVIIM/vimrc
+			\ ReloadVimrc
+
+if exists('##SourceCmd')
+  autocmd vimrc SourceCmd $MYVIMRC,$MYVIM/vimrc
+        \ ReloadVimrc
+endif
+
+" so we can write freely e.g. this
+set spellcapcheck=[.?!]\\%(\ \ \\\|[\\n\\r\\t]\\)
+
+" camel and snake case is spell checked wordly
+if exists('+spelloptions')
+	set spelloptions+=camel
+endif
+
+" KEYMAPPINGS
+"
+" Some tips from @tejr:
+"
+" * Avoid mapping in insert mode; let characters be literal to the greatest
+"   extent possible, and avoid “doing more” in insert mode besides merely
+"   inserting text as it’s typed.
+"
+" * Avoid key chords with CTRL in favor of leader keys.
+"
+" * Never use Alt/Meta key chords; the terminal support for them is just too
+"   confusing and flaky.
+"
+" * Use the configured Leader key as a prefix for mappings as much as
+"   possible.
+"
+" use space a bit more lucratively
+nnoremap <expr> <BSlash>
+      \ line('w$') < line('$')
+        \ ? "\<PageDown>"
+        \ : ":\<C-U>next\<CR>"
+
+" preserve flags from repeated substitute command
+noremap &
+      \ :&&<CR>
+ounmap &
+sunmap &
+
+" Argument list
+nnoremap [a
+      \ :previous<CR>
+nnoremap ]a
+      \ :next<CR>
+" Buffers
+nnoremap [b
+      \ :bprevious<CR>
+nnoremap ]b
+      \ :bnext<CR>
+" Quickfix list
+nnoremap [c
+      \ :cprevious<CR>
+nnoremap ]c
+      \ :cnext<CR>
+" Location list
+nnoremap [l
+      \ :lprevious<CR>
+nnoremap ]l
+      \ :lnext<CR>
+
+" In insert or command mode, move normally by using Ctrl
+inoremap <C-h> <Left>
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-l> <Right>
+cnoremap <C-h> <Left>
+cnoremap <C-j> <Down>
+cnoremap <C-k> <Up>
+cnoremap <C-l> <Right>
+
+" LEADER FOLLOWING KEYMAPS
+
+let mapleader = ' '
+let maplocalleader = ','
+if maplocalleader ==# ','
+	noremap ,,
+				\ ,
+	sunmap ,,
+endif
+"" Leader,w toggles soft wrapping
+noremap <Leader>w
+      \ :<C-U>set wrap! wrap?<CR>
+ounmap <Leader>w
+sunmap <Leader>w
+
+"" Leader,F reloads filetype settings
+nnoremap <Leader>F
+      \ :<C-U>ReloadFileType<CR>
+"" Leader,t shows current filetype
+nnoremap <Leader>t
+      \ :<C-U>set filetype?<CR>
+"" Leader,T clears filetype
+nnoremap <Leader>T
+      \ :<C-U>set filetype=<CR>
+"" Leader,g shows the current file’s fully expanded path
+nnoremap <Leader>g
+      \ :<C-U>echo expand('%:p')<CR>
+"" Leader,G changes directory to the current file’s location
+nnoremap <Leader>G
+      \ :<C-U>cd %:h <Bar> pwd<CR>
+"" Leader,P creates the path to the current file if it doesn’t exist
+nnoremap <Leader>P
+      \ :<C-U>call mkdir(expand('%:h'), 'p')<CR>
+"" Leader,H shows command history
+nnoremap <Leader>H
+      \ :<C-U>history :<CR>
+"" Leader,k shows my marks
+nnoremap <Leader>k
+      \ :<C-U>marks<CR>
+"" Leader,P creates the path to the current file if it doesn’t exist
+nnoremap <Leader>P
+      \ :<C-U>call mkdir(expand('%:h'), 'p')<CR>
+      \ :<C-U>function<CR>
+"" Leader,m shows normal maps
+nnoremap <Leader>m
+      \ :<C-U>nmap<CR>
+"" Leader,M shows buffer-local normal maps
+nnoremap <Leader>M
+      \ :<C-U>nmap <buffer><CR>
+"" Leader,s saves the file
+nnoremap <Leader>s
+      \ :w<CR>
+"" Leader,S shows loaded scripts
+nnoremap <Leader>S
+      \ :<C-U>scriptnames<CR>
+"" Leader,U shows user commands
+nnoremap <Leader>U
+      \ :<C-U>command<CR>
+"" Leader,v shows all global and internal variables
+nnoremap <Leader>v
+      \ :<C-U>let g: v:<CR>
+"" Leader,V shows all buffer, tab, and window local variables
+nnoremap <Leader>V
+      \ :<C-U>let b: t: w:<CR>
+"" Leader,y shows all registers
+nnoremap <Leader>y
+      \ :<C-U>registers<CR>
+
+"" Leader,j jumps to buffers—the “jetpack”
+nnoremap <Leader>j
+      \ :<C-U>buffers<CR>:buffer<Space>
+" reload the vimrc
+nnoremap <Leader>R
+      \ : <C-U>ReloadVimrc<CR>
+
+" ADDITIONAL OPTIONS
+let g:netrw_liststyle = 3
+let g:netrw_banner = 0
+let g:netrw_browse_split = 4
+let g:netrw_altv=1
+let g:netrw_winsize = 25
+if &shell =~# 'fish$'
+    set shell=sh
+endif
+augroup ProjectDrawer
+	autocmd!
+    autocmd VimEnter * :Vexplore
+augroup END
