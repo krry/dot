@@ -71,12 +71,9 @@ set wildignore=*~,#*#,*.7z,.DS_Store,.git,.hg,.svn,*.a,*.adf,*.asc,*.au,*.aup
       \,*.xcf,*.xls,*.xlsx,*.xpm,*.xz,*.zip
 set wildignorecase
 set cursorline " a line under the cursor
-"set cursorcolumn " a column around the cursor
 set nospell
 set nolist " invisible characters rise to meet your maker
 set autoindent
-"set ruler
-"set number
 set wrap
 set mouse=a
 
