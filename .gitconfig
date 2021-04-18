@@ -1,7 +1,14 @@
-[include]
-  path = ~/.gitconfig.local
-[hub]
-	protocol = ssh
+[alias]
+	log = log --graph --pretty=format:\\'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset\\' --abbrev-commit --date=relative
+	co = checkout
+  count   = !git shortlog -sn
+[apply]
+  whitespace = nowarn
+[color]
+  diff = auto
+  status = auto
+  branch = auto
+  ui = true
 [core]
 	editor = code --wait
   excludesfile = ~/.gitignore
@@ -10,40 +17,34 @@
 	; logallrefupdates = true
 	; ignorecase = true
 	; precomposeunicode = true
-[alias]
-	log = log --graph --pretty=format:\\'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset\\' --abbrev-commit --date=relative
-	co = checkout
-  count   = !git shortlog -sn
-[push]
-	default = simple
-[color]
-  diff = auto
-  status = auto
-  branch = auto
-  ui = true
-[apply]
-  whitespace = nowarn
-[help]
-  autocorrect = 1
-[merge]
-  tool = vi
-[mergetool]
-  keepBackup = false
+[credential]
+  helper = osxkeychain
 [diff]
   tool = vimdiff
 [difftool]
   prompt = false
-[credential]
-  helper = osxkeychain
-[pull]
-	rebase = false
 [filter "lfs"]
 	required = true
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
+[help]
+  autocorrect = 1
+[hub]
+	protocol = ssh
+[include]
+  path = ~/.gitconfig.local
+[init]
+	defaultBranch = main
+[merge]
+  tool = vi
+[mergetool]
+  keepBackup = false
+[pull]
+	rebase = false
+[push]
+	default = simple
+	; default = current
 [user]
 	name = Kerry Snyder
 	email = kerry@atmanaut.me
-[init]
-	defaultBranch = main
