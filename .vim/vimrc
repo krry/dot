@@ -14,13 +14,13 @@ set tabstop=4 " the VSCode way
 set softtabstop=4
 set shiftwidth=4
 
-set noexpandtab " keeping tabs as tabs not spaces
 " set backspace=eol,indent,start " also set in sensible.vim
+set noexpandtab " keeping tabs as tabs not spaces
 set linebreak " for breaking btw words not in them
 set confirm " for readonly snafus
 
-set background=dark " default to the darkness
 " and bring back the synthwave
+set background=dark " default to the darkness
 if &background ==# 'dark'
 			\ && (has('gui_running') || &t_Co >= 256)
 			\ && globpath(&runtimepath, 'colors/synthwave84.vim') !=# ''
@@ -34,21 +34,22 @@ set hidden " allow unwritten buffers
 set foldlevel=256 " open all the folds within reason
 set hlsearch " highlight the search target
 nohlsearch
-"set incsearch " searches b4 hitting enter
+set incsearch " searches b4 hitting enter
 set lazyredraw " wait to redraw during macros and such
 set listchars+=tab:>-   " Tab characters, preserve width with hyphens
 set listchars+=trail:-  " Trailing spaces
 set listchars+=nbsp:+   " Non-breaking spaces
+
 if has('multi_byte_encoding')
   set listchars+=extends:»,precedes:«
 else
   set listchars+=extends:>,precedes:<
 endif
-set nomodeline " use .editorconfig instead
-"set noruler
 
+set nomodeline " use .editorconfig instead
 set formatoptions+=l1jp " lines, singletons, joining lines
 set cpoptions+=J " two-space Joins
+
 " protect the plugins
 set sessionoptions-=localoptions  " No buffer options or mappings
 set sessionoptions-=options       " No global options or mappings
@@ -57,8 +58,9 @@ set shortmess+=I " no intro screens
 set splitbelow splitright " we split as we read
 set virtualedit+=block " make visual block work as expected
 set visualbell t_vb= " don't bother with the flashing and clanging
-"set wildmenu
+set wildmenu
 set wildmode=list:longest,full
+
 "don't suggest the contents of these
 set wildignore=*~,#*#,*.7z,.DS_Store,.git,.hg,.svn,*.a,*.adf,*.asc,*.au,*.aup
       \,*.avi,*.bin,*.bmp,*.bz2,*.class,*.db,*.dbm,*.djvu,*.docx,*.exe
@@ -86,25 +88,18 @@ if !exists('syntax_on')
 	syntax enable
 endif
 
-command! -bar ReloadFileType
-			\ call reload#FileType()
-
-command! -bar ReloadVimrc
-			\ call reload#Vimrc()
-
-command! -bar ConfigVimrc
-			\ call config#Vimrc()
+command! -bar ReloadFileType call reload#FileType()
+command! -bar ReloadVimrc call reload#Vimrc()
+command! -bar ConfigVimrc call config#Vimrc()
 
 augroup vimrc
 	autocmd!
 augroup END
 
-autocmd vimrc BufWritePost $MYVIMRC,$MYVIIM/vimrc
-			\ ReloadVimrc
+autocmd vimrc BufWritePost $MYVIMRC,$MYVIIM/vimrc ReloadVimrc
 
 if exists('##SourceCmd')
-  autocmd vimrc SourceCmd $MYVIMRC,$MYVIM/vimrc
-        \ ReloadVimrc
+  autocmd vimrc SourceCmd $MYVIMRC,$MYVIM/vimrc ReloadVimrc
 endif
 
 " so we can write freely e.g. this
@@ -144,25 +139,17 @@ ounmap &
 sunmap &
 
 " Argument list
-nnoremap [a
-      \ :previous<CR>
-nnoremap ]a
-      \ :next<CR>
+nnoremap [a :previous<CR>
+nnoremap ]a :next<CR>
 " Buffers
-nnoremap [b
-      \ :bprevious<CR>
-nnoremap ]b
-      \ :bnext<CR>
+nnoremap [b :bprevious<CR>
+nnoremap ]b :bnext<CR>
 " Quickfix list
-nnoremap [c
-      \ :cprevious<CR>
-nnoremap ]c
-      \ :cnext<CR>
+nnoremap [c :cprevious<CR>
+nnoremap ]c :cnext<CR>
 " Location list
-nnoremap [l
-      \ :lprevious<CR>
-nnoremap ]l
-      \ :lnext<CR>
+nnoremap [l :lprevious<CR>
+nnoremap ]l :lnext<CR>
 
 " In insert or command mode, move normally by using Ctrl
 inoremap <C-h> <Left>

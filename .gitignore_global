@@ -10,6 +10,9 @@
 # Editing tools and IDEs
 .idea
 
+# Thumbnails
+._*
+
 # Logs and databases
 *.log
 *.sql
@@ -18,7 +21,8 @@
 # OS generated files 
 .DS_Store
 .DS_Store?
-._*
+.AppleDouble
+.LSOverride
 .Spotlight-V100
 .Trashes
 Icon?
@@ -29,8 +33,19 @@ Desktop.ini
 .fseventsd
 .TemporaryItems
 .VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
 
 # Custom fish env files
 .fish.env
 .fish.out
 .envrc
+
+# vimmy detritus
+.netrwhist
