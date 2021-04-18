@@ -1,0 +1,39 @@
+add_newline = true
+[character]
+success_symbol = "[⟴ ](bold green)"
+
+[time]
+disabled = false
+format = '[$time]($style) '
+time_format = "%T"
+
+[shell]
+disabled = true
+fish_indicator = ""
+
+[battery]
+disabled = false
+
+[status]
+disabled = false
+
+[ruby]
+symbol = " "
+
+[rust]
+symbol = " "
+
+[docker]
+symbol = " "
+
+[directory]
+read_only = " "
+
+[memory_usage]
+symbol = " "
+
+[package]
+symbol = " "
+
+[swift]
+symbol = "ﯣ "
