@@ -37,37 +37,53 @@ TIMEFORMAT='real:%lR user:%lU sys:%lS'
 # If set, the pattern "**" used in a pathname expansion context will
 # match all files and zero or more directories and subdirectories.
 # shopt -s globstar
+
 # Correct small errors in directory names given to the `cd` builtin
 shopt -s cdspell
 # shopt -s dirspell
+
 # Check that hashed commands still exist before running them
 shopt -s checkhash
+
 # Update LINES and COLUMNS after each command if necessary
 shopt -s checkwinsize
+
 # Put multi-line commands into one history entry
 shopt -s cmdhist
+
 # Include filenames with leading dots in pattern matching
 shopt -s dotglob
+
 # Enable extended globbing: !(foo), ?(bar|baz)...
 shopt -s extglob
+
 # Append history to $HISTFILE rather than overwriting it
 shopt -s histappend
+
 # If history expansion fails, reload the command to try again
 shopt -s histreedit
+
 # Load history expansion result as the next command, don't run them directly
 shopt -s histverify
+
 # Don't assume a word with a @ in it is a hostname
 shopt -u hostcomplete
+
 # Don't change newlines to semicolons in history
 shopt -s lithist
+
 # Don't try to tell me when my mail is read
 shopt -u mailwarn
+
 # Don't complete a Tab press on an empty line with every possible command
 shopt -s no_empty_cmd_completion
+
 # Use programmable completion, if available
 shopt -s progcomp
+
 # Warn me if I try to shift nonexistent values off an array
 shopt -s shift_verbose
+
 # Don't search $PATH to find files for the `source` builtin
 shopt -u sourcepath
 
@@ -87,7 +103,7 @@ esac
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
 # should be on the output of commands, not on the prompt
-#force_color_prompt=yes
+# force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
@@ -120,8 +136,8 @@ esac
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
+    # alias dir='dir --color=auto'
+    # alias vdir='vdir --color=auto'
 
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
@@ -129,16 +145,10 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # colored GCC warnings and errors
-#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+# export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-# some more ls aliases
-alias ls="exa $@"
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-alias ..='cd ..'
 # Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
+# sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # Alias definitions.
@@ -180,9 +190,3 @@ export NVM_DIR="$HOME/.nvm"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
-
-# alias clear='clear; echo; echo; seq 1 $(tput cols) | sort -R | spark; echo; echo'          # Non coloured
-alias clear='clear; echo; echo; seq 1 $(tput cols) | sort -R | spark | lolcat -a; echo; echo' # Coloured
-alias rebash='source ~/.bashrc'

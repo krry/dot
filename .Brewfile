@@ -54,14 +54,14 @@ brew 'yarn'             # npm for hobbyists
 brew 'z'                # jump around
 brew 'zenith'           # better `vtop` `gtop` `htop`
 
-# cask '1password'
-cask 'dashlane'
+# cask 'dashlane'
 cask 'google-chrome'
 cask 'firefox'
-# cask 'handbrake'     # video (en/de)coder
+cask 'handbrake'     # video (en/de)coder
 cask 'iterm2'
 cask 'slack'
 cask 'spotify'
-# cask 'transmission'  # torrentz?
+cask 'telegram'
+cask 'transmission'  # torrentz?
 cask 'visual-studio-code'
 cask 'vlc'

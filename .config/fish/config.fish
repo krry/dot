@@ -22,6 +22,9 @@ if status --is-interactive
 # let node find the path
 	set -ga fish_user_paths (nvm current)
 
+# switch to modern python
+	set -ga fish_user_paths "/Library/Frameworks/Python.framework/Versions/3.9/bin"
+
 # drop some rubies
 	source (rbenv init -|psub)
 
@@ -43,3 +46,7 @@ if status --is-interactive
 		Kamadhenu
 	end
 end
+
+# Setting PATH for Python 3.9
+# The original version is saved in /Users/kerry/.config/fish/config.fish.pysave
+set -x PATH "/Library/Frameworks/Python.framework/Versions/3.9/bin" "$PATH"
