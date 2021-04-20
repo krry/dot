@@ -51,7 +51,6 @@ brew 'wego'             # cli weather
 brew 'wget'             # straighter curl
 brew 'wtfutil'          # rarely used but key info
 brew 'yarn'             # npm for hobbyists
-brew 'z'                # jump around
 brew 'zenith'           # better `vtop` `gtop` `htop`
 
 # cask 'dashlane'
