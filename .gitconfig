@@ -1,17 +1,51 @@
 [alias]
+	a = add
+	s = status
+	st = status
+	ci = commit
+	b = branch
+	co = checkout
+	re = remote
+	d = diff
+	dc = diff --cached
+	lol = log --graph --decorate --pretty=oneline --abbrev-commit
+	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+	ls = ls-files
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	lgi = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ci) %C(bold blue)<%an>%Creset' --abbrev-commit
+	# Pull Upstream
+	pu = !"git fetch origin -v; git fetch upstream -v; git merge upstream/master"
+	# Commit Amend Reuse Message HEAD
+	carmh = commit --amend --reuse-message=HEAD
+	# Push Current
+	pc = !"f() { remote=\"${1:-origin}\"; git push -u \"$remote\" $(git rev-parse --abbrev-ref HEAD); }; f"
+	# Push Current Force
+	pcf = !"f() { echo git pc \"$@\" -f; }; f"
+	# Mainly for YADM
+	untracked = !"f() { git status --porcelain=v1 -zunormal | xargs -0n1 printf \"%s\\n\" | grep -E '^\\?\\? \\.' | cut -c4-; }; f"
+	# Current branch
+	current = rev-parse --abbrev-ref HEAD
 	log = log --graph --pretty=format:\\'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset\\' --abbrev-commit --date=relative
 	co = checkout
 	count   = !git shortlog -sn
 [apply]
 	whitespace = nowarn
 [color]
-	diff = auto
-	status = auto
 	branch = auto
-	ui = true
+	diff = auto
+	grep = auto
+	interactive = auto
+	status = auto
+	ui = auto
+[commit]
+	verbose = true
+	template = ~/.gitmessage
 [core]
+	autocrlf = false
 	editor = code --wait
 	excludesfile = ~/.gitignore_global
+	# Use the best pager available
+	pager = (which diff-so-fancy >/dev/null 2>&1 && diff-so-fancy || which brew >/dev/null 2>&1 && $(brew --prefix git)/share/git-core/contrib/diff-highlight/diff-highlight || cat)|less
 [credential]
 	helper = osxkeychain
 [diff]
@@ -23,6 +57,8 @@
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
+[github]
+	user = krry
 [help]
 	autocorrect = 1
 [hub]
@@ -32,11 +68,32 @@
 [init]
 	defaultBranch = main
 [merge]
-	tool = vi
+	tool = vimdiff
 [mergetool]
 	keepBackup = false
+	prompt = false
 [pull]
-	rebase = false
+	rebase = true
 [push]
 	default = simple
 	; default = current
+[rebase]
+	autoStash = true
+[rerere]
+	enabled = true
+	autoupdate = true
+# read from given uri
+# push to writable one
+# http://bit.ly/g9c9Y2
+#
+[url "http://github.com/"]
+	insteadOf = "gh:"
+
+[url "git@github.com:"]
+	pushInsteadOf = "https://github.com/"
+	pushInsteadOf = "http://github.com/"
+	pushInsteadOf = "gh:"
+
+[user]
+	email = kerry@atmanaut.me
+	name = Kerry Snyder
