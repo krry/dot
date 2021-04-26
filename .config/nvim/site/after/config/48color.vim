@@ -7,7 +7,7 @@ end
 
 " use $THEME env variable if available
 set background=dark
-colorscheme synthwave84
+colorscheme deep-space
 
 " execute 'set bg='.$THEME
 
@@ -16,7 +16,7 @@ colorscheme synthwave84
 " colorscheme anderson    " muted and classy brown
 " colorscheme deep-space  " blueshift, cool dark
 " colorscheme lightning   " light and stark
-" colorscheme molokayo    " dark hi contrast
+colorscheme molokayo    " dark hi contrast
 " colorscheme one         " light and dark ****
 " colorscheme sonokai     " nice monokai rendition
 " colorscheme Atom        " nice middle ground

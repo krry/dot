@@ -24,7 +24,7 @@ set timeoutlen=3000         " more patience to complete mappings
 filetype plugin indent on
 syntax enable
 set cursorline
-set cursorcolumn
+set nocursorcolumn
 set signcolumn=yes          " CoC requested nvim/site/plugin/coc.vim
 
 " 6 multiple windows

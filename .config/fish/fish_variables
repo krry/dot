@@ -1,6 +1,7 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
 SETUVAR Z_DATA_DIR:/Users/kerry/\x2elocal/share/z
+SETUVAR __done_notify_sound:1
 SETUVAR __fish_initialized:3100
 SETUVAR _fish_abbr_atma:code\x20/Users/kerry/Code/krry/atmanautica\x2ecom
 SETUVAR _fish_abbr_bri:brew\x20install
@@ -56,11 +57,13 @@ SETUVAR _fish_abbr_yp:yadm\x20push
 SETUVAR _fish_abbr_yrd:yarn\x20dev
 SETUVAR _fish_abbr_ys:yadm\x20status\x20\x2ds\x20\x2db
 SETUVAR _fisher_FabioAntunes_2F_fish_2D_nvm_files:/Users/kerry/\x2econfig/fish/functions/__nvm_run\x2efish\x1e/Users/kerry/\x2econfig/fish/functions/node\x2efish\x1e/Users/kerry/\x2econfig/fish/functions/npm\x2efish\x1e/Users/kerry/\x2econfig/fish/functions/npx\x2efish\x1e/Users/kerry/\x2econfig/fish/functions/nvm\x2efish\x1e/Users/kerry/\x2econfig/fish/functions/nvm_alias_command\x2efish\x1e/Users/kerry/\x2econfig/fish/functions/nvm_alias_function\x2efish\x1e/Users/kerry/\x2econfig/fish/functions/yarn\x2efish\x1e/Users/kerry/\x2econfig/fish/completions/nvm\x2efish
+SETUVAR _fisher_Markcial_2F_cprintf_files:/Users/kerry/\x2econfig/fish/functions/cprintf\x2efish\x1e/Users/kerry/\x2econfig/fish/completions/cprintf\x2efish
 SETUVAR _fisher_edc_2F_bass_files:/Users/kerry/\x2econfig/fish/functions/__bass\x2epy\x1e/Users/kerry/\x2econfig/fish/functions/bass\x2efish
+SETUVAR _fisher_franciscolourenco_2F_done_files:/Users/kerry/\x2econfig/fish/conf\x2ed/done\x2efish
 SETUVAR _fisher_jorgebucaran_2F_fish_2D_getopts_files:/Users/kerry/\x2econfig/fish/functions/getopts\x2efish
 SETUVAR _fisher_jorgebucaran_2F_fish_2D_spark_files:/Users/kerry/\x2econfig/fish/functions/spark\x2efish\x1e/Users/kerry/\x2econfig/fish/completions/spark\x2efish
 SETUVAR _fisher_laughedelic_2F_pisces_files:/Users/kerry/\x2econfig/fish/functions/_pisces_append\x2efish\x1e/Users/kerry/\x2econfig/fish/functions/_pisces_backspace\x2efish\x1e/Users/kerry/\x2econfig/fish/functions/_pisces_bind_pair\x2efish\x1e/Users/kerry/\x2econfig/fish/functions/_pisces_complete\x2efish\x1e/Users/kerry/\x2econfig/fish/functions/_pisces_insert_identical\x2efish\x1e/Users/kerry/\x2econfig/fish/functions/_pisces_insert_left\x2efish\x1e/Users/kerry/\x2econfig/fish/functions/_pisces_insert_right\x2efish\x1e/Users/kerry/\x2econfig/fish/functions/_pisces_jump\x2efish\x1e/Users/kerry/\x2econfig/fish/functions/_pisces_lookup\x2efish\x1e/Users/kerry/\x2econfig/fish/functions/_pisces_remove\x2efish\x1e/Users/kerry/\x2econfig/fish/functions/_pisces_should_insert\x2efish\x1e/Users/kerry/\x2econfig/fish/functions/_pisces_skip\x2efish\x1e/Users/kerry/\x2econfig/fish/conf\x2ed/pisces\x2efish
-SETUVAR _fisher_plugins:edc/bass\x1eFabioAntunes/fish\x2dnvm\x1elaughedelic/pisces\x1ejorgebucaran/fish\x2dgetopts\x1ejorgebucaran/fish\x2dspark
+SETUVAR _fisher_plugins:edc/bass\x1eFabioAntunes/fish\x2dnvm\x1elaughedelic/pisces\x1ejorgebucaran/fish\x2dgetopts\x1ejorgebucaran/fish\x2dspark\x1efranciscolourenco/done\x1eMarkcial/cprintf
 SETUVAR fish_color_autosuggestion:555\x1ebrblack
 SETUVAR fish_color_cancel:\x2dr
 SETUVAR fish_color_command:005fd7

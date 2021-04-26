@@ -1,15 +1,18 @@
 add_newline = true
+
 [character]
-success_symbol = "[⟴ ](bold green)"
+success_symbol = '[⟴ ](bold green)'
 
 [time]
 disabled = false
 format = '[$time]($style) '
-time_format = "%T"
+time_format = '%T'
 
 [shell]
-disabled = true
-fish_indicator = ""
+disabled = false
+fish_indicator = ''
+bash_indicator = '💥'
+zsh_indicator = '💤⚡️'
 
 [battery]
 disabled = false
@@ -18,22 +21,22 @@ disabled = false
 disabled = false
 
 [ruby]
-symbol = " "
+symbol = ' '
 
 [rust]
-symbol = " "
+symbol = ' '
 
 [docker]
-symbol = " "
+symbol = ' '
 
 [directory]
-read_only = " "
+read_only = ' '
 
 [memory_usage]
-symbol = " "
+symbol = ' '
 
 [package]
-symbol = " "
+symbol = ' '
 
 [swift]
-symbol = "ﯣ "
+symbol = 'ﯣ '

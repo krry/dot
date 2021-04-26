@@ -135,6 +135,13 @@ noremap &
 ounmap &
 sunmap &
 
+# treat partial colons equally
+nnoremap ; :
+
+" Easy moves through wrapped lines
+nnoremap j gj
+nnoremap k gk
+
 " Argument list
 nnoremap [a :previous<CR>
 nnoremap ]a :next<CR>

@@ -25,7 +25,7 @@ if (exists('g:vscode'))
 	echo 'found vscode'
 elseif (!exists('g:vscode'))
 " 2. source files in this order
-	echo '^@;@^ hoo-told you there''s visual studio around here'
+	echo 'hoot <^@;@^>'
 	call SourceDirectory('~/.config/nvim/site/config')
 	call SourceDirectory('~/.config/nvim/site/plugin')
 	call SourceDirectory('~/.config/nvim/site/after/config')

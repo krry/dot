@@ -19,7 +19,10 @@
 
 " Edit .vimrc
   nnoremap <leader>ec :e $MYVIMRC<cr>
-
+  nnoremap <leader>bc :e ~/.config/nvim/site/config/00bundles.vim     <cr>
+  nnoremap <leader>kc :e ~/.config/nvim/site/config/02keymap.vim      <cr>
+  nnoremap <leader>sc :e ~/.config/nvim/site/config/01default.vim     <cr>
+  nnoremap <leader>cc :e ~/.config/nvim/site/after/config/48color.vim <cr>
 " Source .vimrc
   nnoremap <leader>rc :source $MYVIMRC<cr>
              \:exe 'echo ".vimrc resourced"'<cr>
