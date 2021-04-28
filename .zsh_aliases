@@ -39,3 +39,6 @@ gcm()
 	git commit -m $1
 gcam()
 	git commit -am $1
+
+rezsh()
+	source ~/.zshrc

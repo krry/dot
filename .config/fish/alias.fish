@@ -51,9 +51,10 @@ abbr -a npi npm install
 abbr -a yad yarn add
 
 # homebrew
-abbr -a bri brew install
-abbr -a bru brew uninstall
-abbr -a bruu 'brew update && brew upgrade'
+abbr -a brin arch -arm64 brew install
+abbr -a brun arch -arm64 brew uninstall
+abbr -a bruu 'arch -arm64 brew update && arch -arm64 brew upgrade'
+abbr -a brd brew doctor
 
 # ls
 alias l='ls -l'
@@ -78,4 +79,6 @@ abbr -a dot code $HOME/Code/dot
 abbr -a smn code $HOME/Code/summon
 abbr -a atma code $HOME/Code/krry/atmanautica.com
 abbr -a cmnplc code $HOME/Code/krry/commonplace
-abbr -a confish code $HOME/.config/fish
+
+# neovim spaces
+abbr -a confish nvim $HOME/.config/fish

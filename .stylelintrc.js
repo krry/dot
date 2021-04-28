@@ -1,7 +1,7 @@
 module.exports = {
 	extends: [
 		// 'stylelint-config-sass-guidelines',
-		'stylelint-config-prettier',
+		// 'stylelint-config-prettier',
 		'stylelint-config-standard',
 	],
 	rules: {
@@ -16,4 +16,3 @@ module.exports = {
 		'declaration-colon-newline-after': null,
 	},
 }
-

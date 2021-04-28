@@ -4,12 +4,15 @@ SETUVAR Z_DATA_DIR:/Users/kerry/\x2elocal/share/z
 SETUVAR __done_notify_sound:1
 SETUVAR __fish_initialized:3100
 SETUVAR _fish_abbr_atma:code\x20/Users/kerry/Code/krry/atmanautica\x2ecom
+SETUVAR _fish_abbr_brd:brew\x20doctor
 SETUVAR _fish_abbr_bri:brew\x20install
+SETUVAR _fish_abbr_brin:arch\x20\x2darm64\x20brew\x20install
 SETUVAR _fish_abbr_bru:brew\x20uninstall
-SETUVAR _fish_abbr_bruu:brew\x20update\x20\x26\x26\x20brew\x20upgrade
+SETUVAR _fish_abbr_brun:arch\x20\x2darm64\x20brew\x20uninstall
+SETUVAR _fish_abbr_bruu:arch\x20\x2darm64\x20brew\x20update\x20\x26\x26\x20arch\x20\x2darm64\x20brew\x20upgrade
 SETUVAR _fish_abbr_ccd:cd\x20/Users/kerry/Code
 SETUVAR _fish_abbr_cmnplc:code\x20/Users/kerry/Code/krry/commonplace
-SETUVAR _fish_abbr_confish:code\x20/Users/kerry/\x2econfig/fish
+SETUVAR _fish_abbr_confish:nvim\x20/Users/kerry/\x2econfig/fish
 SETUVAR _fish_abbr_dls:cd\x20/Users/kerry/Downloads
 SETUVAR _fish_abbr_dot:code\x20/Users/kerry/Code/dot
 SETUVAR _fish_abbr_ga:git\x20add

@@ -26,7 +26,7 @@ symbol = ' '
 [rust]
 symbol = ' '
 
-[docker]
+[docker_context]
 symbol = ' '
 
 [directory]
