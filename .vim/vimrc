@@ -135,7 +135,7 @@ noremap &
 ounmap &
 sunmap &
 
-# treat partial colons equally
+" treat partial colons equally
 nnoremap ; :
 
 " Easy moves through wrapped lines
