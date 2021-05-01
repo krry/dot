@@ -52,6 +52,9 @@
 " search for help on cursorword
   nnoremap <leader>h "hyaw:h <C-r>h<cr>
 
+" search for things using fzf
+  nnoremap <leader>f :FZF<cr>
+
 " preview file under the cursor
   xnoremap <silent> <Leader>pf y:pedit <C-r><C-r>"<cr>
   nnoremap <silent> <Leader>pf :pedit <C-r><C-f><cr>

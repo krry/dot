@@ -22,6 +22,8 @@ if status --is-interactive
 # let node find the path
 	set -ga fish_user_paths (nvm current)
 
+# let the yarns spin
+	set -ga fish_user_paths (yarn global bin)
 # switch to modern python
 	set -ga fish_user_paths "/Library/Frameworks/Python.framework/Versions/3.9/bin"
 
@@ -46,6 +48,7 @@ if status --is-interactive
 
 	if not set -q VIMRUNTIME
 		set fish_greeting
+		neofetch
 		Kamadhenu
 	end
 end

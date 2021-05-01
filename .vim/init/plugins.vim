@@ -17,6 +17,7 @@ silent! if plug#begin()
   Plug 'tpope/vim-vinegar'
   Plug 'junegunn/vim-easy-align'
   Plug 'honza/vim-snippets'
+  Plug 'tpope/vim-commentary'
 
   " ignore these on older versions of vim
   if v:version >= 703

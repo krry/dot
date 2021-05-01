@@ -43,6 +43,7 @@ brew 'shpotify'         # spotify meets shell
 brew 'sk'               # skim - fuzzy grep
 brew 'spark'            # a tiny graph on the command line
 brew 'starship'         # cross-shell prompt in rust
+brew 'the_silver_searcher' # ag fast ack searcher
 brew 'tldr'             # better `man`
 brew 'tmux'             # terminal multiplexer
 brew 'trash'            # mac-friendly rm-ing

@@ -9,7 +9,6 @@ alias dcu="docker compose up"
 
 # utils
 alias psef="ps -ef | grep"
-alias reload="source ~/.zshrc"
 
 # mac specific
 alias flush="dscacheutil -flushcache"

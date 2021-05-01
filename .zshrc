@@ -8,6 +8,7 @@ export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 eval "$(rbenv init -)"
 eval "$(direnv hook zsh)"
 eval source <("/opt/homebrew/bin/starship" init zsh --print-full-init)
+neofetch
 Kamadhenu
 
 ### Added by Zinit's installer

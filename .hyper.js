@@ -74,7 +74,6 @@ module.exports = {
 		// an array here instead of a color map object
 		colors: {
 			black: 'hsl(273, 21%, 17%)',
-			// black: 'hsl(273, 12%, 6%)',
 			red: 'hsl(353, 72%, 56%)',
 			green: 'hsl(163, 72%, 56%)',
 			yellow: 'hsl(43, 72%, 56%)',
@@ -152,8 +151,8 @@ module.exports = {
 		'hyper-search',
 		'hyper-pane',
 		'hyperpower',
-		'hyper-highlight-active-pane',
 		'hyper-quit',
+		'hyper-highlight-active-pane',
 		// 'hyper-material-theme',
 		// 'hyper-electron-highlighter',
 		// 'hyperocean',

@@ -41,4 +41,4 @@ function! FindReplace()
     endif
 endfunction
 
-nnoremap <leader>fr :call FindReplace()<CR>
+nnoremap <leader>y :call FindReplace()<CR>

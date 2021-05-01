@@ -25,11 +25,11 @@ filetype off                              " must precede vimplug
 call plug#begin('~/.local/share/nvim/bundles')
 
 " Navigation
-Plug 'Shougo/denite.nvim'                 " unite all the tools
-Plug 'jremmen/vim-ripgrep'                " fuzzy search for anything
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'                   " fuzzy search sensible interface
+Plug 'jremmen/vim-ripgrep'                " grep within vim
 Plug 'scrooloose/nerdtree'                " filesystem navigation
 Plug 'yegappan/mru'                       " Most Recently Used files viewer
-Plug 'Shougo/neomru.vim'                  " makes mru denite-compatible
 Plug 'Shougo/neoyank.vim'                 " saves yank history then filters
 Plug 'mhinz/vim-startify'                 " start screen
 
