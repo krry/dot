@@ -36,7 +36,7 @@ module.exports = {
 		cursorShape: 'BLOCK',
 
 		// set to `true` (without backticks and without quotes) for blinking cursor
-		cursorBlink: false,
+		cursorBlink: true,
 
 		// color of the text
 		foregroundColor: '#fff',
@@ -151,11 +151,13 @@ module.exports = {
 		'hyper-search',
 		'hyper-pane',
 		'hyperpower',
-		'hyper-quit',
 		'hyper-highlight-active-pane',
-		// 'hyper-material-theme',
-		// 'hyper-electron-highlighter',
-		// 'hyperocean',
+		'hyperterm-summon',
+		'hyperterm-paste',
+		'hyperterm-dibdabs',
+		'hyperlinks',
+		'hyperduck',
+		'hyperborder',
 	],
 
 	// in development, you can create a directory under
