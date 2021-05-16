@@ -40,6 +40,8 @@
 [commit]
 	verbose = true
 	template = ~/.gitmessage
+	gpsign = true
+	gpgsign = true
 [core]
 	autocrlf = false
 	editor = code --wait
@@ -97,3 +99,7 @@
 [user]
 	email = kerry@atmanaut.me
 	name = Kerry Snyder
+	signingkey = 9FB8205D4A8DE1D1
+
+[gpg]
+	program = gpg2
