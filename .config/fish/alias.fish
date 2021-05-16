@@ -91,11 +91,9 @@ alias c++ 'c++-10'
 abbr -a ccd cd $HOME/Code
 abbr -a dls cd $HOME/Downloads
 abbr -a scz cd $HOME/Desktop/Screenshots
-abbr -a smn cd $HOME/Code/summon
 
 # code workspaces
 abbr -a dot code $HOME/Code/dot
-abbr -a smnc code $HOME/Code/summon
 abbr -a atma code $HOME/Code/krry/atmanautica.com
 abbr -a cmnplc code $HOME/Code/krry/commonplace
 
