@@ -17,7 +17,7 @@ set smartcase
 set scrolloff=3
 set linebreak
 set showbreak=...           " prefix wrapped rows with three dots
-set list
+set nolist
 set timeoutlen=3000         " more patience to complete mappings
 
 " 5 syntax, highlighting and spelling

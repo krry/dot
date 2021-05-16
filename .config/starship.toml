@@ -1,20 +1,43 @@
+format = """\
+  $username\
+  $hostname\
+  $directory\
+  $git_branch\
+  $git_commit\
+  $git_state\
+  $git_status\
+	$golang\
+	$nodejs\
+	$ruby\
+	$lua\
+	$env_var\
+  $custom\
+  $cmd_duration\
+  $line_break\
+  $jobs\
+  $battery\
+	$shell\
+  $time\
+	$status\
+  $character"""
+
 add_newline = true
 
 [character]
-success_symbol = '[⫷](bold green)'
-vicmd_symbol = '[↯](bold yellow)'
-error_symbol = '[⨳](bold red)'
+success_symbol = '[⚭ \$](bold green)'
+vicmd_symbol = '[✒︎ \$](bold yellow)'
+error_symbol = '[𝚡 \$](bold red)'
+
+[shell]
+disabled = false
+fish_indicator = '[ϕ](bold blue)'
+bash_indicator = '[β](bold blue)'
+zsh_indicator = '[ζ](bold blue)'
 
 [time]
 disabled = false
 format = '[$time]($style) '
 time_format = '%T'
-
-[shell]
-disabled = false
-fish_indicator = '[⚜︎](bold blue)'
-bash_indicator = '[⚛︎](bold yellow)'
-zsh_indicator = '[⚕︎](bold green)'
 
 [battery]
 disabled = false
