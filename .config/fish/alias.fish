@@ -1,9 +1,10 @@
 # apps... but better
 alias git=hub
-# alias vim=nvim
+alias vim=nvim
 alias ls=exa
 alias find=fd
 alias cat=bat
+alias top=htop
 
 # git
 abbr -a gs   git status -sb
@@ -51,10 +52,14 @@ abbr -a npi npm install
 abbr -a yad yarn add
 
 # homebrew
-abbr -a brin arch -arm64 brew install
-abbr -a brun arch -arm64 brew uninstall
-abbr -a bruu 'arch -arm64 brew update && arch -arm64 brew upgrade'
-abbr -a brd brew doctor
+alias brew='arch -arm64 /opt/homebrew/bin/brew'
+alias ibrew='arch -x86_64 /usr/local/bin/brew'
+
+abbr -a brin brew install
+abbr -a brun brew uninstall
+abbr -a bruu 'brew update && brew upgrade'
+abbr -a brd  brew doctor
+abbr -a brl  brew list
 
 # ls
 alias l='ls -l'
@@ -64,21 +69,36 @@ alias lt='ls --tree'
 alias cpr='cp -r'
 
 # misc
-alias reload='exec fish'
-alias refish='exec fish'
-
+alias reload='exec $SHELL -l'
+alias refish='reload'
 abbr -a h history
+
+# hyper
+alias hypi='hyper install '
+alias hypr='hyper remove '
+
+# python
+alias python='python3'
+abbr -a python python3
+
+# c : use homebrew version
+alias gcc 'gcc-10'
+alias cc 'gcc-10'
+alias g++ 'g++-10'
+alias c++ 'c++-10'
 
 # cds
 abbr -a ccd cd $HOME/Code
 abbr -a dls cd $HOME/Downloads
 abbr -a scz cd $HOME/Desktop/Screenshots
+abbr -a smn cd $HOME/Code/summon
 
 # code workspaces
 abbr -a dot code $HOME/Code/dot
-abbr -a smn code $HOME/Code/summon
+abbr -a smnc code $HOME/Code/summon
 abbr -a atma code $HOME/Code/krry/atmanautica.com
 abbr -a cmnplc code $HOME/Code/krry/commonplace
 
 # neovim spaces
-abbr -a confish nvim $HOME/.config/fish
+abbr -a confish nvim $HOME/.config/fish/config.fish
+abbr -a falias nvim $HOME/.config/fish/alias.fish
