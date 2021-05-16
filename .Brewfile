@@ -2,8 +2,9 @@ cask_args appdir: '/Applications'
 
 tap 'homebrew/bundle'
 
+brew 'anyenv'           # rbenv pyenv, anyenv!
 brew 'bash-completion'  # basic bash completion
-brew 'bat'				# better cat
+brew 'bat'				      # better cat
 brew 'coreutils'        # GNU tools like `shuf` from Linux
 brew 'cowsay'           # more than just cows
 brew 'direnv'           # loads .env into shell vars
@@ -12,6 +13,7 @@ brew 'fd'               # better `find`
 brew 'figlet'           # makes ascii words
 brew 'fish'             # fish shell
 brew 'fortune'          # so many sayings
+brew 'gcc'              # newer c compiler, needs aliasing
 brew 'gh'               # github's own `hub`
 brew 'gist'             # make gists from the command line
 brew 'git'              # an independent git
@@ -48,6 +50,7 @@ brew 'tldr'             # better `man`
 brew 'tmux'             # terminal multiplexer
 brew 'trash'            # mac-friendly rm-ing
 brew 'tree'             # what apples fall from
+brew 'vips'             # rapid image processing
 brew 'wego'             # cli weather
 brew 'wget'             # straighter curl
 brew 'wtfutil'          # rarely used but key info
@@ -58,6 +61,7 @@ brew 'zenith'           # better `vtop` `gtop` `htop`
 cask 'google-chrome'
 cask 'firefox'
 cask 'handbrake'     # video (en/de)coder
+cask 'hyper'
 cask 'iterm2'
 cask 'slack'
 cask 'spotify'
