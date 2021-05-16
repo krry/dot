@@ -8,13 +8,6 @@ alias zshrc="vim ~/.zshrc"
 alias -s {html,css,js,jsx,ts,tsx,scss,mdx,json}="code"
 alias -s {md}="glow"
 
-brin()
-	brew install "$@"
-
-brun()
-	brew uninstall "$@"
-
-
 cheat()
 	curl "cheat.sh/$1"
 

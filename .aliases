@@ -22,6 +22,9 @@ alias gc="git commit -m"
 alias ga="git add ."
 
 # brew
+alias brew='arch -arm64 brew'
+alias brin="brew install"
+alias brun="brew uninstall"
 alias bru="brew doctor && brew update"
 alias bruu="brew update && brew upgrade"
 alias brdoc="brew doctor && brew cleanup"
